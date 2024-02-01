@@ -1,0 +1,2037 @@
+{
+   
+    "ErrorMsgs":{
+        "erroeReq":"this  is error"
+    },
+    
+    
+    "drMastersGridColumns":[
+        {
+            "field":"",
+            "header":"Salutation",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"First Name",
+            "style":{
+                "width":"150px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Last Name",
+            "style":{
+                "width":"120px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Department",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Doctor Type",
+            "style":{
+                "width":"130px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Qualification",
+            "style":{
+                "width":"150px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Specialization",
+            "style":{
+                "width":"150px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Registration Number",
+            "style":{
+                "width":"150px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Clinic Phone",
+            "style":{
+                "width":"120px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Mobile",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Res Phone",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Doctor License Number",
+            "style":{
+                "width":"180px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Address",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Prescribe By Favourites",
+            "style":{
+                "width":"180px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Enable Doctor for Surgert/Procedure",
+            "style":{
+                "width":"200px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Schedulable by",
+            "style":{
+                "width":"150px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Email",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Overbook Limit",
+            "style":{
+                "width":"150px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Payment Category",
+            "style":{
+                "width":"150px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Payment Eligible",
+            "style":{
+                "width":"150px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Doctor Speciality",
+            "style":{
+                "width":"150px"
+            }
+        },
+        {
+            "field":"",
+            "header":"OP Revisit Consultation Validity",
+            "style":{
+                "width":"200px"
+            }
+        },
+        {
+            "field":"",
+            "header":"OP Revisit Consultation Count",
+            "style":{
+                "width":"200px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Schedulable for Online Consults",
+            "style":{
+                "width":"200px"
+            }
+        },
+        {
+            "field":"",
+            "header":"IP Discharge Consultation Validity",
+            "style":{
+                "width":"200px"
+            }
+        },
+        {
+            "field":"",
+            "header":"IP Discharge Consultation Count",
+            "style":{
+                "width":"200px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Practitioner",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"IP Consultation Template",
+            "style":{
+                "width":"200px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Allow Signature to be used by others",
+            "style":{
+                "width":"250px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Send Feedback SMS",
+            "style":{
+                "width":"200px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Create By",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Create Date",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Modify By",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"",
+            "header":"Modify Date",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "storeTypeMastersGridColumns":[
+        {
+            "field":"storetypename",
+            "header":"Store Type Name",
+            "style":{
+                "width":"100px"
+            },
+            "filterType": "text"
+        },
+        {
+            "field":"storedescription",
+            "header":"Store Description",
+            "style":{
+                "width":"100px"
+            },
+            "filterType": "text"
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            },
+            "filterType": "text"
+        }
+    ],
+    "storeMastersGridColumns":[
+        {
+            "field":"store",
+            "header":"Store",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"counter",
+            "header":"Counter",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"gstinno",
+            "header":"GST IN No.",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"drugLicenceNo",
+            "header":"Drug Licence No.",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"autoFillPrecription",
+            "header":"Auto Fill Precription",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"accountGroup",
+            "header":"Account Group",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"salesAcountPrefix",
+            "header":"Sales Acount Prefix",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"purcheseAccountPrefix",
+            "header":"Purchese Account Prefix",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"storeType",
+            "header":"Store Type",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"isSuperStore",
+            "header":"Is Super Store",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"salesUnit",
+            "header":"Sales Unit",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"allowToRiseBill",
+            "header":"Allow To Rise Bill",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"precriptionPrintTemplate",
+            "header":"Precription Print Template",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"precriptionLabelPrintTemplate",
+            "header":"Precription Label Print Template",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"salesPrintTemplate",
+            "header":"Sales Print Template",
+            "style":{
+                "width":"100px"
+            }
+        }
+        ,
+        {
+            "field":"isSalesStore",
+            "header":"Is Sales Store",
+            "style":{
+                "width":"100px"
+            }
+        } ,
+        {
+            "field":"autoFillIndent",
+            "header":"Auto Fill Indent",
+            "style":{
+                "width":"100px"
+            }
+        } ,
+        {
+            "field":"isSterileStore",
+            "header":"Is Sterile Store",
+            "style":{
+                "width":"100px"
+            }
+        } ,
+        {
+            "field":"storesTariff",
+            "header":"Stores Tariff",
+            "style":{
+                "width":"100px"
+            }
+        } ,
+        {
+            "field":"useSellingPriceFromItemBatch",
+            "header":"Use Selling Price From Item Batch",
+            "style":{
+                "width":"100px"
+            }
+        } ,
+        {
+            "field":"grnPrintTemplate",
+            "header":"Grn Print Template",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"allowAutoPOGeneration",
+            "header":"Allow Auto PO Generation",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"pOGenerationFrequency",
+            "header":"PO Generation Frequency",
+            "style":{
+                "width":"100px"
+            }
+        }
+        ,
+        {
+            "field":"autoCancelPO",
+            "header":"Auto Cancel PO",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"autoCancelPOFreuency",
+            "header":"Auto Cancel PO Freuency",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"salesWebTemplate",
+            "header":"Sales Web Template",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"salesWebPrinter",
+            "header":"Sales Web Printer",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"batchExpireThesholdForStockTake",
+            "header":"Batch Expire Theshold For Stock Take",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "uomCreationGridColumns":[
+        {
+            "field":"packageUom",
+            "header":"Package Uom",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"unitUom",
+            "header":"Unit Uom",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"pkgSize",
+            "header":"Pkg Size",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"integrationId",
+            "header":"Integration Id",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Satus",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "addItemCategoryGridColumns":[
+        {
+            "field":"categoryName",
+            "header":"Category Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"identification",
+            "header":"Identification",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"issuseType",
+            "header":"Issuse Type",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"bilable",
+            "header":"Bilable",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"retilable",
+            "header":"Retilable",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"calmiable",
+            "header":"Calmiable",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"validateExpireDate",
+            "header":"Validate Expire Date",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"discount",
+            "header":"Discount",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"prescribable",
+            "header":"Prescribable",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"assestsTracking",
+            "header":"Assests Tracking",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"drug",
+            "header":"Drug",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "genericClssificationDetailsGridColumns":[
+        {
+            "field":"clasificationName",
+            "header":"Clasification Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"clasificationDesc",
+            "header":"Clasification Description",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        } 
+    ],
+    "genericSubClassificationDetailsGridColumns":[
+        {
+            "field":"clasificationName",
+            "header":"Clasification Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"subClasificationName",
+            "header":"Sub Clasification Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"subClasificationDesc",
+            "header":"Sub Clasification Description",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        } 
+    ],
+    "genericDetailsGridColumns":[
+        {
+            "field":"genericName",
+            "header":"Generic Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"clasificationName",
+            "header":"Classification Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"subClassificationName",
+            "header":"Sub Classification Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"standrdAdultDose",
+            "header":"Standrd Adult Dose",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"crability",
+            "header":"Critical Ability",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        } 
+    ],
+    "supplierCategoryGridColumns":[
+        {
+            "field":"categoryname",
+            "header":"Category Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"categorydescription",
+            "header":"Category Description",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        } 
+    ],
+    "supplierDetailsGridColumns":[
+        {
+            "field":"supplierName",
+            "header":"Supplier Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"suppliercode",
+            "header":"Supplier code",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"registeredsupplier",
+            "header":"Registered supplier",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"supplierCategory",
+            "header":"Supplier Category",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"supplierGSTINNumber",
+            "header":"GSTIN Number",
+            "style":{
+                "width":"100px"
+            }
+        },
+
+        {
+            "field":"suppliercreditPeriod",
+            "header":"Credit Period",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"supplierdrugLicenseNo",
+            "header":"Drug License No",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"supplierPANNo",
+            "header":"PAN No",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"suppliercorporteIdentificationNumber",
+            "header":"Corporte Identification Number",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"supplierapplyTCSforPOStockEntry",
+            "header":"Apply TCS for PO Stock EEntry",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"regioncity",
+            "header":"City",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"regionstate",
+            "header":"State",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"regioncountry",
+            "header":"Country",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactaddress",
+            "header":"Address",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactphone1",
+            "header":"Phone 1",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactphone2",
+            "header":"Phone 2",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactpostalCode",
+            "header":"postal Code",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactfax",
+            "header":"Fax",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactemail",
+            "header":"Email",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactwebsite",
+            "header":"Web Site",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"helpdeskname",
+            "header":"Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"helpdeskphno",
+            "header":"Phone No.",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"helpdeskemail",
+            "header":"Email",
+            "style":{
+                "width":"100px"
+            }
+        }    
+    ],
+    "manufactureCretionGridColumns":[
+        {
+            "field":"manufacturename",
+            "header":"Manufacture Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"regioncountry",
+            "header":"Country",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"regionstate",
+            "header":"State",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"regioncity",
+            "header":"City",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactaddress",
+            "header":"Address",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactphone1",
+            "header":"Phone 1",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactphone2",
+            "header":"Phone 2",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactpostalCode",
+            "header":"postal Code",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactfax",
+            "header":"Fax",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactemail",
+            "header":"Email",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"contactwebsite",
+            "header":"Web Site",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "documentGridColumns":[
+        {
+            "field":"document",
+            "header":"Document Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"documentpageurl",
+            "header":"Document Page Url",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"documentgridUrl",
+            "header":"Document Grid Url",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"documentdescription",
+            "header":"Document Description",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"Status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "mastersGridColumns":[
+        {
+            "field":"modulename",
+            "header":"Module Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"moduledesc",
+            "header":"Module Description",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "raisePurchaseOrderGridColumns":[
+        {
+            "field":"store",
+            "header":"store",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"poNumber",
+            "header":"Po Number",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"createdt",
+            "header":"Po Date",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"supplier",
+            "header":"supplier",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"createby",
+            "header":"Raised By",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"poTotal",
+            "header":"Value",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"grn",
+            "header":"Grn",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"approvalStatus",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "stockEntryGridColumns":[
+        {
+            "field":"store",
+            "header":"store",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"ponumber",
+            "header":"Po Number",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"poDate",
+            "header":"Po Date",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"supplier",
+            "header":"supplier",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"createdt",
+            "header":"Raised By",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"InvTotal",
+            "header":"Value",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"grn",
+            "header":"Grn",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"approvalStatus",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "newGridColumns":[
+        {
+            "field":"itemName",
+            "header":"Item Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"shortName",
+            "header":"Short Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"category",
+            "header":"Category",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"generateItemCode",
+            "header":"Generate Item Code",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"customItemCode",
+            "header":"Custom Item Code",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"manufacture",
+            "header":"Manufacture",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"strength",
+            "header":"Strength",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"strengthUnits",
+            "header":"Strength Units",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemFrom",
+            "header":"Item From",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"root",
+            "header":"Root",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"unitUOM",
+            "header":"unit UOM",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"packageUOM",
+            "header":"Package UOM",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"packageSize",
+            "header":"Package Size",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"packageType",
+            "header":"Package Type",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"consumptionUOM",
+            "header":"Consumption UOM",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"consumptionCapacity",
+            "header":"Consumption Capacity",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"genericName",
+            "header":"Generic Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"serviceGroup",
+            "header":"Service Group",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"serviceSubGroup",
+            "header":"Service Sub Group",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"maxCostPrice",
+            "header":"Max Cost Price",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"supplierName",
+            "header":"Supplier Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"preferredSupplier",
+            "header":"Preferred Supplier",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"invoiceDetails",
+            "header":"Invoice Details",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"controlType",
+            "header":"Control Type",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"insurenceCategory",
+            "header":"Insurence Category",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"preAuthRequired",
+            "header":"Pre Auth Required",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"billingGroup",
+            "header":"Billing Group",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"taxBasis",
+            "header":"Tax Basis",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"tax",
+            "header":"Tax (%)",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"binRack",
+            "header":"Bin / Rack",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"batchNumberApplicable",
+            "header":"Batch Number Applicable",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemSellingPrice",
+            "header":"Item Selling Price",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"highCostConsumables",
+            "header":"High Cost Consumables",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"allowZeroCalimAmnt",
+            "header":"Allow Zero Calim Amount",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "newItemListCols":[
+        {
+            "field":"itemName",
+            "header":"Item ",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Code",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Package",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Package Type",
+            "style":{
+                "width":"100px"
+            }
+        },
+               {
+            "field":"itemName",
+            "header":"MRP",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Adj MRP",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Rate",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Qty",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Bonus",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"UOM",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Tax(%)",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Tax Basis",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Disc",
+            "style":{
+                "width":"100px"
+            }
+        },
+             {
+            "field":"itemName",
+            "header":"Tax Amt",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Total",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "newItemCols":[
+        {
+            "field":"itemName",
+            "header":"Item ",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Item Code",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Control Type",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Batch",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Exp",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"PKG",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"MRP",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Rate",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Qty",
+            "style":{
+                "width":"100px"
+            }
+        },       
+        {
+            "field":"itemName",
+            "header":"UOM",
+            "style":{
+                "width":"100px"
+            }
+        },       
+        {
+            "field":"itemName",
+            "header":"Disc",
+            "style":{
+                "width":"100px"
+            }
+        },       
+        {
+            "field":"itemName",
+            "header":"Amt",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"itemName",
+            "header":"Tax",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "generalMastersGridColumns":[
+        {
+            "field":"masterid",
+            "header":"Master Id",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"mastername",
+            "header":"Master",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"masterdesc",
+            "header":"Master Desc",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"Status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "serviceGroupColumns":[
+        {
+            "field":"servicegroupname",
+            "header":"Service Group Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"displayorder",
+            "header":"Display Order",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"code",
+            "header":"Alias/Code",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "storeWiseCols":[
+        {
+            "field":"store",
+            "header":"Store",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"store",
+            "header":"Bin / Rack",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"store",
+            "header":"Danger Level",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"store",
+            "header":"Min Level",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"store",
+            "header":"Recorder Level",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"store",
+            "header":"Max Level",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "taxCols":[
+        {
+            "field":"store",
+            "header":"Tax Group Type",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"store",
+            "header":"Tax Group",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"store",
+            "header":"Tax Sub Group",
+            "style":{
+                "width":"100px"
+            }
+        }
+    ],
+    "purchaseItemListCols":[
+        {
+            "field": "itemName",
+            "header": "Item ",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Code",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "B/S No.",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Expiry",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Package",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "MRP",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Rate",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Qty",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Bonus",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "UOM",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Tax(%)",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Tax Basis",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Disc",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Sch Disc",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Tax Amt",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "itemName",
+            "header": "Amount",
+            "style": {
+                "width": "100px"
+            }
+        }
+    ],
+    "departmentGridColumns":[
+        {
+            "field": "department",
+            "header": "Department",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "departmentType",
+            "header": "Department Type",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "status",
+            "header": "Status",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "allowedGender",
+            "header": "Allowed Gender",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "costCenterCode",
+            "header": "Cost Center Id",
+            "style": {
+                "width": "100px"
+            }
+        },
+        {
+            "field": "referralDoctorAsOrderingClinician",
+            "header": "Refferal Doctor",
+            "style": {
+                "width": "100px"
+            }
+        }
+    ],
+    "serviceSubGroupColumns":[
+        {
+            "field":"servicegroupname",
+            "header":"Service Group Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"servicegroupname",
+            "header":"Account Head",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"servicesubgroupname",
+            "header":"Service Sub Group Name",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"code",
+            "header":"Alias/Code",
+            "style":{
+                "width":"100px"
+            }
+        },
+        {
+            "field":"displayorder",
+            "header":"Display Order",
+            "style":{
+                "width":"100px"
+            }
+        }       
+    ],
+    "taxGroupGridColumns":[
+        {
+            "field":"taxgrouptype",
+            "header":"Tax Group Type",
+            "style":{
+                "width":"100px"
+            }
+        } ,
+        {
+            "field":"taxgroup",
+            "header":"Tax Group",
+            "style":{
+                "width":"100px"
+            }
+        }  ,
+        {
+            "field":"taxgroupcode",
+            "header":"Tax Group Code",
+            "style":{
+                "width":"100px"
+            }
+        }  ,
+        {
+            "field":"displayorder",
+            "header":"Display Order",
+            "style":{
+                "width":"100px"
+            }
+        }  ,
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        }   
+    ],
+    "taxSubGrpGridColumns":[
+        
+        {
+            "field":"taxgroup",
+            "header":"Tax Group",
+            "style":{
+                "width":"100px"
+            }
+        }  ,
+        {
+            "field":"taxsubgroup",
+            "header":"Tax Sub Group",
+            "style":{
+                "width":"100px"
+            }
+        } ,
+        {
+            "field":"status",
+            "header":"Status",
+            "style":{
+                "width":"100px"
+            }
+        }   ,
+               {
+            "field":"displayorder",
+            "header":"Display Order",
+            "style":{
+                "width":"100px"
+            }
+        }  ,
+        {
+            "field":"taxrate",
+            "header":"Tax Rate",
+            "style":{
+                "width":"100px"
+            }
+        }  ,
+        {
+            "field":"validityStartDt",
+            "header":"Start Date",
+            "style":{
+                "width":"100px"
+            }
+        }  ,
+        {
+            "field":"validityEndDt",
+            "header":"End Date",
+            "style":{
+                "width":"100px"
+            }
+        }  ,
+        {
+            "field":"taxrateexpression",
+            "header":"Tax Rate",
+            "style":{
+                "width":"100px"
+            }
+        }   
+    ]      
+
+       }
