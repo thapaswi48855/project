@@ -1,0 +1,349 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      [redirectToGrid]="redirectToGrid"
+      #headers
+    ></app-header>
+  </div>
+  <div class="div-padding-fieldset">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 132px)' }">
+      <div class="formgrid grid">
+        <div class="field col-12">
+          <p-fieldset>
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Patient Type'"
+                  [options]="patientTypeList"
+                  [(inputModel)]="salesreturn.patientType"
+                  [disabled]="!isEditable"
+                  optionLabel="label"
+                  optionValue="value"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-datepicker
+                  [labelName]="'Date'"
+                  [(inputModel)]="salesreturn.date"
+                  [disabled]="!isEditable"
+                ></app-datepicker>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'store'"
+                  [options]="storeTypeList"
+                  [(inputModel)]="salesreturn.patientType"
+                  [disabled]="!isEditable"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                Pharacy Counter
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+      <div class="formgrid grid">
+        <div class="field col-12">
+          <p-fieldset legend="Patient Details" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'MR No.'"
+                  [labelValue]="salesreturn.mrNo"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Name'"
+                  [labelValue]="salesreturn.name"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Age / Gender'"
+                  [labelValue]="salesreturn.age"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Visit No.'"
+                  [labelValue]="salesreturn.visitNo"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Dept'"
+                  [labelValue]="salesreturn.dept"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-inputtext
+                  [labelName]="'Doctor'"
+                  [(inputModel)]="salesreturn.doctor"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Reg Date'"
+                  [labelValue]="salesreturn.regdate"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Reffered By'"
+                  [labelValue]="salesreturn.refferBy"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Bed'"
+                  [labelValue]="salesreturn.bed"
+                ></app-labelbind>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+      <div>
+        <!-- table -->
+        <p-table
+          #dt
+          [columns]="gridCols"
+          [value]="newItemList"
+          [paginator]="false"
+          [rows]="25"
+          [responsive]="true"
+          [resizableColumns]="true"
+          styleClass="p-datatable-gridlines"
+          [scrollable]="true"
+          scrollHeight="flex"
+        >
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th
+                *ngFor="let col of columns"
+                pResizableColumn
+                [pSortableColumn]="col.field"
+                [ngStyle]="col.style"
+              >
+                {{ col.header }}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{ rowData[col.field] }}
+              </td>
+            </tr>           
+          </ng-template>        
+        </p-table>
+      </div>
+      <div class="formgrid grid" style="border: 1px solid black">
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Discount Plan'"
+            [(inputModel)]="salesreturn.discountPlan"
+            [disabled]="!isEditable"
+          ></app-inputtext>
+        </div>
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Item Discount'"
+            [(inputModel)]="salesreturn.itemDiscounts"
+            [disabled]="!isEditable"
+          ></app-inputtext>
+        </div>
+        <div
+          class="flex align-items-center justify-content-center font-bold border-round gap-1"
+        >
+          <button
+            pButton
+            pRipple
+            label="Add"
+            class="p-button-success"
+            (click)="onApplyDiscount()"
+          ></button>
+        </div>
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Discount Auth'"
+            [(inputModel)]="salesreturn.discountAuth"
+            [disabled]="!isEditable"
+          ></app-dropdown>
+        </div>
+        <div
+        class="flex align-items-center justify-content-center font-bold border-round gap-1"
+      >
+        <button
+            pButton
+            pRipple
+            label="Add"
+            class="p-button-success"
+            (click)="onDialogClick()"
+          ></button>
+        </div>
+      </div>      
+
+      <div class="formgrid grid">
+        <div class="field col-12">
+          <p-fieldset legend="Bill Discount and Total" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-4">
+                <div class="field col-12">
+                  <app-inputtext
+                    [labelName]="'Bill Discount'"
+                    [(inputModel)]="salesreturn.billDiscountAp"
+                    [disabled]="!isEditable"
+                  ></app-inputtext>
+                </div>
+                <div class="field col-12">
+                  <app-inputtext
+                    [labelName]="'Roud Off'"
+                    [(inputModel)]="salesreturn.itemDiscounts"
+                    [disabled]="!isEditable"
+                  ></app-inputtext>
+                </div>
+              </div>
+              <div class="field col-8">
+                <div class="formgrid grid">
+                  <div
+                    class="field col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3"
+                  >
+                    <app-labelbind
+                      [labelName]="'Billed Amount'"
+                      [labelValue]="salesreturn.billedAmnt"
+                    ></app-labelbind>
+                  </div>
+                  <div
+                    class="field col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3"
+                  >
+                    <app-labelbind
+                      [labelName]="'Bill Discount'"
+                      [labelValue]="salesreturn.billDiscount"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Patient Amount'"
+                      [labelValue]="salesreturn.patientAmnt"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Patient Tax'"
+                      [labelValue]="salesreturn.patientTax"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Ground Total'"
+                      [labelValue]="salesreturn.grandTotal"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Item Discount'"
+                      [labelValue]="salesreturn.itemDiscount"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Round Off'"
+                      [labelValue]="salesreturn.roundOff"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Pri. Claim'"
+                      [labelValue]="salesreturn.priClaim"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Pri. Claim Tax'"
+                      [labelValue]="salesreturn.priClaimtax"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Item Total'"
+                      [labelValue]="salesreturn.itemTotal"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Bill Level Total'"
+                      [labelValue]="salesreturn.billLevelTotal"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Sec Claim'"
+                      [labelValue]="salesreturn.secClaim"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Sec Claim Tax'"
+                      [labelValue]="salesreturn.secClaimTax"
+                    ></app-labelbind>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+
+      <div class="formgrid grid">
+        <div class="field col-12">
+          <p-fieldset legend="Payment Details" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Bill Type'"
+                  [options]="billTypeList"
+                  [(inputModel)]="salesreturn.billType"
+                  [disabled]="!isEditable"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Remarks'"
+                  [(inputModel)]="salesreturn.remarks"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Narration'"
+                  [(inputModel)]="salesreturn.narration"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+    </p-scrollPanel>
+  </div>
+</div>
+<app-saving #saving></app-saving>
+<p-dialog header="Header" [(visible)]="itemDialogDisplay" [style]="{width: '50vw'}">
+  <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+</p-dialog>

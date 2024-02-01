@@ -1,0 +1,184 @@
+<!-- <p>document works!</p> -->
+<!-- <p-dropdown></p-dropdown> -->
+<!-- <app-inputtext></app-inputtext> -->
+<!-- module Display -->
+<!-- <div *ngFor="let module of modules">
+  <div style="height: 100px; width: 100px; border: 1px solid black">
+    <a href="javascript:void(0);" (click)="onClick()">{{
+      module.moduleName
+    }}</a>
+    <div *ngIf="documents">
+      <div *ngFor="let document of module.document">
+        <a href="javascript:void(0);" routerLink="/{{document.documentPath}}">
+            {{ document.documentName }}
+        </a>
+       
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- module Display -->
+<!-- Document Name
+<input type="text" pInputText  [(ngModel)]="module.document" />
+Document First Path
+<input type="text" pInputText  [(ngModel)]="module.fpath" />
+Document Second Path
+<input type="text" pInputText  [(ngModel)]="module.spath" /> -->
+<!-- <div class="flex-fill border p-2">
+  <div class="row g-2">
+    <div class="col">
+      <div class="row g-2">
+        <div class="col-md-2">
+          <label for="">Doctor Name<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Rate Sheet<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">payment Category<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">View Charges For<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <button>search</button>
+          <button>Clear</button> -->
+          <!-- <label for="">Doctor Type<span>:</span> </label>
+          <app-inputtext></app-inputtext> -->
+        <!-- </div>
+        <div>
+          <p-table >
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th>Doctor Name</th>
+                <th>Doctor Desc</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td>Name</td>
+                <td>details</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>        
+      </div>
+      <div>
+       Add New Doctor
+      </div>
+      <div>
+        Group Update
+        <div class="col-md-2">
+          <label for="">Select Doctor<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Select Bed type<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Update Charges<span>:</span> </label>
+          <label for="">Update Discount<span>:</span> </label>
+          <label for="">Apply Discount On Charges<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Chrge type<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Amount type<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Amount<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Round Off<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Export / Import Doctor Detils<span>:</span> </label>
+          <button>Export</button>
+          <button>Import</button>
+        </div>
+        <div class="col-md-2">
+          <label for="">Export / Import Charges<span>:</span> </label>
+          <button>Export</button>
+          <button>Import</button>
+        </div>
+        <div class="col-md-2">
+         
+          <button>Update Charges</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="onGrid"
+      [onAddNew]="onAddNew"
+      [onClear]="onClear"
+      (gridClick)="onGridClick()"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      #headers   
+    ></app-header>
+  </div>
+  <p-scrollPanel [style]="{ width: '100%', height:' calc(100vh - 136px)' }" styleClass="custombar1">
+  <div class="flex-fill border p-2 overflow-auto">
+    <div class="row g-2 p-2">
+      <div class="formgrid grid">  
+        <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+          <app-inputtext
+            [(inputModel)]="document.documentName" [labelName]="'Document Name'" 
+            (onBlur)="onGetErrorMsgs('documentName', true)"
+            errorMessages="{{errorMsgs.documentReq}}"
+          ></app-inputtext>
+        </div>
+      </div>
+      <div class="formgrid grid">  
+        <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+          <app-inputtext
+            [(inputModel)]="document.documentPageUrl" [labelName]="'Page Url'"           
+            (onBlur)="onGetErrorMsgs('documentPageUrl', true)"
+            errorMessages="{{errorMsgs.documentPageUrlReq}}"
+          ></app-inputtext>
+        </div>
+      </div>
+
+      <div class="formgrid grid">  
+        <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+          <app-inputtext
+            [(inputModel)]="document.documentGridUrl" [labelName]="'Grid Url'" 
+          ></app-inputtext>
+        </div>
+      </div>
+
+      <div class="formgrid grid">
+        <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+          <app-textarea  [labelName]="'Document Description'" [rows]="'2'" [cols]="'5'" [(inputModel)]="document.documentDescription"></app-textarea>
+        </div>
+      </div>
+      <div class="formgrid grid">
+        <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+          <app-checkbox [labelName]="'Status'"  [(inputModel)]="document.status"></app-checkbox>
+        </div>
+      </div>
+    </div>
+    <!-- <app-saving #saving></app-saving> -->
+  </div>
+</p-scrollPanel>
+</div>
+
+
+

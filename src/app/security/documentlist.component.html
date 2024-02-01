@@ -1,0 +1,22 @@
+<div class="">
+    <div>
+      <app-header
+        [pageTitle]="pageTitle"
+        [onSubmit]="onSubmit"
+        [onGrid]="onGrid"
+        [onAddNew]="onAddNew"
+        (gridClick)="onGridClick()"
+        (addNewClick)="onAddNewClick()"
+        #header
+      ></app-header>
+    </div>
+    <div class="border d-flex flex-column flex-fill h-100 p-2">
+    <app-gridview class="d-flex flex-column h-100"
+      #gridView
+      [mastersGridColumns]="mastersGridColumns"
+     [masterGridData]="masterGridData" [showCheckBox]="showCheckBox" [paramKey]="paramKey"
+     [actionOptions]="actionOptions"
+    >
+    </app-gridview>
+    </div>
+  </div>

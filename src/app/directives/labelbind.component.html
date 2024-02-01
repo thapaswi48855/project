@@ -1,0 +1,52 @@
+<!-- <div class="justify-content-center">
+  <div class="flex flex-column ">
+    <div class="field grid">
+      <label
+        class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"
+        htmlFor="{{ labelName }}"
+        title="{{ labelName }}"
+        >{{ labelName }}</label
+      >
+      <div class="col">
+        {{ labelValue }}
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="justify-content-center">
+  <div class="flex flex-column gap-2">
+    <!-- <div >{{labelAxis}} -->
+      <!-- <label for="" [hidden]="labelAxis"> aaaa -->
+        <!-- [ngClass]="{'formgroup-inline':labelAxis === true}" -->
+      <!-- <label [ngClass]="labelAxis === true ? '' :''"  > -->
+        <!-- class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis" -->
+        <div [ngClass]="labelAxis === true ? 'displayBlock':'formgroup-inline' " >
+        <label class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"      
+          htmlFor="{{ labelName }}"
+          title="{{ labelName }}"
+          >{{ labelName }}</label
+        >
+        {{ labelValue }}
+      </div>
+      <!-- </label> -->
+    <!-- </label> -->
+    <!-- </div>  -->
+     <!-- <div> -->
+      <!-- <label for="" *ngIf="!labelAxis">{{labelAxis}}
+        bbbb
+      <label
+        class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"
+        htmlFor="{{ labelName }}"
+        title="{{ labelName }}"
+        >{{ labelName }}</label
+      >
+      {{ labelValue }}bb
+    </label> -->
+    <!-- </div> -->
+  </div>
+</div>
+<style>
+  .displayBlock{
+    display: contents;
+  }
+</style>

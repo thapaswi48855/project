@@ -1,0 +1,111 @@
+<div class="d-flex flex-column h-100 overflow-hidden p-2">
+    <div>
+      <app-header
+        [pageTitle]="pageTitle"
+        [onSubmit]="onSubmit"
+        [onGrid]="onGrid"
+        [onAddNew]="onAddNew"
+        (gridClick)="onGridClick()"
+        (submitClick)="onSaveClick()"
+        (clearClick)="onClearClick()"
+        #headers
+      ></app-header>
+    </div>
+  
+    <div class="flex-fill border p-2 overflow-auto">
+      <div class="row m-2">
+        <div class="flex justify-content-center col-12">
+          <p-fieldset legend="Item Details" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+        <div class="flex justify-content-center col-4 p-2">
+          <p-fieldset legend="Header" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="flex justify-content-center col-6">
+          <p-fieldset legend="Header" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+        <div class="flex justify-content-center col-4 p-2">
+          <p-fieldset legend="Header" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-6 xl:col-6">
+                <label for="firstname2">Type</label>
+                <app-inputtext [(inputModel)]="storeitems.type"></app-inputtext>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <app-saving #saving></app-saving> -->
+  

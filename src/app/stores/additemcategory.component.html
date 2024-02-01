@@ -1,0 +1,138 @@
+<div class="">
+  <div>
+    <app-header
+    [pageTitle]="pageTitle"
+    [onSubmit]="onSubmit"
+    [onGrid]="true"
+    [onAddNew]="false"
+    [onClear]="onClear"
+    [onEdit]="onEdit"
+    [onView]="onView"
+    (submitClick)="onSaveClick()"
+    (clearClick)="onClearClick()"
+    [redirectToGrid]="redirectToGrid"
+    #headers
+  ></app-header>
+  </div>
+
+  <!-- <div class="flex-fill border p-2 overflow-auto">
+    <div class="row g-2"> -->
+  <!-- <p-scrollPanel
+    [style]="{ width: '100%', height: ' calc(100vh - 136px)' }"
+    styleClass="custombar1"
+  > -->
+  <div class="div-padding">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-inputtext
+          [labelName]="'Category Name'"
+          [(inputModel)]="itemCategory.categoryName"
+          (onBlur)="onGetErrorMsgs('categoryName', true)"
+          errorMessages="{{errorMsgs.categoryName}}"
+          [disabled]="!isEditable"
+        ></app-inputtext>
+      </div>
+
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown [labelName]="'Identification'" [options]="identificationList"
+            [(inputModel)]="itemCategory.identification" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'Issuse Type '" [options]="issuseTypeList"
+          [(inputModel)]="itemCategory.issuseType"
+          [disabled]="!isEditable"
+          [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
+      </div>
+
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'Bilable'" [options]="billableList"
+          [(inputModel)]="itemCategory.bilable"
+          [disabled]="!isEditable"
+          [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
+      </div>
+
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'Retilable'" [options]="retilableList"
+          [(inputModel)]="itemCategory.retilable"
+          [disabled]="!isEditable"
+          [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
+      </div>
+
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'Calmiable'" [options]="clamiableList"
+          [(inputModel)]="itemCategory.calmiable"
+          [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
+      </div>
+
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <!-- <p-calendar [(ngModel)]="itemCategory.validateExpireDate" [showIcon]="true"></p-calendar> -->
+        <app-datepicker
+          [labelName]="'Validate Expire Date'" 
+          [(inputModel)]="itemCategory.validateExpireDate"
+          [disabled]="!isEditable"
+        ></app-datepicker>
+      </div>
+
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-inputtext
+          [labelName]="'Discount %'" 
+          [(inputModel)]="itemCategory.discount"
+          [disabled]="!isEditable"
+        ></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'prescribable'" [options]="prescribableList"
+          [(inputModel)]="itemCategory.prescribable"
+          [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'Assests Tracking'" [options]="asseststrackingList"
+          [(inputModel)]="itemCategory.assestsTracking"
+          [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'Status'" [options]="statusList"
+          [(inputModel)]="itemCategory.status"
+          [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'Drug'" [options]="drugList"
+          [(inputModel)]="itemCategory.drug"
+          [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
+      </div>
+    </div>
+  </p-scrollPanel>
+  </div>
+  <!-- </p-scrollPanel> -->
+  <!-- </div>
+  </div> -->
+</div>
+<app-saving #saving></app-saving>

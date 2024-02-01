@@ -1,0 +1,32 @@
+<div class="justify-content-center">
+<div class="flex flex-column gap-2 ">
+  <div [ngClass]="dropdownAxis === true ? 'formgroup-inline':'displayBlock' " >
+  <label class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis" htmlFor="{{ labelName }}">{{ labelName }}</label>
+  <!-- <input pInputText id="username" aria-describedby="username-help"  /> -->
+
+  <p-dropdown  [style]="{width:'100%'}" aria-describedby="username-help"
+  [filter]="true"
+  filterBy="label"
+  [options]="options"
+  [(ngModel)]="inputModel"
+  [optionLabel]="optionLabel"
+  [optionValue]="optionValue"
+  (onBlur)="onLeaveControl();"
+  (onChange)="onChangeControl()"
+  [appendTo]="appendTo"
+  [ngClass]="{
+    'ng-invalid': errorMessages !== '',
+    'ng-dirty': errorMessages !== ''
+  }"
+  [disabled]="disabled"
+  placeholder="Select {{labelName}}"
+></p-dropdown>
+  <small id="username-help" class="errorMessages" pTooltip="{{ errorMessages }}" tooltipPosition="top" >{{errorMessages}}</small>
+</div>
+</div>
+</div>
+<style>
+  .displayBlock{
+    display: contents;
+  }
+</style>

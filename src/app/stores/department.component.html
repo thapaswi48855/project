@@ -1,0 +1,61 @@
+<div class="">
+    <div>
+      <app-header
+        [pageTitle]="pageTitle"
+        [onSubmit]="onSubmit"
+        [onGrid]="true"
+        [onAddNew]="false"
+        [onClear]="onClear"
+        [onEdit]="onEdit"
+        [onView]="onView"
+        (submitClick)="onSaveClick()"
+        (clearClick)="onClearClick()"
+        [redirectToGrid]="redirectToGrid"
+        #headers
+      ></app-header>
+    </div>
+  
+    <div class="div-padding">
+      <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-inputtext [labelName]="'Department'" [(inputModel)]="department.department" 
+        [disabled]="!isEditable"
+            (onBlur)="onGetErrorMsgs('genericName', true)"
+            errorMessages="{{errorMsgs.genericNameReq}}"></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown [labelName]="'Department Type'" 
+        [(inputModel)]="department.departmentType" 
+        [options]="departmentTypeList" [disabled]="!isEditable"
+        (onBlur)="onGetErrorMsgs('departmentType', true)"
+            errorMessages="{{errorMsgs.departmentTypeReq}}"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"></app-dropdown>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown [labelName]="'Status'" [(inputModel)]="department.status"
+         [disabled]="!isEditable" [options]="statusList" 
+         [optionLabel]="'subMasterName'"
+        [optionValue]="'subMasterId'"></app-dropdown>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown [labelName]="'Allowed Gender'" 
+        [(inputModel)]="department.allowedGender" [options]="genderList" 
+        [disabled]="!isEditable" [optionLabel]="'subMasterName'"
+        [optionValue]="'subMasterId'"></app-dropdown>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-inputtext [labelName]="'Cost Center Code'" [(inputModel)]="department.costCenterCode" [disabled]="!isEditable"></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown [labelName]="'Send Referral Doctor As Ordering Clinician'" [(inputModel)]="department.referralDoctorAsOrderingClinician"
+         [disabled]="!isEditable" [options]="referralDoctor" 
+         [optionLabel]="'subMasterName'"
+        [optionValue]="'subMasterId'"></app-dropdown>
+      </div>      
+      </p-scrollPanel>
+    </div>
+  
+  </div>
+  <app-saving #saving></app-saving>
+  

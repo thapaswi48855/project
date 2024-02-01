@@ -1,0 +1,59 @@
+<div class="">
+    <div>
+      <app-header
+        [pageTitle]="pageTitle"
+        [onSubmit]="onSubmit"
+        [onGrid]="true"
+        [onAddNew]="false"
+        [onClear]="onClear"
+        [onEdit]="onEdit"
+        [onView]="onView"
+        (submitClick)="onSaveClick()"
+        (clearClick)="onClearClick()"
+        [redirectToGrid]="redirectToGrid"
+        #headers
+      ></app-header>
+    </div>
+    <div class="div-padding">
+      <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+        <div class="grid">
+          <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+            <app-dropdown
+              [(inputModel)]="taxgroup.taxgrouptype"
+              [labelName]="'Tax Group Type'"
+              [optionLabel]="'subMasterName'"
+              [optionValue]="'subMasterId'"
+              [disabled]="!isEditable" [options]="taxGrpTypeList"
+            ></app-dropdown>
+            <app-inputtext
+              [(inputModel)]="taxgroup.taxgroup"
+              [labelName]="'Tax Group'"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+            <app-dropdown
+              [(inputModel)]="taxgroup.taxgroupcode"
+              [labelName]="'Tax Group Code'"
+              [disabled]="!isEditable" [options]="taxGrpCodeList"
+              [optionLabel]="'subMasterName'"
+              [optionValue]="'subMasterId'"
+            ></app-dropdown>           
+           
+            <app-inputtext
+              [(inputModel)]="taxgroup.displayorder"
+              [labelName]="'Display Order'"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+            <app-dropdown
+            [(inputModel)]="taxgroup.status"
+            [labelName]="'Status'"
+            [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'" [options]="statusList"
+          ></app-dropdown>
+          </div>
+        </div>
+      </p-scrollPanel>
+    </div>
+  </div>
+  <app-saving #saving></app-saving>
+  

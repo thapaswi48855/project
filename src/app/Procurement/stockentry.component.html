@@ -1,0 +1,549 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      [onSaveApprove]=true
+      [onSavePrint]="true"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      (saveApproveClick)="onSaveApproveClick()"
+      (savePrintClick)="onSavePrintClick()"
+      #headers
+    ></app-header>
+  </div>
+
+  <div class="div-padding">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <p-fieldset legend="Manufacture" [toggleable]="true">
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-dropdown
+              [labelName]="'Store'"
+              [options]="storeList"
+              [(inputModel)]="stockEntry.store"
+              [optionLabel]="'store'"
+              [optionValue]="'_id'"
+            ></app-dropdown>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-dropdown
+              [labelName]="'Po Number'"
+              [(inputModel)]="stockEntry.ponumber"
+              [disabled]="!isEditable"
+              [options]="purchaseList"
+              [optionLabel]="'poNumber'"
+              [optionValue]="'_id'"
+              (onChange)="onSelectPoNum(stockEntry.ponumber)"
+            ></app-dropdown>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-dropdown
+              [labelName]="'Quantity UOM'"
+              [options]="UOMList"
+              [(inputModel)]="stockEntry.quantityUom"
+              [disabled]="!isEditable"
+            ></app-dropdown>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Supplier'"
+              [(inputModel)]="stockEntry.supplier"
+              [disabled]="!isEditable"
+              (onBlur)="onGetErrorMsgs('supplier', true)"
+              errorMessages="{{errorMsgs.supplierReq}}"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Supplier Address'"
+              [(inputModel)]="stockEntry.supplieraddress"
+              [disabled]="!isEditable"              
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Invoice No.'"
+              [(inputModel)]="stockEntry.invoiceNo"
+              [disabled]="!isEditable"
+              (onBlur)="onGetErrorMsgs('invoiceNo', true)"
+              errorMessages="{{errorMsgs.invoiceNoReq}}"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-datepicker
+              [labelName]="'Invoice Date'"
+              [(inputModel)]="stockEntry.invoiceDte"
+              [disabled]="!isEditable"
+              (onBlur)="onGetErrorMsgs('invoiceDte', true)"
+              errorMessages="{{errorMsgs.invoiceDteReq}}"
+            ></app-datepicker>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-datepicker
+              [labelName]="'Due Date'"
+              [(inputModel)]="stockEntry.dueDate"
+              [disabled]="!isEditable"
+              (onBlur)="onGetErrorMsgs('dueDate', true)"
+              errorMessages="{{errorMsgs.dueDateReq}}"
+            ></app-datepicker>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Status'"
+              [(inputModel)]="stockEntry.status"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-dropdown
+              [labelName]="'Stock Type'"
+              [options]="stockTypeList"
+              [disabled]="!isEditable"
+              [(inputModel)]="stockEntry.stockType"
+            ></app-dropdown>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Cash Purchase'"
+              [(inputModel)]="stockEntry.cashPurchase"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'PO Reference'"
+              [(inputModel)]="stockEntry.poReference"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-dropdown
+              [labelName]="'Item Discount Type'"
+              [options]="discountTypeList"
+              [disabled]="!isEditable"
+              [(inputModel)]="stockEntry.itemDiscountType"
+            ></app-dropdown>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Item Discount Value'"
+              [(inputModel)]="stockEntry.itemDiscountValue"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Remarks'"
+              [(inputModel)]="stockEntry.remarks"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Payment Remarks'"
+              [(inputModel)]="stockEntry.paymentRemarks"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <!-- <app-inputtext
+              [labelName]="'Upload Invoice Copy'"
+              [(inputModel)]="stockEntry.uploadInvoiceCopy"
+              [disabled]="!isEditable"
+            ></app-inputtext> -->
+            <p-fileUpload
+              mode="basic"
+              name="demo[]"
+              url="https://www.primefaces.org/cdn/api/upload.php"
+              accept="image/*"
+              (onUpload)="onBasicUploadAuto($event)"
+              [auto]="true"
+              chooseLabel="Browse"
+            ></p-fileUpload>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Purpose of Purchase'"
+              [(inputModel)]="stockEntry.purposeOfPurchase"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+        </div>
+      </p-fieldset>
+
+      <p-fieldset legend="Details" [toggleable]="true">
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Company Name'"
+              [(inputModel)]="stockEntry.companyname"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Means Transport'"
+              [(inputModel)]="stockEntry.meansTransport"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Consignment No.'"
+              [(inputModel)]="stockEntry.consignmentNo"
+              [disabled]="!isEditable"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-datepicker
+              [labelName]="'Consignment Date'"
+              [(inputModel)]="stockEntry.consignmentDate"
+              [disabled]="!isEditable"
+            ></app-datepicker>
+          </div>
+        </div>
+      </p-fieldset>
+      <div>
+        <!-- table -->
+        <!-- {{newItemList |json}} -->
+        <p-table
+          #dt
+          [columns]="gridCols"
+          [value]="newItemsList"
+          [paginator]="false"
+          [rows]="25"
+          [responsive]="true"
+          [resizableColumns]="true"
+          styleClass="p-datatable-gridlines"
+          [scrollable]="true"
+          scrollHeight="flex"
+        >
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <!-- <th></th> -->
+              <th
+                *ngFor="let col of columns"
+                pResizableColumn
+                [pSortableColumn]="col.field"
+                [ngStyle]="col.style"
+              >
+                {{ col.header }}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+              <th>
+
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns"  let-rowIndex="rowIndex">
+            <tr>
+              <td>
+                {{ rowData.itemName }}
+              </td>
+              <td>
+                {{ rowData.generateItemCode }}
+              </td>
+              <td>
+                {{ rowData.batch }}
+              </td>
+              <td>
+                {{ rowData.expiry }}
+              </td>
+              <td>
+                <!-- {{ rowData.itemName }} -->
+              </td>
+              <td>
+                {{ rowData.mrp }}
+              </td>
+              <td>
+                {{ rowData.rate }}
+              </td>
+              <td>
+                {{ rowData.qty }}
+              </td>
+              <td>
+                {{ rowData.bouns }}
+              </td>
+              <td>
+                {{ rowData.pckUOM }}
+              </td>
+              
+              <td>
+                {{ rowData.taxRate }}
+              </td>
+              <td>
+                <!-- {{ rowData.taxRate }} -->
+              </td>
+              <td>
+                {{ rowData.disAmt }}
+              </td>
+              <td>
+                {{ rowData.schDiscount }}
+              </td>
+              <td>
+                {{ rowData.taxAmt}}
+              </td>
+              <td>
+                {{ rowData.totalAmt }} 
+              </td>   
+              <td>
+                <button (click)="onEditSelect(rowIndex ,rowData)">Edit</button>
+              </td>          
+            </tr>
+          </ng-template>
+        </p-table>
+        <button (click)="onItemClick()">AAA</button>
+      </div>
+      <p-fieldset legend="Total" [toggleable]="true">
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-labelbind
+              [labelName]="'Total Item Discount'"
+              [labelValue]="stockEntry.totalItemDis"
+            ></app-labelbind>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-labelbind
+              [labelName]="'Total Item Sch Discount'"
+              [labelValue]="stockEntry.itemSchDis"
+            ></app-labelbind>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-labelbind
+              [labelName]="'Total Item Amount'"
+              [labelValue]="stockEntry.totalItemAmount"
+            ></app-labelbind>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-labelbind
+              [labelName]="'CGST'"
+              [labelValue]="stockEntry.totalcgst"
+            ></app-labelbind>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-labelbind
+              [labelName]="'SGST'"
+              [labelValue]="stockEntry.totalsgst"
+            ></app-labelbind>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-labelbind
+              [labelName]="'i-GST'"
+              [labelValue]="stockEntry.gst"
+            ></app-labelbind>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-labelbind
+              [labelName]="'Tax Amount'"
+              [labelValue]="stockEntry.tataltaxAmt"
+            ></app-labelbind>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-dropdown
+              [labelName]="'Inv. Discount Type'"
+              [(inputModel)]="stockEntry.InvDiscountType"
+              [options]="poDiscountTypeList"
+              [optionLabel]="'subMasterName'"
+              [optionValue]="'subMasterId'" 
+             
+            ></app-dropdown>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Inv. Discount Value'"
+              [(inputModel)]="stockEntry.InvDiscountValue"
+              (onChange)="onInvDisAmt(stockEntry.InvDiscountType)"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Transportation Charges'"
+              [(inputModel)]="stockEntry.transportCharges"
+              (onChange)="onTransportCharges()"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-labelbind
+              [labelName]="'Inv. Discount Amount'"
+              [labelValue]="stockEntry.InvDiscontAmount"
+            ></app-labelbind>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Other Charges'"
+              [(inputModel)]="stockEntry.otherCharges"
+              (onChange)="onOtherCharges()"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Round Off'"
+              [(inputModel)]="stockEntry.roundOff"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-inputtext
+              [labelName]="'Debit amount'"
+              [(inputModel)]="stockEntry.debitAmt"
+            ></app-inputtext>
+          </div>
+          <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <app-labelbind
+              [labelName]="'Invoice Total'"
+              [labelValue]="stockEntry.InvTotal"
+            ></app-labelbind>
+          </div>
+         
+        </div>
+      </p-fieldset>     
+    </p-scrollPanel>
+  </div>
+</div>
+<app-saving #saving></app-saving>
+<p-dialog header="Header" [(visible)]="visible" [style]="{ width: '50vw' }">
+  <p-fieldset legend="Total" [toggleable]="true">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-lookup
+          [labelName]="'Item'"
+          [(inputModel)]="itemDetails.itemName"
+          [filteredOptions]="newItemList"
+          [filterName]="'itemName'"
+          (onLoopUp)="onLoopUp($event)"
+          (onBlur)="onGetErrorMsgs('itemName', true)"
+          errorMessages="{{errorMsgs.itemNameReq}}"
+        ></app-lookup>
+      </div>      {{itemDetails.itemName}}
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'MRP'" [labelValue]=""></app-labelbind> -->
+        <app-inputtext [labelName]="'Batch/Serial No.'"
+        [(inputModel)]="itemDetails.batch"
+        [disabled]="!isEditable"  ></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'MRP'" [labelValue]=""></app-labelbind> -->
+        <app-datepicker [labelName]="'Expiry'"
+        [(inputModel)]="itemDetails.expiry"
+        [disabled]="!isEditable"  ></app-datepicker>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'MRP'" [labelValue]=""></app-labelbind> -->
+        <app-inputtext [labelName]="'MRP'"
+        [(inputModel)]="itemDetails.mrp"
+        [disabled]="!isEditable" (onChange)="onChangeMrpAmt(itemDetails.mrp)"
+        (onBlur)="onGetErrorMsgs('mrp', true)"
+        errorMessages="{{errorMsgs.mrpReq}}" ></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'Adj MRP'" [labelValue]=""></app-labelbind> -->
+        <app-inputtext [labelName]="'Adj MRP'"
+        [(inputModel)]="itemDetails.adjMrp"
+        [disabled]="!isEditable"></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'Rate'" [labelValue]=""></app-labelbind> -->
+        <app-inputtext [labelName]="'Rate'"
+        [(inputModel)]="itemDetails.rate"
+        [disabled]="!isEditable"
+        (onBlur)="onGetErrorMsgs('rate', true)"
+        errorMessages="{{errorMsgs.rateReq}}"></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'Qty'" [labelValue]=""></app-labelbind> -->
+        <app-inputtext [labelName]="'Qty'"
+        [(inputModel)]="itemDetails.qty"
+        [disabled]="!isEditable"
+        (onChange)="onRateWiseTaxAmt(itemDetails.qty);onDiscountAmt(itemDetails.discountPer)"
+        (onBlur)="onGetErrorMsgs('qty', true)"
+        errorMessages="{{errorMsgs.qtyReq}}"></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'Bouns'" [labelValue]=""></app-labelbind> -->
+        <app-inputtext [labelName]="'Bouns'"
+        [(inputModel)]="itemDetails.bouns"
+        [disabled]="!isEditable"></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'Discount'" [labelValue]=""></app-labelbind> -->
+        <app-inputtext [labelName]="'Discount (%)'"
+        [(inputModel)]="itemDetails.discountPer"
+        [disabled]="!isEditable"  (onChange)="onDiscountAmt(itemDetails.discountPer)"></app-inputtext>
+      </div>
+      <!-- <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-labelbind [labelName]="'Discount'" [labelValue]=""></app-labelbind>
+        <app-inputtext [labelName]="'Discount'"
+        [(inputModel)]="itemDetails.discount"
+        [disabled]="!isEditable" (onChange)="onDiscountAmt(itemDetails.discount)"></app-inputtext>
+      </div> -->
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind
+          [labelName]="'Discount Amt'"
+          [labelValue]=""
+        ></app-labelbind> -->
+        <app-inputtext [labelName]="'Discount Amt'"
+        [(inputModel)]="itemDetails.disAmt"
+        [disabled]="!isEditable"
+        (onChange)="onDisPer(itemDetails.disAmt);onRateWiseTaxAmt(itemDetails.qty)"></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'Discount'" [labelValue]=""></app-labelbind> -->
+        <app-inputtext [labelName]="'Scheme Discount (%)'"
+        [(inputModel)]="itemDetails.schDiscountPer"
+        [disabled]="!isEditable" (onChange)="onSchDiscountAmt(itemDetails.schDiscountPer)"></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <!-- <app-labelbind [labelName]="'Discount'" [labelValue]=""></app-labelbind> -->
+        <app-inputtext [labelName]="'Scheme Discount'"
+        [(inputModel)]="itemDetails.schDiscount"
+        [disabled]="!isEditable" (onChange)="onSchDisPer(itemDetails.schDiscount);onRateWiseTaxAmt(itemDetails.qty)"></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-labelbind
+          [labelName]="'package Size'"
+          [labelValue]="itemDetails.pckSize"
+        ></app-labelbind>
+      </div>
+    </div>
+    <p-fieldset legend="Total" [toggleable]="true">
+      <div class="formgrid grid">
+        <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+          <app-dropdown [labelName]="'Tax Basis'" [(inputModel)]="itemDetails.taxBasis"
+          [options]="taxGrpTypeList" [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"></app-dropdown>
+        </div>
+        <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+          <app-labelbind
+            [labelName]="'Tax Rate'"
+            [labelValue]="itemDetails.taxRate"
+          ></app-labelbind>
+        </div>
+        <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+          <app-labelbind [labelName]="'Tax Amt'" [labelValue]="itemDetails.taxAmt"></app-labelbind>
+        </div>
+        <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+          <app-dropdown  [labelName]="'CGST'"
+          [(inputModel)]="itemDetails.cgst" [options]="cgstList"  [optionLabel]="'taxsubgroup'"
+          [optionValue]="'_id'" (onChange)="onCgstTaxAmt(itemDetails.cgst)"></app-dropdown>
+        </div>
+        <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+          <app-dropdown [labelName]="'SGST'"
+          [(inputModel)]="itemDetails.sgst" [options]="sgstList"  [optionLabel]="'taxsubgroup'"
+          [optionValue]="'_id'" (onChange)="onSgstTaxAmt(itemDetails.sgst)"></app-dropdown>
+        </div>
+        <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+          <app-dropdown [labelName]="'IGST'"
+          [(inputModel)]="itemDetails.igst" [options]="igstList"  [optionLabel]="'taxsubgroup'"
+          [optionValue]="'_id'"></app-dropdown>
+        </div>
+      </div>
+    </p-fieldset>
+  </p-fieldset>
+  <button (click)="onAddItemClick(itemDetails)">ADD</button>
+  <button>N</button>
+</p-dialog>

@@ -1,0 +1,473 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      [redirectToGrid]="redirectToGrid"
+      #headers
+    ></app-header>
+  </div>
+
+  <div class="div-padding-fieldset">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <div class="formgrid grid">
+        <div class="col-12">
+          <p-fieldset legend="Item Details" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Item Name'"
+                  [(inputModel)]="newItem.itemName"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Short Name'"
+                  [(inputModel)]="newItem.shortName"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Status'"
+                  [options]="statusList"
+                  [(inputModel)]="newItem.status"
+                  [disabled]="!isEditable"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Category'"
+                  [(inputModel)]="newItem.category"
+                  [optionLabel]="'categoryName'"
+                  [optionValue]="'_id'"
+                  [disabled]="!isEditable"
+                  [options]="categoryList"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Generate Item Code'"
+                  [(inputModel)]="newItem.generateItemCode"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Custom Item Code'"
+                  [(inputModel)]="newItem.customItemCode"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Manufacture'"
+                  [(inputModel)]="newItem.manufacture"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Strength'"
+                  [(inputModel)]="newItem.strength"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Strength Units'"
+                  [(inputModel)]="newItem.strengthUnits"
+                  [disabled]="!isEditable"
+                  [options]="strengthUnitsList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Item From'"
+                  [(inputModel)]="newItem.itemFrom"
+                  [disabled]="!isEditable"
+                  [options]="itemFromList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Root'"
+                  [(inputModel)]="newItem.root"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'unit UOM'"
+                  [(inputModel)]="newItem.unitUOM"
+                  [disabled]="!isEditable"
+                  [options]="unitUomList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Package UOM'"
+                  [(inputModel)]="newItem.packageUOM"
+                  [disabled]="!isEditable"
+                  [options]="packageUomList"
+                  [optionLabel]="'packageUom'"
+                  [optionValue]="'_id'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Package Size'"
+                  [(inputModel)]="newItem.packageSize"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Package Type'"
+                  [(inputModel)]="newItem.packageType"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Consumption UOM'"
+                  [(inputModel)]="newItem.consumptionUOM"
+                  [disabled]="!isEditable"
+                  [options]="consumptionUOMList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Consumption Capacity'"
+                  [(inputModel)]="newItem.consumptionCapacity"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Generic Name'"
+                  [(inputModel)]="newItem.genericName"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Service Group'"
+                  [(inputModel)]="newItem.serviceGroup"
+                  [disabled]="!isEditable"
+                  [options]="serviceGrpList"
+                  [optionLabel]="'servicegroupname'"
+                  [optionValue]="'_id'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Service Sub Group'"
+                  [(inputModel)]="newItem.serviceSubGroup"
+                  [disabled]="!isEditable"
+                  [options]="serviceSubGrpList"
+                  [optionLabel]="'servicesubgroupname'"
+                  [optionValue]="'_id'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Max Cost Price'"
+                  [(inputModel)]="newItem.maxCostPrice"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Supplier Name'"
+                  [(inputModel)]="newItem.supplierName"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Preferred Supplier'"
+                  [(inputModel)]="newItem.preferredSupplier"
+                  [disabled]="!isEditable"
+                  [options]="preferredSupplierList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Invoice Details'"
+                  [(inputModel)]="newItem.invoiceDetails"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Control Type'"
+                  [(inputModel)]="newItem.controlType"
+                  [disabled]="!isEditable"
+                  [options]="controlTypeList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Insurence Category'"
+                  [(inputModel)]="newItem.insurenceCategory"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Pre Auth Required'"
+                  [(inputModel)]="newItem.preAuthRequired"
+                  [disabled]="!isEditable"
+                  [options]="preAuthRequiredList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Billing Group'"
+                  [(inputModel)]="newItem.billingGroup"
+                  [disabled]="!isEditable"
+                  [options]="billingGroupList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Tax Basis'"
+                  [(inputModel)]="newItem.taxBasis"
+                  [disabled]="!isEditable"
+                  [options]="taxBasisList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Tax (%)'"
+                  [(inputModel)]="newItem.tax"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Bin / Rack'"
+                  [(inputModel)]="newItem.binRack"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Batch Number Applicable'"
+                  [(inputModel)]="newItem.batchNumberApplicable"
+                  [disabled]="!isEditable"
+                  [options]="batchNumberApplicableList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Item Selling Price'"
+                  [(inputModel)]="newItem.itemSellingPrice"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'High Cost Consumables'"
+                  [(inputModel)]="newItem.highCostConsumables"
+                  [disabled]="!isEditable"
+                  [options]="highCostConsumablesList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Allow Zero Calim Amount'"
+                  [(inputModel)]="newItem.allowZeroCalimAmnt"
+                  [disabled]="!isEditable"
+                  [options]="allowZeroCalimAmntList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+        <div class="col-12">
+          <p-fieldset legend="Store Item List" [toggleable]="true">
+            <!-- {{storeWiseList | json}} -->
+            <p-table
+              #dt
+              [columns]="storeWiseCols"
+              [value]="storeWiseList"
+              [paginator]="false"
+              [rows]="25"
+              [responsive]="true"
+              [resizableColumns]="true"
+              styleClass="p-datatable-gridlines"
+              [scrollable]="true"
+              scrollHeight="400px"
+              selectionMode="multiple"
+            >
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th
+                    *ngFor="let col of columns"
+                    pResizableColumn
+                    [pSortableColumn]="col.field"
+                    [ngStyle]="col.style"
+                  >
+                    {{ col.header }}
+                  </th>
+                  <th></th>
+                </tr>
+
+                <!-- <tr></tr> -->
+              </ng-template>
+              <ng-template pTemplate="body" let-store let-columns="columns" let-rowIndex="rowIndex">
+                <tr [pSelectableRow]="store">
+                  <td>
+                    <app-dropdown
+                    [(inputModel)]="store.store"
+                    [disabled]="!isEditable"
+                    [options]="storeList"
+                    [optionLabel]="'store'"
+                    [optionValue]="'_id'"></app-dropdown>
+                  </td>
+                  <td>
+                    <app-inputtext></app-inputtext>
+                  </td>
+                  <td>
+                    <app-inputtext></app-inputtext>
+                  </td>
+                  <td>
+                    <app-inputtext></app-inputtext>
+                  </td>
+                  <td>
+                    <app-inputtext></app-inputtext>
+                  </td>
+                  <td>
+                    <app-inputtext></app-inputtext>
+                  </td>
+
+                  <td>
+                    <!-- <button>AA</button> -->
+                    <i class="pi pi-plus-circle" (click)="onAddStoreItem()">
+                    </i>
+                    <i class="pi pi-minus-circle" (click)="onRemoveStoreItem(rowIndex)">
+                    </i>
+                  </td>
+                </tr>
+              </ng-template>
+              <!-- <tr>
+                aaa
+              </tr> -->
+            </p-table>
+          </p-fieldset>
+        </div>
+        <!-- <div class="col-6">
+          <p-fieldset legend="Health Authority Code Type " [toggleable]="true">
+          </p-fieldset>
+        </div> -->
+        <div class="col-6">
+          <p-fieldset legend="Tax Sub Group" [toggleable]="true"> 
+            <!-- {{taxList |json}} -->
+            <p-table
+            #dt
+            [columns]="taxCols"
+            [value]="taxList"
+            [paginator]="false"
+            [rows]="25"
+            [responsive]="true"
+            [resizableColumns]="true"
+            styleClass="p-datatable-gridlines"
+            [scrollable]="true"
+            scrollHeight="400px"
+            selectionMode="multiple"
+          >
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th
+                  *ngFor="let col of columns"
+                  pResizableColumn
+                  [pSortableColumn]="col.field"
+                  [ngStyle]="col.style"
+                >
+                  {{ col.header }}
+                </th>
+                <th></th>
+              </tr>
+
+              <!-- <tr></tr> -->
+            </ng-template>
+            <ng-template pTemplate="body" let-tax let-columns="columns" let-rowIndex="rowIndex">
+              <tr [pSelectableRow]="tax">
+                <td>
+                  <app-dropdown
+                  [(inputModel)]="tax.taxGrpType"
+                    [disabled]="!isEditable"
+                    [options]="taxGrpTypeList"
+                    [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"></app-dropdown>
+                </td>
+                <td>
+                  <app-dropdown [(inputModel)]="tax.taxGrp"
+                  [disabled]="!isEditable"
+                  [options]="taxGroupList"
+                  [optionLabel]="'taxgroup'"
+                  [optionValue]="'_id'"></app-dropdown>
+                </td>
+                <td>
+                  <app-dropdown [(inputModel)]="tax.taxSubGrp"
+                  [disabled]="!isEditable"
+                  [options]="taxSubGroupList"
+                  [optionLabel]="'taxsubgroup'"
+                  [optionValue]="'_id'"></app-dropdown>
+                </td>
+                <td>
+                  <!-- <button>AA</button> -->
+                  <i class="pi pi-plus-circle" (click)="onAddTaxItem()">
+                  </i>
+                  <i class="pi pi-minus-circle" (click)="onRemoveTaxItem(rowIndex)">
+                  </i>
+                </td>
+              </tr>
+            </ng-template>
+            <!-- <tr>
+              aaa
+            </tr> -->
+          </p-table>
+          </p-fieldset>
+        </div>
+      </div>
+    </p-scrollPanel>
+  </div>
+</div>
+<app-saving #saving></app-saving>

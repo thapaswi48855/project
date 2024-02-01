@@ -1,0 +1,20 @@
+<div class="justify-content-center">
+    <div class="flex flex-column gap-2">
+        <label  class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis" htmlFor="{{ labelName }}">{{labelName}}</label>
+        <textarea
+        rows="rows"
+        cols="cols"
+        pInputTextarea
+        [(ngModel)]="inputModel"
+        [disabled]="disabled"
+        pAutoFocus
+        (blur)="onLeaveControl()"
+        pTooltip="{{ errorMessages }}"
+        [ngClass]="{
+          'ng-invalid': errorMessages !== '',
+          'ng-dirty': errorMessages !== ''
+        }"
+      ></textarea>
+        <small id="username-help">{{ errorMessages }}</small>
+    </div>
+</div>

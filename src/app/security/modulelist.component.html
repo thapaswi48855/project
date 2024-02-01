@@ -1,0 +1,53 @@
+<div class="d-flex flex-column h-100 overflow-hidden p-2">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="onGrid"
+      [onAddNew]="onAddNew"
+      (gridClick)="onGridClick()"
+      (addNewClick)="onAddNewClick()"
+      #header
+    ></app-header>
+  </div>
+  <div class="border d-flex flex-column flex-fill h-100 p-2">
+  <app-gridview class="d-flex flex-column h-100"
+    #gridView
+    [mastersGridColumns]="mastersGridColumns"
+    [masterGridData]="masterGridData"
+    [showCheckBox]="showCheckBox" [paramKey]="paramKey"
+  >
+  </app-gridview>
+  </div>
+</div>
+
+<!-- <p>modulelist works!</p> -->
+<!-- <div class="mt-1">
+    <div>
+      <app-headers [pageTitle]="pageTitle" [onSubmit]="onSubmit" [onGrid]="onGrid" [onAddNew]="onAddNew"></app-headers>
+    </div>
+    <div class="mt-2">
+        <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                   
+                    <th>Name</th>
+                    <th>Description</th>
+                
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>
+                        <input type="text" pInputText  [(ngModel)]="product.name" />
+                    </td>
+                    <td>
+                        <input type="text" pInputText  [(ngModel)]="product.Description" />
+                    </td>
+                   
+                </tr>
+            </ng-template>
+        </p-table>
+        
+    </div>
+</div>   -->

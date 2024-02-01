@@ -1,0 +1,26 @@
+<div class="">
+    <div>
+      <app-header
+        [pageTitle]="pageTitle"
+        [onSubmit]="onSubmit"
+        [onGrid]="onGrid"
+        [onAddNew]="onAddNew"
+        #headers
+      ></app-header>
+    </div>
+    <div class="div-padding">
+      <p-scrollPanel
+        [style]="{ width: '100%', height: ' calc(100vh - 150px)' }"
+        styleClass="custombar1"
+      >
+      <app-gridview
+        class="d-flex flex-column h-100"
+        #grid
+        [mastersGridColumns]="mastersGridColumns" [masterGridData]="masterGridData"
+        [paramKey]="paramKey"  
+        [printOptions]="printOptions" [actionOptions]="actionOptions">
+      </app-gridview>
+      </p-scrollPanel>
+    </div>
+  </div>
+  

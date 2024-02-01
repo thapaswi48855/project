@@ -1,0 +1,25 @@
+<div class="justify-content-center ">
+    <div class="flex flex-column gap-2" >
+      <span [ngClass]="inputAxis === true ? 'formgroup-inline':'displayBlock' " >
+        <label class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"
+         htmlFor="{{ labelName }}" title="{{labelName}}">{{labelName}}</label>
+        <input pInputText id="username" aria-describedby="username-help"
+        type="text" 
+        [(ngModel)]="inputModel"
+        pAutoFocus
+        (blur)="onLeaveControl()"
+        (change)="onChangeControl()"
+        [disabled]="disabled"
+        [ngClass]="{
+          'ng-invalid': errorMessages !== '',
+          'ng-dirty': errorMessages !== ''
+        }" />
+        <small id="username-help" class="errorMessages" pTooltip="{{ errorMessages }}" tooltipPosition="top">{{ errorMessages }}</small>
+    </span>
+  </div>
+</div>
+<style>
+  .displayBlock{
+    display: contents;
+  }
+</style>

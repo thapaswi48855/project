@@ -1,0 +1,94 @@
+<div class="">
+    <div>
+      <app-header
+        [pageTitle]="pageTitle"
+        [onSubmit]="onSubmit"
+        [onGrid]="true"
+        [onAddNew]="false"
+        [onClear]="onClear"
+        [onEdit]="onEdit"
+        [onView]="onView"
+        (submitClick)="onSaveClick()"
+        (clearClick)="onClearClick()"
+        #headers
+      ></app-header>
+    </div>
+  
+    <div class="div-padding">
+      <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+        <p-fieldset legend="Tax Sub Group" [toggleable]="true">
+          <div class="formgrid grid">
+            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+              <app-dropdown
+                [labelName]="'Tax Group'"
+                
+                [(inputModel)]="taxsubgroup.taxgroup"
+                [disabled]="!isEditable" [options]="taxGroupList"
+                [optionLabel]="'taxgroup'"
+                [optionValue]="'_id'"
+              ></app-dropdown>
+            </div>
+            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+              <app-inputtext
+                [labelName]="'Tax Sub Group'"
+                [(inputModel)]="taxsubgroup.taxsubgroup"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+              <app-dropdown
+                [labelName]="'Status'"
+               
+                [(inputModel)]="taxsubgroup.status"
+                [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
+                [optionValue]="'subMasterId'" [options]="statusList"
+              ></app-dropdown>
+            </div>
+            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+              <app-inputtext
+                [labelName]="'Display Order'"
+                [(inputModel)]="taxsubgroup.displayorder"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>           
+          </div>
+        </p-fieldset>
+  
+        <p-fieldset legend="Tax Sub Group Details" [toggleable]="true">
+          <div class="formgrid grid">
+            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+              <app-inputtext
+                [labelName]="'Tax Rate'"
+                [(inputModel)]="taxsubgroup.taxrate"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+              <app-datepicker
+                [labelName]="'Validity Start'"
+                [(inputModel)]="taxsubgroup.validityStartDt"
+                [disabled]="!isEditable"
+              ></app-datepicker>
+            </div>
+            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+              <app-datepicker
+                [labelName]="'Validity End'"
+                [(inputModel)]="taxsubgroup.validityEndDt"
+                [disabled]="!isEditable"
+              ></app-datepicker>
+            </div>
+            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+              <app-textarea
+                [labelName]="'Tax Rate Expression'"
+                [(inputModel)]="taxsubgroup.taxrateexpression"
+                [disabled]="!isEditable"
+              ></app-textarea>
+            </div>
+          </div>
+        </p-fieldset>
+       
+      </p-scrollPanel>
+    </div>
+  </div>
+  <app-saving #saving></app-saving>
+  

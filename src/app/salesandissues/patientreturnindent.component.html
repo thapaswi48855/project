@@ -1,0 +1,154 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      #headers
+    ></app-header>
+  </div>
+  <div class="div-padding-fieldset">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <div>
+        <app-lookup [labelName]="'MR No.'" [lookupAxis]=true [(inputModel)]="name" [filteredOptions]="countries" [filterField]="'name'"></app-lookup>
+      </div>
+      <!-- <div class=""> -->
+        <div class="field col-12">
+          <p-fieldset legend="Patient Details" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'MR No.'"
+                  [labelValue]="patientreturnIndent.mrNo"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Name'"
+                  [labelValue]="patientreturnIndent.name"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Age / Gender'"
+                  [labelValue]="patientreturnIndent.age"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Visit No.'"
+                  [labelValue]="patientreturnIndent.visitNo"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Dept'"
+                  [labelValue]="patientreturnIndent.dept"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                [labelName]="'Doctor'"
+                [labelValue]="patientreturnIndent.doctor"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Rate Plan'"
+                  [labelValue]="patientreturnIndent.ratePlan"
+                ></app-labelbind>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      <!-- </div> -->
+      <!-- <div > -->
+        <div class="field col-12">
+          <p-fieldset legend="Indent Details" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-labelbind
+                  [labelName]="'Raised By'"                 
+                  [labelValue]="patientreturnIndent.raisedBy"                
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Indent Store'"
+                  [(inputModel)]="patientreturnIndent.indentStore"
+                  [disabled]="!isEditable"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Status'"
+                  [options]="statusTypeList"
+                  [(inputModel)]="patientreturnIndent.status"
+                  [disabled]="!isEditable"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-datepicker [labelName]="'Expected Date'" [(inputModel)]="patientreturnIndent.expectedDate"></app-datepicker>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext [labelName]="'Remarks'" [(inputModel)]="patientreturnIndent.remarks"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-labelbind [labelName]="'Dispend Status'" [labelValue]="patientreturnIndent.dispenseStatus"></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext [labelName]="'Priority'" [(inputModel)]="patientreturnIndent.priortity"></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext [labelName]="'Priscription Doctor'" [(inputModel)]="patientreturnIndent.priscriptionDoctor"></app-inputtext>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      <!-- </div> -->
+
+      <div>
+        <p-table
+        #dt
+        [columns]="gridCols"
+        [value]="newItemList"
+        [paginator]="false"
+        [rows]="25"
+        [responsive]="true"
+        [resizableColumns]="true"
+        styleClass="p-datatable-gridlines"
+        [scrollable]="true"
+        scrollHeight="flex"
+      >
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th
+              *ngFor="let col of columns"
+              pResizableColumn
+              [pSortableColumn]="col.field"
+              [ngStyle]="col.style"
+            >
+              {{ col.header }}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+              {{ rowData[col.field] }}
+            </td>
+          </tr>          
+        </ng-template>
+       
+      </p-table>
+      </div>
+    </p-scrollPanel>
+  </div>
+</div>

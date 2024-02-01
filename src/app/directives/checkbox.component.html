@@ -1,0 +1,7 @@
+<div class=" flex justify-content-center">
+    <div class="flex flex-column gap-2">
+        <label htmlFor="{{ labelName }}">{{labelName}}</label>
+        <p-checkbox [(ngModel)]="inputModel" [binary]="true" inputId="binary" (click)="onLeaveControl()"></p-checkbox>
+        <!-- <small id="username-help">{{ errorMessages }}</small> -->
+    </div>
+</div>

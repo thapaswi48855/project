@@ -1,0 +1,137 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      [redirectToGrid]="redirectToGrid"
+      #headers
+    ></app-header>
+  </div>
+
+  <div class="div-padding">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <div class="formgrid grid">
+        <div class="col-4 md:col-6 sm:col-6 lg:col-4 xl:col-4">
+          <p-fieldset legend="Manufacture" [toggleable]="true">
+            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+              <app-inputtext
+                [labelName]="'Manufacture Name'"
+                [(inputModel)]="manufacture.manufacturename"
+                (onBlur)="_service.onGetErrorMsgs(manufacture, 'name', true)"
+                errorMessages="{{ this._service.errorMsgs.name }}"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+
+            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+              <app-dropdown
+                [labelName]="'Status'"
+                [options]="statusList"
+                [(inputModel)]="manufacture.status"
+                [optionLabel]="'subMasterName'"
+                [optionValue]="'subMasterId'"
+              ></app-dropdown>
+            </div>
+            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+              <app-inputtext
+                [labelName]="'Manufacture Description'"
+                [(inputModel)]="manufacture.manufacturecode"
+                (onBlur)="_service.onGetErrorMsgs(manufacture, 'code', true)"
+                errorMessages="{{ this._service.errorMsgs.code }}"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+          </p-fieldset>
+        </div>
+        <div class="col-4 md:col-6 sm:col-6 lg:col-4 xl:col-4">
+          <p-fieldset legend="Region" [toggleable]="true">
+            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+              <app-inputtext
+                [labelName]="'Country'"
+                [(inputModel)]="manufacture.regioncountry"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+              <app-inputtext
+                [labelName]="'State'"
+                [(inputModel)]="manufacture.regionstate"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+              <app-inputtext
+                [labelName]="'City'"
+                [(inputModel)]="manufacture.regioncity"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+      <div class="col-7 md:col-8 sm:col-8 lg:col-6 xl:col-6">
+        <p-fieldset legend="Contact" [toggleable]="true">
+          <div class="grid">
+            <div class="field col-12 md:col-10 sm:col-10 lg:col-10 xl:col-10">
+              <app-textarea
+                [labelName]="'Address'"
+                [(inputModel)]="manufacture.contactaddress"
+                [disabled]="!isEditable"
+              ></app-textarea>
+            </div>
+            <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
+              <app-inputtext
+                [labelName]="'Phone 1'"
+                [(inputModel)]="manufacture.contactphone1"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+            <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
+              <app-inputtext
+                [labelName]="'Phone 2'"
+                [(inputModel)]="manufacture.contactphone2"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+            <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
+              <app-inputtext
+                [labelName]="'postal Code'"
+                [(inputModel)]="manufacture.contactpostalCode"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+            <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
+              <app-inputtext
+                [labelName]="'Fax'"
+                [(inputModel)]="manufacture.contactfax"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+            <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
+              <app-inputtext
+                [labelName]="'Contact Email'"
+                [(inputModel)]="manufacture.contactemail"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+            <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
+              <app-inputtext
+                [labelName]="'Web Site'"
+                [(inputModel)]="manufacture.contactwebsite"
+                [disabled]="!isEditable"
+              ></app-inputtext>
+            </div>
+          </div>
+        </p-fieldset>
+      </div>
+    </p-scrollPanel>
+  </div>
+</div>
+<app-saving #saving></app-saving>

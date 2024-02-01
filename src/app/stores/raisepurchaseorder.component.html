@@ -1,0 +1,78 @@
+<div class="">
+    <div>
+      <app-header
+        [pageTitle]="pageTitle"
+        [onSubmit]="onSubmit"
+        [onGrid]="onGrid"
+        [onAddNew]="onAddNew"
+        [onClear]="onClear"
+        (gridClick)="onGridClick()"
+        (submitClick)="onSaveClick()"
+        (clearClick)="onClearClick()"
+        #headers   
+      ></app-header>
+    </div>
+    <p-scrollPanel [style]="{ width: '100%', height:' calc(100vh - 136px)' }" styleClass="custombar1">
+    <div class="flex-fill border p-2 overflow-auto">
+      <div class="row g-2 p-2">
+        <div class="formgrid grid">  
+          <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+            <app-inputtext
+              [(inputModel)]="document.documentName" [labelName]="'Document Name'" 
+              (onBlur)="_service.onGetErrorMsgs(document, 'documentName', true)"
+              errorMessages="{{ this._service.errorMsgs.documentName }}"
+            ></app-inputtext>
+          </div>
+        </div>
+        <div class="formgrid grid">  
+          <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+            <app-inputtext
+              [(inputModel)]="document.documentPageUrl" [labelName]="'Page Url'" 
+              (onBlur)="_service.onGetErrorMsgs(document, 'documentPageUrl', true)"
+              errorMessages="{{ this._service.errorMsgs.documentPageUrl }}"
+            ></app-inputtext>
+          </div>
+        </div>
+  
+        <div class="formgrid grid">  
+          <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+            <app-inputtext
+              [(inputModel)]="document.documentGridUrl" [labelName]="'Grid Url'" 
+            ></app-inputtext>
+          </div>
+        </div>
+  
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+            <app-textarea  [labelName]="'Document Description'" [rows]="'2'" [cols]="'5'" [(inputModel)]="document.documentDescription"></app-textarea>
+          </div>
+        </div>
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+            <app-checkbox [labelName]="'Status'"  [(inputModel)]="document.status"></app-checkbox>
+          </div>
+        </div>
+  
+        <div class="formgrid grid">  
+          <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+            <app-inputtext
+              [(inputModel)]="document.documentGridUrl" [labelName]="'Grid Url'" 
+            ></app-inputtext>
+          </div>
+        </div>
+  
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+            <app-textarea  [labelName]="'Document Description'" [rows]="'2'" [cols]="'5'" [(inputModel)]="document.documentDescription"></app-textarea>
+          </div>
+        </div>
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-2">
+            <app-checkbox [labelName]="'Status'"  [(inputModel)]="document.status"></app-checkbox>
+          </div>
+        </div>
+      </div>
+      <!-- <app-saving #saving></app-saving> -->
+    </div>
+  </p-scrollPanel>
+  </div>

@@ -1,0 +1,52 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      [redirectToGrid]="redirectToGrid"
+      #headers
+    ></app-header>
+  </div>
+  <!-- {{store |json}} -->
+  <div class="div-padding">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <div class="grid">
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [(inputModel)]="store.storetypename"
+            [labelName]="'Store Type Name'"
+            (onBlur)="onGetErrorMsgs('storetypename', true)"
+            errorMessages="{{ errorMsgs.storetypename }}"
+            [disabled]="!isEditable"
+          ></app-inputtext>
+          <app-dropdown
+            [labelName]="'Status'"
+            [(inputModel)]="store.status"
+            [options]="statusList"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>         
+          <app-textarea
+            [labelName]="'Store Type Description'"
+            [rows]="'2'"
+            [cols]="'5'"
+            [disabled]="!isEditable"
+            [(inputModel)]="store.storedescription"
+          ></app-textarea>
+          <!-- <app-checkbox
+            [labelName]="'Status'"
+            [(inputModel)]="store.status"
+          ></app-checkbox> -->
+        </div>
+      </div>
+    </p-scrollPanel>
+  </div>
+</div>
+<app-saving #saving></app-saving>

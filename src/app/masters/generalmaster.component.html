@@ -1,0 +1,99 @@
+<div class="d-flex flex-column h-100 overflow-hidden">
+  <div>
+    <app-header
+    [pageTitle]="pageTitle"
+    [onSubmit]="onSubmit"
+    [onGrid]="true"
+    [onAddNew]="false"
+    [onClear]="onClear"
+    [onEdit]="onEdit"
+    [onView]="onView"
+    (submitClick)="onSaveClick()"
+    (clearClick)="onClearClick()"
+    [redirectToGrid]="redirectToGrid"
+    ></app-header>
+  </div>
+ 
+  <div class="div-padding">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <div class="grid">
+        <div class="col-3">
+          <app-inputtext
+          [labelName]="'ID'"
+          [(inputModel)]="master.masterid"
+        ></app-inputtext>
+          <app-inputtext
+            [labelName]="'Name'"
+            [(inputModel)]="master.mastername"
+          ></app-inputtext>
+          <app-dropdown
+            [labelName]="'Status'"
+            [(inputModel)]="master.status"
+            [options]="statusList" [optionLabel]="'subMasterName'" [optionValue]="'subMasterId'"
+          ></app-dropdown>
+          <app-textarea
+            [labelName]="'Description'"
+            [(inputModel)]="master.masterdesc"
+          ></app-textarea>
+        </div>
+        <div class="col-9">
+          <p-table
+            #dt
+            [columns]="subMasterCols"
+            [value]="subMasterData"
+            [paginator]="true"
+            [rows]="25"
+            [responsive]="true"
+            [resizableColumns]="true"
+            styleClass="p-datatable-gridlines"
+            [scrollable]="true"
+            scrollHeight="flex"
+          >
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th
+                  *ngFor="let col of columns"
+                  pResizableColumn
+                  [pSortableColumn]="col.field"
+                  [ngStyle]="col.style"
+                >
+                  {{ col.header }} <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-rowData
+              let-columns="columns"
+              let-rowIndex="rowIndex"
+            >
+              <tr>
+                <td>{{ rowIndex + 1 }}</td>
+                <td>
+                  <app-inputtext                 
+                    [(inputModel)]="rowData.subMasterName"
+                  ></app-inputtext>
+                </td>
+                <td>
+                  <app-textarea                  
+                    [(inputModel)]="rowData.subMasterDesc"
+                  ></app-textarea>
+                </td>
+                <td>
+                  <button (click)="onAddClick()" >A</button>
+                  <button (click)="onRemoveClick(rowData)" >R</button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft" let-data>
+              {{ data | json }}
+              Showing {{ data.first + 1 }} to
+              {{ math.min((data.page + 1) * data.rows, data.totalRecords) }} of
+              {{ data.totalRecords }} Records
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </p-scrollPanel>
+  </div>
+</div>

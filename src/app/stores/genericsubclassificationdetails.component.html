@@ -1,0 +1,62 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      [redirectToGrid]="redirectToGrid"
+      #headers
+    ></app-header>
+  </div>
+  <div class="div-padding">
+    <p-scrollPanel
+      [style]="{ width: '100%', height: ' calc(100vh - 164px)' }"
+      styleClass="custombar1"
+    >
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'Clasification Name'"
+          [options]="geneticClassificationList"
+          [(inputModel)]="genericSubClassification.clasificationName"
+          (onBlur)="onGetErrorMsgs('clasificationName', true)"
+          errorMessages="{{ errorMsgs.clasificationNameReq }}"
+          [optionLabel]="'clasificationName'"
+          [optionValue]="'_id'"
+        ></app-dropdown>
+      </div>{{genericSubClassification.clasificationName}} ,
+      {{geneticClassificationList |json}}
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-inputtext
+          [labelName]="'Sub Clasification Name'"
+          [(inputModel)]="genericSubClassification.subClasificationName"
+          (onBlur)="onGetErrorMsgs('subClasificationName', true)"
+          errorMessages="{{ errorMsgs.subClasificationNameReq }}"
+          [disabled]="!isEditable"
+        ></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-inputtext
+          [labelName]="'Clasification Description'"
+          [(inputModel)]="genericSubClassification.subClasificationDesc"
+          [disabled]="!isEditable"
+        ></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'Status'"
+          [options]="statusList"
+          [(inputModel)]="genericSubClassification.status"
+          [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
+      </div>
+    </p-scrollPanel>
+  </div>
+</div>
+<app-saving #saving></app-saving>

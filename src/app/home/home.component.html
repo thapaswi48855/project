@@ -1,0 +1,37 @@
+  <div class="flex justify-content-between flex-wrap p-1 header_text" >
+    <div class="flex align-items-center justify-content-center font-bold border-round" >
+      <img src="../../assets/images/logo.jpeg" height="40" class="mr-2" />
+        <p-sidebar [(visible)]="sidebarVisible">
+          <!-- <p-treeSelect containerStyleClass="w-full" 
+          [(ngModel)]="selectedNodes" [options]="moduleArray" placeholder="Select Item"></p-treeSelect>
+         -->
+          <div *ngFor="let moduleName of moduleArray">
+            {{ moduleName.label }}
+            <div *ngFor="let document of moduleName.items">
+              <a
+                routerLink="{{ document.routerLink }}"
+                (click)="onNavitionToMenu(document.routerLink, document)"
+                >{{ document.label }}</a
+              >
+            </div>
+          </div>
+        </p-sidebar>
+        <p-button class="buttonStyle"
+          (click)="sidebarVisible = true"
+          icon="pi pi-arrow-right" 
+        ></p-button>
+    </div>
+    <div class="flex align-items-center justify-content-center  font-bold border-round gap-1">
+      <a href="">
+        <i class="pi pi-power-off" style="font-size: 1.7rem;margin-top: 10px;"></i>
+      </a>
+    </div>
+</div>
+  <router-outlet></router-outlet>
+
+
+<style>
+  .buttonStyle{
+    margin-bottom: -10px;
+  }
+</style>

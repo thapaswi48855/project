@@ -1,0 +1,62 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      [redirectToGrid]="redirectToGrid"
+      #headers
+    ></app-header>
+  </div>
+  <div class="div-padding">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <div class="grid">
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [(inputModel)]="servicesubgroup.servicegroupname"
+            [labelName]="'Service Group Name'"
+            [optionLabel]="'servicegroupname'"
+            [optionValue]="'_id'"
+            [disabled]="!isEditable" [options]="serviceGroupList"
+          ></app-dropdown>
+          <app-dropdown
+            [(inputModel)]="servicesubgroup.accounthead"
+            [labelName]="'Account Head'"
+            [disabled]="!isEditable"
+            [options]="accountHeadList"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+          <app-dropdown
+            [(inputModel)]="servicesubgroup.status"
+            [labelName]="'Status'" [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+            [disabled]="!isEditable" [options]="statusList"
+          ></app-dropdown>
+          <app-inputtext
+            [(inputModel)]="servicesubgroup.servicesubgroupname"
+            [labelName]="'Service Sub Group Name'"
+            [disabled]="!isEditable"
+          ></app-inputtext>
+          <app-inputtext
+            [(inputModel)]="servicesubgroup.code"
+            [labelName]="'Alias/Code'"
+            [disabled]="!isEditable"
+          ></app-inputtext>
+          <app-inputtext
+            [(inputModel)]="servicesubgroup.displayorder"
+            [labelName]="'Display Order:'"
+            [disabled]="!isEditable"
+          ></app-inputtext>
+        </div>
+      </div>
+    </p-scrollPanel>
+  </div>
+</div>
+<app-saving #saving></app-saving>

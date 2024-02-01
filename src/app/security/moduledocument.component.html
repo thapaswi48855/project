@@ -1,0 +1,111 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="onGrid"
+      [onAddNew]="onAddNew"
+      (gridClick)="onGridClick()"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      #header
+    ></app-header>
+  </div>
+  <div class="grid">
+    <div class="col p-4">
+        <!-- <div class="text-center p-3 border-round-sm bg-primary font-bold"> -->
+          <p-table
+          #dt
+          [value]="modulesLists"
+          [paginator]="false"
+          [rows]="25"
+          [responsive]="true"
+          [resizableColumns]="true"
+          styleClass="p-datatable-gridlines"
+          [scrollable]="true"
+          scrollHeight="400px" selectionMode="single"
+        >
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th>Modules</th>
+            </tr>            
+          </ng-template>
+          <ng-template pTemplate="body" let-modulesList let-columns="columns">
+            <tr  [pSelectableRow]="modulesList">
+              <td   [ngClass]="modulesList['selected']==true ? 'grid-selected-row' : null">
+                <p-checkbox [(ngModel)]="modulesList.selected" [binary]="true" inputId="binary" (click)="onSelectmodule(modulesList,modulesList.selected)"></p-checkbox>
+                {{modulesList['modulename']}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <!-- </div> -->
+    </div>
+    <div class="col p-4">
+      <p-table
+      #dt
+      [value]="subModulesLists"
+      [paginator]="false"
+      [rows]="25"
+      [responsive]="true"
+      [resizableColumns]="true"
+      styleClass="p-datatable-gridlines"
+      [scrollable]="true"
+      scrollHeight="400px" selectionMode="single"
+    >
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+         <th>Sub Modules</th>
+        </tr>            
+      </ng-template>
+      <ng-template pTemplate="body" let-subModulesList let-columns="columns">
+        <tr [pSelectableRow]="subModulesList" >
+          <td  [ngClass]="subModulesList['selected']==true ? 'grid-selected-row' : null" >
+            <p-checkbox [(ngModel)]="subModulesList.selected" [binary]="true" inputId="binary" (click)="onSelectSubmodule(subModulesList,subModulesList.selected)"></p-checkbox>
+            {{subModulesList['submodulename']}}
+            {{subModulesList['selected']}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    </div>
+    <div class="col p-4">
+      <p-table
+      #dt
+      [value]="documentLists"
+      [paginator]="false"
+      [rows]="25"
+      [responsive]="true"
+      [resizableColumns]="true"
+      styleClass="p-datatable-gridlines"
+      [scrollable]="true"
+      scrollHeight="400px" selectionMode="multiple"
+    >
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th>Documents</th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns">
+            <p-columnFilter
+              type="text"
+              [field]="col.field"
+            ></p-columnFilter>
+            <!-- <input type="text" [field]="col.field"> -->
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-documents let-columns="columns">
+        <tr [pSelectableRow]="documents">
+          <td >
+            <p-checkbox [(ngModel)]="documents.selected" [binary]="true" inputId="binary" (click)="onSelectDocuments(documents,documents.selected)"></p-checkbox>
+           {{documents['document']}}
+           {{documents['selected']}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    </div>
+</div>
+
+</div>

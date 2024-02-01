@@ -1,0 +1,37 @@
+<div class="justify-content-center">
+  <div class="flex flex-column gap-2">
+    <div [ngClass]="labelAxis === true ? 'formgroup-inline':'displayBlock' " >
+    <label
+      class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"
+      htmlFor="{{ labelName }}"
+      title="{{ labelName }}"
+      >{{ labelName }}</label
+    >
+    <p-calendar
+    [style]="{width:'100%'}"
+      [(ngModel)]="inputModel"
+      [inline]="false"
+      [showWeek]="showWeek"
+      [showIcon]="true"
+      [showTime]="showTime"
+      [showSeconds]="showSeconds"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [disabled]="disabled"
+      (ngModelChange)="inputModelChange.emit(inputModel)"
+    ></p-calendar>
+    <small
+      id="username-help"
+      class="errorMessages"
+      pTooltip="{{ errorMessages }}"
+      tooltipPosition="top"
+      >{{ errorMessages }}</small
+    >
+  </div>
+</div>
+</div>
+<style>
+  .displayBlock{
+    display: contents;
+  }
+</style>

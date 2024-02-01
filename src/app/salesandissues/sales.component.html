@@ -1,0 +1,603 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      [redirectToGrid]="redirectToGrid"
+      #headers
+    ></app-header>
+  </div>
+  <div class="div-padding-fieldset">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 132px)' }">
+      <div class="formgrid grid">
+        <div class="field col-12">
+          <p-fieldset>
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Patient Type'"
+                  [options]="patientTypeList"
+                  [(inputModel)]="sales.patientType"
+                  [disabled]="!isEditable"
+                  optionLabel="label"
+                  optionValue="value"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-datepicker
+                  [labelName]="'Date'"
+                  [(inputModel)]="sales.date"
+                  [disabled]="!isEditable"
+                ></app-datepicker>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'store'"
+                  [options]="storeTypeList"
+                  [(inputModel)]="sales.patientType"
+                  [disabled]="!isEditable"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                Pharacy Counter
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+      <div class="formgrid grid" *ngIf="sales.patientType == '1'">
+        <div class="field col-12">
+          <p-fieldset legend="Retail Customer Details" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Name'"
+                  [(inputModel)]="sales.name"
+                  [disabled]="!isEditable"
+                  (onBlur)="onGetErrorMsgs( 'name', true)"
+          errorMessages="{{errorMsgs.nameReq }}"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Doctor'"
+                  [(inputModel)]="sales.doctor"
+                  [disabled]="!isEditable" (onBlur)="onGetErrorMsgs( 'doctor', true)"
+                  errorMessages="{{errorMsgs.doctorReq }}"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Mobile No.'"
+                  [(inputModel)]="sales.mobileNo"
+                  [disabled]="!isEditable"
+                  (onBlur)="onGetErrorMsgs( 'mobileNo', true)"
+                  errorMessages="{{errorMsgs.mobileNoReq }}"
+                ></app-inputtext>
+              </div>
+              <!-- {{errorMsgs |json}} -->
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Govt ID Proof'"
+                  [options]="storeTypeList"
+                  [(inputModel)]="sales.govtIdproof"
+                  [disabled]="!isEditable"
+                ></app-dropdown>
+              </div>
+
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Govt ID Proof'"
+                  [(inputModel)]="sales.govtIdProofNo"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+
+      <div class="formgrid grid" *ngIf="sales.patientType == '2'">
+        <div class="field col-12">
+          <p-fieldset legend="Retail Credit" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Name'"
+                  [(inputModel)]="sales.name"
+                  [disabled]="!isEditable"
+                  (onBlur)="onGetErrorMsgs( 'name', true)"
+                  errorMessages="{{errorMsgs.nameReq }}"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Doctor'"
+                  [(inputModel)]="sales.doctor"
+                  [disabled]="!isEditable"
+                  (onBlur)="onGetErrorMsgs( 'doctor', true)"
+                  errorMessages="{{errorMsgs.doctorReq }}"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Sponsor'"
+                  [(inputModel)]="sales.sponsor"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Mobile No.'"
+                  [(inputModel)]="sales.mobileNo"
+                  [disabled]="!isEditable"
+                  (onBlur)="onGetErrorMsgs( 'mobileNo', true)"
+                  errorMessages="{{errorMsgs.mobileNoReq }}"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'IP Credit Limit'"
+                  [(inputModel)]="sales.ipCreditLimit"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+
+      <div class="formgrid grid" *ngIf="sales.patientType == '3'">
+        <div class="field col-12">
+          <p-fieldset legend="Patient Details" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'MR No.'"
+                  [labelValue]="sales.mrNo"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Name'"
+                  [labelValue]="sales.name"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Age / Gender'"
+                  [labelValue]="sales.age"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Visit No.'"
+                  [labelValue]="sales.visitNo"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Dept'"
+                  [labelValue]="sales.dept"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-inputtext
+                  [labelName]="'Doctor'"
+                  [(inputModel)]="sales.doctor"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Reg Date'"
+                  [labelValue]="sales.regdate"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Reffered By'"
+                  [labelValue]="sales.refferBy"
+                ></app-labelbind>
+              </div>
+              <div class="field col-12 md:col-4 sm:col-3 lg:col-2 xl:col-2">
+                <app-labelbind
+                  [labelName]="'Bed'"
+                  [labelValue]="sales.bed"
+                ></app-labelbind>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+      {{newItemsList |json}}
+      <div>
+        <!-- table -->
+        <p-table
+          #dt
+          [columns]="gridCols"
+          [value]="newItemsList"
+          [paginator]="false"
+          [rows]="25"
+          [responsive]="true"
+          [resizableColumns]="true"
+          styleClass="p-datatable-gridlines"
+          [scrollable]="true"
+          scrollHeight="flex"
+        >
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th
+                *ngFor="let col of columns"
+                pResizableColumn
+                [pSortableColumn]="col.field"
+                [ngStyle]="col.style"
+              >
+                {{ col.header }}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+              <!-- <th></th> -->
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-rowData
+            let-columns="columns"
+            let-rowIndex="rowIndex"
+            >
+            <tr>
+              <td>
+                {{ rowData.itemName }}
+              </td>
+              <td>
+                {{ rowData.code }}
+              </td>
+              <td>
+                {{rowData.controlType}}
+              </td>
+              <td>
+                {{ rowData.batch }}
+              </td>
+              <td>
+                {{ rowData.expiry }}
+              </td>
+              <td>
+                {{ rowData.pckUOM }}
+              </td>
+              <td>
+                {{ rowData.mrp }}
+              </td>
+              <td>
+                {{ rowData.rate }}
+              </td>
+              <td>
+                {{ rowData.qty }}
+              </td>
+              <td>
+                {{ rowData.unitUOM }}
+              </td>
+              <td>
+                {{ rowData.disAmt }}
+              </td>
+              <td>
+                {{ rowData.rate }}
+              </td>
+              <td>
+                {{ rowData.taxAmt }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <button (click)="onItemClicks()">Add</button>
+      </div>
+      <div class="formgrid grid" style="border: 1px solid black">
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Discount Plan'"
+            [(inputModel)]="sales.discountPlan"
+            [disabled]="!isEditable"
+          ></app-inputtext>
+        </div>
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Item Discount'"
+            [(inputModel)]="sales.itemDiscounts"
+            [disabled]="!isEditable"
+          ></app-inputtext>
+        </div>
+        <div
+          class="flex align-items-center justify-content-center font-bold border-round gap-1"
+        >
+          <button
+            pButton
+            pRipple
+            label="Add"
+            class="p-button-success"
+            (click)="onApplyDiscount()"
+          ></button>
+        </div>
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Discount Auth'"
+            [(inputModel)]="sales.discountAuth"
+            [disabled]="!isEditable"
+          ></app-dropdown>
+        </div>
+        <div
+          class="flex align-items-center justify-content-center font-bold border-round gap-1"
+        >
+          <button
+            pButton
+            pRipple
+            label="Add"
+            class="p-button-success"
+            (click)="onDialogClick()"
+          ></button>
+        </div>
+      </div>
+      <div class="formgrid grid">
+        <div class="field col-12">
+          <p-fieldset legend="Bill Discount and Total" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-4">
+                <div class="field col-12">
+                  <app-dropdown
+                    [labelName]="'Bill Discount'"
+                    [(inputModel)]="sales.billDiscountAp"
+                    [disabled]="!isEditable"
+                    [options]="poDiscountTypeList"
+                    [optionLabel]="'subMasterName'"
+                    [optionValue]="'subMasterId'"
+                  ></app-dropdown>
+                </div>
+                <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+                  <app-inputtext
+                    [labelName]="'Inv. Discount Value'"
+                    [(inputModel)]="sales.InvDiscountValue"
+                    (onChange)="onInvDisAmt(sales.billDiscountAp)"
+                  ></app-inputtext>
+                </div>
+                <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+                  <app-labelbind
+                    [labelName]="'Inv. Discount Amount'"
+                    [labelValue]="sales.InvDiscontAmount"
+                  ></app-labelbind>
+                </div>
+                <div class="field col-12">
+                  <app-inputtext
+                    [labelName]="'Roud Off'"
+                    [(inputModel)]="sales.itemDiscounts"
+                    [disabled]="!isEditable"
+                  ></app-inputtext>
+                </div>
+              </div>
+              <div class="field col-8">
+                <div class="formgrid grid">
+                  <div
+                    class="field col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3"
+                  >
+                    <app-labelbind
+                      [labelName]="'Billed Amount'"
+                      [labelValue]="sales.billedAmnt"
+                    ></app-labelbind>
+                  </div>
+                  <div
+                    class="field col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3"
+                  >
+                    <app-labelbind
+                      [labelName]="'Bill Discount'"
+                      [labelValue]="sales.billDiscount"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Patient Amount'"
+                      [labelValue]="sales.patientAmnt"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Patient Tax'"
+                      [labelValue]="sales.tataltaxAmt"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Ground Total'"
+                      [labelValue]="sales.grandTotal"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Item Discount'"
+                      [labelValue]="sales.itemDiscount"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Round Off'"
+                      [labelValue]="sales.roundOff"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Pri. Claim'"
+                      [labelValue]="sales.priClaim"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Pri. Claim Tax'"
+                      [labelValue]="sales.priClaimtax"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Item Total'"
+                      [labelValue]="sales.itemTotal"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Bill Level Total'"
+                      [labelValue]="sales.billLevelTotal"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Sec Claim'"
+                      [labelValue]="sales.secClaim"
+                    ></app-labelbind>
+                  </div>
+                  <div class="col-12 md:col-9 sm:col-10 lg:col-3 xl:col-3">
+                    <app-labelbind
+                      [labelName]="'Sec Claim Tax'"
+                      [labelValue]="sales.secClaimTax"
+                    ></app-labelbind>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+
+      <div class="formgrid grid">
+        <div class="field col-12">
+          <p-fieldset legend="Payment Details" [toggleable]="true">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-dropdown
+                  [labelName]="'Bill Type'"
+                  [options]="billTypeList"
+                  [(inputModel)]="sales.billType"
+                  [disabled]="!isEditable"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Remarks'"
+                  [(inputModel)]="sales.remarks"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+                <app-inputtext
+                  [labelName]="'Narration'"
+                  [(inputModel)]="sales.narration"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+    </p-scrollPanel>
+  </div>
+</div>
+<app-saving #saving></app-saving>
+<p-dialog  [(visible)]="visible" [style]="{ width: '50vw' }">
+  <p-fieldset legend="Add Item" [toggleable]="false">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-lookup
+          [labelName]="'Item'"
+          [(inputModel)]="itemDetails.itemName"
+          [filteredOptions]="newItemList"
+          [filterName]="'itemName'"
+          (onLoopUp)="onLoopUp($event)"
+          (onBlur)="onGetErrorMsgs('itemName', true)"
+          errorMessages="{{errorMsgs.itemNameReq}}"
+        ></app-lookup>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-labelbind
+          [labelName]="'Item Code'"
+          [labelValue]="itemDetails.itemCode"
+        ></app-labelbind>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-labelbind
+          [labelName]="'Generic'"
+          [labelValue]="itemDetails.generic"
+        ></app-labelbind>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-labelbind
+        [labelName]="'Category'"
+        [labelValue]="itemDetails.category"
+      ></app-labelbind>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-labelbind
+        [labelName]="'Manufacture'"
+        [labelValue]="itemDetails.manufacture"
+      ></app-labelbind>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'CGST'"
+          [(inputModel)]="itemDetails.cgst"
+          [options]="cgstList"
+          [optionLabel]="'taxsubgroup'"
+          [optionValue]="'_id'"
+          (onChange)="onCgstTaxAmt(itemDetails.cgst)"
+          (onBlur)="onGetErrorMsgs('cgst', true)"
+          errorMessages="{{errorMsgs.cgstReq}}"
+        ></app-dropdown>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-dropdown
+          [labelName]="'SGST'"
+          [(inputModel)]="itemDetails.sgst"
+          [options]="sgstList"
+          [optionLabel]="'taxsubgroup'"
+          [optionValue]="'_id'"
+          (onChange)="onSgstTaxAmt(itemDetails.sgst)"
+          (onBlur)="onGetErrorMsgs('sgst', true)"
+          errorMessages="{{errorMsgs.sgstReq}}"
+        ></app-dropdown>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-labelbind
+        [labelName]="'Package Type'"
+        [labelValue]="itemDetails.pkgType"
+      ></app-labelbind>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-labelbind
+        [labelName]="'Available Qty'"
+        [labelValue]="itemDetails.availableQty"
+      ></app-labelbind>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-inputtext
+          [labelName]="'Sale Quantity'"
+          [(inputModel)]="itemDetails.saleQty"
+          (onBlur)="onGetErrorMsgs('saleQty', true)"
+          errorMessages="{{errorMsgs.saleQtyReq}}"
+        ></app-inputtext>
+      </div>
+      <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+        <app-dropdown
+        [labelName]="'Sale UOM'"
+        [(inputModel)]="itemDetails.saleUom"
+        [options]="saleUomList"
+        [optionLabel]="'taxsubgroup'"
+        [optionValue]="'_id'"
+        (onBlur)="onGetErrorMsgs('saleUom', true)"
+        errorMessages="{{errorMsgs.saleUomReq}}"
+      ></app-dropdown>
+      </div>
+      
+    </div>
+  </p-fieldset>
+  <button (click)="onAddItemClick(itemDetails)">ADD</button>
+  <button>N</button>
+</p-dialog>

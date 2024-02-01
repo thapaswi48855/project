@@ -1,0 +1,284 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      [redirectToGrid]="redirectToGrid"
+      #headers
+    ></app-header>
+  </div>
+
+  <!-- <div class="flex-fill border p-2 overflow-auto">
+    <div class="row g-2"> -->
+  <div class="div-padding">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <div class="formgrid grid">
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Store '"
+            [(inputModel)]="storeMaster.store"
+            (onBlur)="onGetErrorMsgs('store', true)"
+            errorMessages="{{errorMsgs.store}}"
+            [disabled]="!isEditable"
+          ></app-inputtext>
+        </div>
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Counter '" [options]="counterList"
+            [(inputModel)]="storeMaster.counter" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Status'" [options]="statusList"
+            [(inputModel)]="storeMaster.status" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'GSTIN Number'"
+            [(inputModel)]="storeMaster.gstinno" [disabled]="!isEditable"
+          ></app-inputtext>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Drug Licence Number'" [disabled]="!isEditable"
+            [(inputModel)]="storeMaster.drugLicenceNo"
+          ></app-inputtext>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Auto Fill Precription'" [options]="autoFillPrecriptionList"
+            [(inputModel)]="storeMaster.autoFillPrecription" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Account Group'" [options]="accountGroupList"
+            [(inputModel)]="storeMaster.accountGroup" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Sales Acount Prefix(GST)'" [disabled]="!isEditable"
+            [(inputModel)]="storeMaster.salesAcountPrefix"
+          ></app-inputtext>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Purchese Account prefix(GST)'" [disabled]="!isEditable"
+            [(inputModel)]="storeMaster.purcheseAccountPrefix"
+          ></app-inputtext>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Purchese Account prefix(GST)'" [disabled]="!isEditable"
+            [(inputModel)]="storeMaster.purcheseAccountPrefix"
+          ></app-inputtext>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Store Type '"
+            [isMandatoryIcon]="'true'"
+            [(inputModel)]="storeMaster.storeType"
+            [options]="storeTypeList"
+            (onBlur)="onGetErrorMsgs('storeType', true)"
+            errorMessages="{{errorMsgs['storeType']}}" [disabled]="!isEditable"
+            [optionLabel]="'storetypename'"
+            [optionValue]="'_id'"
+          ></app-dropdown>
+        </div>
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Is Super Store'" [options]="isSuperStoreList"
+            [(inputModel)]="storeMaster.isSuperStore" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Sales Unit'" [options]="salesUnitList"
+            [(inputModel)]="storeMaster.salesUnit" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Allow To Rise Bill'" [options]="riseBillList"
+            [(inputModel)]="storeMaster.allowToRiseBill" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Precription Print Template'" [options]="precriptionPrintTemplateList"
+            [(inputModel)]="storeMaster.precriptionPrintTemplate" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown 
+            [labelName]="'Precription Label Print Template'" [options]="precriptionLabelPrintTemplateList"
+            [(inputModel)]="storeMaster.precriptionLabelPrintTemplate" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Sales Print Template'" [options]="salesPrintTemplateList"
+            [(inputModel)]="storeMaster.salesPrintTemplate" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Is Sales Store'" [options]="isSalesStoreList"
+            [(inputModel)]="storeMaster.isSalesStore" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Auto fill Indent'" [options]="autoFillIndentList"
+            [(inputModel)]="storeMaster.autoFillIndent" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Is Sterile Store'" [options]="isSterileStoreList"
+            [(inputModel)]="storeMaster.isSterileStore" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Stores Tariff'" [options]="storesTariffList"
+            [(inputModel)]="storeMaster.storesTariff" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Use Selling Price from Item Batch'" [options]="sellingPriceItemList"
+            [(inputModel)]="storeMaster.useSellingPriceFromItemBatch" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Grn Print Template'" [options]="grnPrintTemplateList"
+            [(inputModel)]="storeMaster.grnPrintTemplate" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Allow Auto PO Generation'" [options]="autoPoGenerationList"
+            [(inputModel)]="storeMaster.allowAutoPOGeneration" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'PO Generation Frequency'"
+            [(inputModel)]="storeMaster.pOGenerationFrequency" [disabled]="!isEditable"
+          ></app-inputtext>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Auto Cancel PO'" [options]="autoCancelPoList"
+            [(inputModel)]="storeMaster.autoCancelPO" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Auto Cancel PO Freuency'"
+            [(inputModel)]="storeMaster.autoCancelPOFreuency" [disabled]="!isEditable"
+          ></app-inputtext>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Sales Web Template'" [options]="webtemplateList"
+            [(inputModel)]="storeMaster.salesWebTemplate" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-dropdown
+            [labelName]="'Sales Web Printer'" [options]="webPrinterList"
+            [(inputModel)]="storeMaster.salesWebPrinter" [disabled]="!isEditable"
+            [optionLabel]="'subMasterName'"
+            [optionValue]="'subMasterId'"
+          ></app-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+          <app-inputtext
+            [labelName]="'Batch Expire Theshold for Stock Take(In Months)'"
+            [(inputModel)]="storeMaster.batchExpireThesholdForStockTake" [disabled]="!isEditable" 
+          ></app-inputtext>
+        </div>
+      </div>
+    </p-scrollPanel>
+  </div>
+  <!-- </div>
+  </div> -->
+</div>
+<app-saving #saving></app-saving>

@@ -1,0 +1,306 @@
+<!-- <p>document works!</p> -->
+<!-- <p-dropdown></p-dropdown> -->
+<!-- <app-inputtext></app-inputtext> -->
+<!-- module Display -->
+<!-- <div *ngFor="let module of modules">
+  <div style="height: 100px; width: 100px; border: 1px solid black">
+    <a href="javascript:void(0);" (click)="onClick()">{{
+      module.moduleName
+    }}</a>
+    <div *ngIf="documents">
+      <div *ngFor="let document of module.document">
+        <a href="javascript:void(0);" routerLink="/{{document.documentPath}}">
+            {{ document.documentName }}
+        </a>
+       
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- module Display -->
+<!-- Document Name
+<input type="text" pInputText  [(ngModel)]="module.document" />
+Document First Path
+<input type="text" pInputText  [(ngModel)]="module.fpath" />
+Document Second Path
+<input type="text" pInputText  [(ngModel)]="module.spath" /> -->
+<!-- <div class="flex-fill border p-2">
+  <div class="row g-2">
+    <div class="col">
+      <div class="row g-2">
+        <div class="col-md-2">
+          <label for="">Doctor Name<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Rate Sheet<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">payment Category<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">View Charges For<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <button>search</button>
+          <button>Clear</button> -->
+<!-- <label for="">Doctor Type<span>:</span> </label>
+          <app-inputtext></app-inputtext> -->
+<!-- </div>
+        <div>
+          <p-table >
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th>Doctor Name</th>
+                <th>Doctor Desc</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td>Name</td>
+                <td>details</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>        
+      </div>
+      <div>
+       Add New Doctor
+      </div>
+      <div>
+        Group Update
+        <div class="col-md-2">
+          <label for="">Select Doctor<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Select Bed type<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Update Charges<span>:</span> </label>
+          <label for="">Update Discount<span>:</span> </label>
+          <label for="">Apply Discount On Charges<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Chrge type<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Amount type<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Amount<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Round Off<span>:</span> </label>
+          <app-inputtext></app-inputtext>
+        </div>
+        <div class="col-md-2">
+          <label for="">Export / Import Doctor Detils<span>:</span> </label>
+          <button>Export</button>
+          <button>Import</button>
+        </div>
+        <div class="col-md-2">
+          <label for="">Export / Import Charges<span>:</span> </label>
+          <button>Export</button>
+          <button>Import</button>
+        </div>
+        <div class="col-md-2">
+         
+          <button>Update Charges</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="onGrid"
+      [onAddNew]="onAddNew"
+      (gridClick)="onGridClick()"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      #header
+    ></app-header>
+  </div>
+
+  <div class="grid">
+    <div class="col col-4" >
+      <div class="col-8 py-2">
+        <app-inputtext
+        [(inputModel)]="module.moduleName"
+        [labelName]="'Module Name'"
+        (onBlur)="onGetErrorMsgs('moduleName', true)"
+        errorMessages="{{errorMsgs.moduleNameReq}}"
+      ></app-inputtext>
+      </div>
+      <div class="col-8 py-2"><app-textarea
+        [labelName]="'Module Description'"
+        [rows]="'2'"
+        [cols]="'5'"
+        [(inputModel)]="module.moduleDescription"
+      ></app-textarea></div>
+      <div class="col-8 py-2">
+            <app-checkbox
+              [labelName]="'Status'"
+              [(inputModel)]="module.status"
+            ></app-checkbox>
+      </div>
+    </div>
+    <div class="col p-4 pr-6">
+      <p-table
+      #dt
+      [value]="subModules"
+      [paginator]="false"
+      [rows]="25"
+      [responsive]="true"
+      [resizableColumns]="true"
+      styleClass="p-datatable-gridlines"
+      [scrollable]="true"
+      scrollHeight="400px"
+    >
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th>Sub Module Name</th>
+          <th>Sub Module Description</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-subModule let-columns="columns" let-index="index">
+        <tr>
+          <td >
+            <input
+              type="text"
+              style="padding: 10px"
+              pInputText
+              [(ngModel)]="subModule.subModuleName"
+              pAutoFocus
+            />
+          </td>
+          <td >
+            <input
+              type="text"
+              style="padding: 10px"
+              pInputText
+              [(ngModel)]="subModule.subModuleDesc"
+              pAutoFocus
+            />
+          </td>
+          <td>
+            <button (click)="addSubModules()">A</button>
+            <button (click)="removeSubModules(index)">S</button>
+          </td>
+        </tr>
+      </ng-template>
+      <!-- <ng-template pTemplate="paginatorleft" let-data>
+   {{ data | json }}
+Showing {{ data.first + 1 }} to
+{{ math.min((data.page + 1) * data.rows, data.totalRecords) }} of
+{{ data.totalRecords }} Records
+</ng-template> -->
+    </p-table>
+    </div>
+</div>
+
+  <!-- <div class="flex-fill border p-2 overflow-auto">
+    <div class="row g-2 p-2">
+      <div class="col-4">
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+            <app-inputtext
+              [(inputModel)]="module.moduleName"
+              [labelName]="'Module Name'"
+             
+              (onBlur)="_service.onGetErrorMsgs(module, 'moduleName', true)"
+              errorMessages="{{ this._service.errorMsgs.moduleName }}"
+            ></app-inputtext>
+          </div>
+        </div>
+
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+            <app-textarea
+              [labelName]="'Module Description'"
+              [rows]="'2'"
+              [cols]="'5'"
+              [(inputModel)]="module.moduleDescription"
+            ></app-textarea>
+          </div>
+        </div>
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+            <app-checkbox
+              [labelName]="'Status'"
+              [(inputModel)]="module.status"
+            ></app-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        sub Module
+
+        <p-table
+          #dt
+          [value]="subModules"
+          [paginator]="false"
+          [rows]="25"
+          [responsive]="true"
+          [resizableColumns]="true"
+          styleClass="p-datatable-gridlines"
+          [scrollable]="true"
+          scrollHeight="400px"
+        >
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th>Sub Module Name</th>
+              <th>Sub Module Description</th>
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subModule let-columns="columns" let-index="index">
+            <tr>
+              <td >
+                <input
+                  type="text"
+                  style="padding: 10px"
+                  pInputText
+                  [(ngModel)]="subModule.subModuleName"
+                  pAutoFocus
+                />
+              </td>
+              <td >
+                <input
+                  type="text"
+                  style="padding: 10px"
+                  pInputText
+                  [(ngModel)]="subModule.subModuleDesc"
+                  pAutoFocus
+                />
+              </td>
+              <td>
+                <button (click)="addSubModules()">A</button>
+                <button (click)="removeSubModules(index)">S</button>
+              </td>
+            </tr>
+          </ng-template>
+           <ng-template pTemplate="paginatorleft" let-data>
+       {{ data | json }}
+   Showing {{ data.first + 1 }} to
+   {{ math.min((data.page + 1) * data.rows, data.totalRecords) }} of
+   {{ data.totalRecords }} Records
+  </ng-template> 
+        </p-table>
+      </div>
+    </div>
+  </div> -->
+</div>

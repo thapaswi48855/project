@@ -1,0 +1,37 @@
+<!-- <div class=""> -->
+  <!-- <div>
+    <img src="../../assets/images/logo.jpeg"  />
+  </div> -->
+ 
+
+<div class="grid" style="padding-top: 11rem; margin-right: -6rem">
+  <div class="col-4"></div>
+  <div class="col-3 col-offset-4 div-padding-login">
+    <div class="formgroup-inline">
+      <img src="../../assets/images/logo.jpeg" height="40" class="mr-2" />
+      <h2>BLISS</h2>
+    </div>
+    <!-- <div class=""> -->
+    <app-inputtext
+      [(inputModel)]="userLogin.userName"
+      [labelName]="'User Name'"
+      (onBlur)="_service.onGetErrorMsgs(userLogin, 'userName', true)"
+      errorMessages="{{ this._service.errorMsgs.userName }}"
+    ></app-inputtext>
+    <app-inputtext
+      [(inputModel)]="userLogin.userPwd"
+      [labelName]="'User Pwd'"
+      (onBlur)="_service.onGetErrorMsgs(userLogin, 'userPwd', true)"
+      errorMessages="{{ this._service.errorMsgs.userPwd }}"
+    ></app-inputtext>
+    <button
+      pButton
+      pRipple
+      label="Login"
+      class="p-button-success"
+      (click)="onLoginClick()"
+    ></button>
+    <!-- </div> -->
+  </div>
+</div>
+<!-- </div> -->

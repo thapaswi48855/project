@@ -1,0 +1,60 @@
+<div class="">
+  <div>
+    <app-header
+      [pageTitle]="pageTitle"
+      [onSubmit]="onSubmit"
+      [onGrid]="true"
+      [onAddNew]="false"
+      [onClear]="onClear"
+      [onEdit]="onEdit"
+      [onView]="onView"
+      (submitClick)="onSaveClick()"
+      (clearClick)="onClearClick()"
+      [redirectToGrid]="redirectToGrid"
+      #headers
+    ></app-header>
+  </div>
+
+  <div class="div-padding">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+    <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+      <app-inputtext [labelName]="'Generic Name'" [(inputModel)]="genericDetails.genericName" (onBlur)="_service.onGetErrorMsgs(genericDetails,'genericName',true)" 
+          errorMessages="{{this._service.errorMsgs.genericName}}" [disabled]="!isEditable"
+          (onBlur)="onGetErrorMsgs('genericName', true)"
+          errorMessages="{{errorMsgs.genericNameReq}}"></app-inputtext>
+    </div>
+    <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+      <app-dropdown [labelName]="'Classification Name'" 
+      [(inputModel)]="genericDetails.clasificationName" 
+      [options]="geneticClassificationList" [disabled]="!isEditable"
+      (onBlur)="onGetErrorMsgs('clasificationName', true)"
+          errorMessages="{{errorMsgs.clasificationNameReq}}"
+          [optionLabel]="'clasificationName'"
+          [optionValue]="'_id'"></app-dropdown>
+    </div>
+    <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+      <app-dropdown [labelName]="'Sub Classification Name'" 
+      [(inputModel)]="genericDetails.subClassificationName" [options]="geneticSubClassificationList" 
+      [disabled]="!isEditable" [optionLabel]="'subClasificationName'"
+      [optionValue]="'_id'"></app-dropdown>
+    </div>
+    <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+      <app-inputtext [labelName]="'standrd Adult Dose'" [(inputModel)]="genericDetails.standrdAdultDose" [disabled]="!isEditable"></app-inputtext>
+    </div>
+    <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+      <app-dropdown [labelName]="'Crability'" [(inputModel)]="genericDetails.crability"
+       [disabled]="!isEditable" [options]="critialityList" 
+       [optionLabel]="'subMasterName'"
+      [optionValue]="'subMasterId'"></app-dropdown>
+    </div>
+    <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+      <app-dropdown [labelName]="'Status'" [(inputModel)]="genericDetails.status"
+       [disabled]="!isEditable" [options]="statusList" 
+       [optionLabel]="'subMasterName'"
+      [optionValue]="'subMasterId'"></app-dropdown>
+    </div>
+    </p-scrollPanel>
+  </div>
+
+</div>
+<app-saving #saving></app-saving>

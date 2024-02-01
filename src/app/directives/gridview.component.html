@@ -1,0 +1,91 @@
+<!-- <div class="gridscrollheight"> -->
+  <p-table #dt
+  [columns]="gridCols"
+  [value]="gridData"
+  [paginator]="true"
+  [rows]="25"
+  [responsive]="true"
+  [resizableColumns]="true"
+  styleClass="p-datatable-gridlines"
+  [scrollable]="true" scrollHeight="flex"
+>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngIf="printOptions.length > 0 || actionOptions.length > 0" style="width: 5rem;" >Action</th>
+      <th style="width: 100px;" *ngIf="false">Actions</th>
+      
+      <th *ngFor="let col of columns" pResizableColumn  [pSortableColumn]="col.field" [ngStyle]="col.style">
+        <!-- <p-columnFilter
+      [type]="col.filterType"
+      [field]="col.field"
+      [display]="'menu'"
+      [matchMode]="col.matchMode"
+      [showMatchModes]="col.showMatchModes"
+      [showAddButton]="col.showAddButton"
+      [showOperator]="col.showOperator"
+      [currency]=""
+      placeholder="Search by {{ col.header }}"
+    ></p-columnFilter> -->
+    <p-columnFilter type="text" [field]="col.field" display="menu"></p-columnFilter>
+               
+        {{ col.header }} <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+   
+    <tr>
+      <td *ngIf="printOptions.length > 0 || actionOptions.length > 0"  style="width: 5rem;">
+        
+        <span *ngFor="let actionOption of rowData.actionOptions">
+          <a
+            href="javascript:return" *ngIf="showActionOptions(actionOption,rowData)"
+            (click)="onActionClick(rowData, actionOption.reportName)" 
+          >
+          <i class="{{actionOption.iconClass}}">
+
+          </i>
+          </a>
+        </span>
+        <span *ngFor="let prtOption of rowData.printOptions">
+          <a
+            href="javascript:return" *ngIf="showPrintOptions(prtOption,rowData)"
+            (click)="onPrintClick(rowData, prtOption.reportName)"
+          >
+          <i class="{{prtOption.iconClass}}">
+
+          </i>
+          </a>
+        </span>
+      </td>
+      <td pFrozenColumn *ngIf="false">
+        <a *ngIf="!(showEdit && rowData.status =='C')" >
+          <i class="pi pi-user-edit" (click)="onCheckBox(rowData,'EDIT')"></i>
+        </a>
+        <a *ngIf="showView">
+          <i class="pi pi-user" (click)="onCheckBox(rowData,'VIEW')"></i>
+        </a>
+        <a *ngIf="!(showCancel && rowData.status =='C')">
+          <i class=" pi pi-times-circle" (click)="onCancelClick(rowData,'Cancel')"></i>
+        </a>
+        <a href="javascripct:return" *ngIf="showReOrder"> <span class="pi pi-bars" pReorderableRowHandle></span> </a>
+       <a href="javascripct:return" *ngIf="showCheckBox">
+        <p-tableCheckbox [value]="rowData" (click)="onCheckBox(rowData,'check')"></p-tableCheckbox>
+       </a>
+       <a  href="javascripct:return" *ngIf="showRadioButton">  <p-tableRadioButton [value]="rowData"></p-tableRadioButton> </a>
+    </td>
+      <td *ngFor="let col of columns">
+        {{ rowData[col.field] }}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="paginatorleft" let-data>
+    <!-- <ng-template pTemplate="footer" let-data> -->
+        {{ data | json }}
+    Showing {{ data.first + 1 }} to
+    {{ math.min((data.page + 1) * data.rows, data.totalRecords) }} of
+    {{ data.totalRecords }} Records
+  </ng-template>
+</p-table>
+<!-- </div> -->
+<!-- </p-scrollPanel> -->
