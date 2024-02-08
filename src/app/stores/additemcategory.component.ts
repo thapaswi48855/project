@@ -31,30 +31,30 @@ export class AdditemcategoryComponent {
     categoryName: '',
     identification: '',
     issuseType: '',
-    bilable: '',
-    retilable: '',
-    calmiable: '',
+    bilable: 'ZLAS11',
+    retilable: 'ZLAS11',
+    calmiable: 'ZLAS11',
     validateExpireDate: '08-10-2023',
     discount: '',
-    prescribable: '',
-    assestsTracking: '',
+    prescribable: 'ZLAS11',
+    assestsTracking: 'ZLAS12',
     status: 'ZLS11',
-    drug: '',
+    drug: 'ZLAS12',
     createdt: null,
     createby: '',
     modifydt: null,
     modifyby: '',
   };
 
-  public identificationList: any = [{label:'Select One' , value:''}];
-  public issuseTypeList:any =[{label:'Select One' , value:''}];
-  public billableList:any=[{label:'Select One' , value:''}];
-  public retilableList:any=[{label:'Select One' , value:''}];
-  public clamiableList:any=[{label:'Select One' , value:''}];
-  public prescribableList:any=[{label:'Select One' , value:''}];
-  public asseststrackingList:any=[{label:'Select One' , value:''}];
-  public drugList:any=[{label:'Select One' , value:''}];
-  public statusList:any=[{label:'Select One' , value:''}]
+  public identificationList: any = [];
+  public issuseTypeList:any =[];
+  public billableList:any=[];
+  public retilableList:any=[];
+  public clamiableList:any=[];
+  public prescribableList:any=[];
+  public asseststrackingList:any=[];
+  public drugList:any=[];
+  public statusList:any=[]
 
   public emptyItemCategory = JSON.stringify(this.itemCategory);
   constructor(
@@ -95,27 +95,27 @@ export class AdditemcategoryComponent {
       this.issuseTypeList=dt.data[0].subMasterData ;
     })
     this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLB1"})
+    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
     .subscribe((dt:any)=>{
       this.billableList=dt.data[0].subMasterData ;
     })
     this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLR1"})
+    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
     .subscribe((dt:any)=>{
       this.retilableList=dt.data[0].subMasterData ;
     })
     this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLCal1"})
+    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
     .subscribe((dt:any)=>{
       this.clamiableList=dt.data[0].subMasterData ;
     })
     this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLPre1"})
+    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
     .subscribe((dt:any)=>{
       this.prescribableList=dt.data[0].subMasterData ;
     })
     this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLAT1"})
+    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
     .subscribe((dt:any)=>{
       this.asseststrackingList=dt.data[0].subMasterData ;
     })
@@ -125,7 +125,7 @@ export class AdditemcategoryComponent {
       this.statusList=dt.data[0].subMasterData ;
     })
     this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLD1"})
+    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
     .subscribe((dt:any)=>{
       this.drugList=dt.data[0].subMasterData ;
     })
