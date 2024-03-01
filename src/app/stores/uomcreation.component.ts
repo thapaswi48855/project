@@ -46,7 +46,8 @@ export class UomcreationComponent {
     public errorMsgs:any={
       packageUom:'',
       unitUom:''
-    }
+    };
+    public emptyErrorMsgs:any=JSON.stringify(this.errorMsgs);
     public unitUomList:any=[];
     public statusList:any=[];
 
@@ -143,6 +144,6 @@ export class UomcreationComponent {
     }else{
       this.isEditable=false;
     }
-    
+    this.errorMsgs=JSON.parse(this.emptyErrorMsgs);
   }
 }

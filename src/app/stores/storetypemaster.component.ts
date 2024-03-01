@@ -86,6 +86,7 @@ export class StoretypemasterComponent {
   public errorMsgs:any={
     'storetypename':''
   }
+  public emptyErrorMsgs:any =JSON.stringify(this.errorMsgs);
 
   onGetErrorMsgs(ctrl:any,showToast:any){
     switch(ctrl){
@@ -137,6 +138,6 @@ export class StoretypemasterComponent {
     }else{
       this.isEditable=false;
     }
-   
+   this.errorMsgs=JSON.parse(this.emptyErrorMsgs);
   }
 }

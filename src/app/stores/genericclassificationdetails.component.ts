@@ -48,6 +48,7 @@ export class GenericclassificationdetailsComponent {
   public errorMsgs: any = {
     clasificationName: '',
   };
+  public emptyErrorMsgs:any =JSON.stringify(this.errorMsgs);
   public statusList: any = [];
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
@@ -133,5 +134,6 @@ export class GenericclassificationdetailsComponent {
     } else {
       this.isEditable = false;
     }
+    this.errorMsgs=JSON.parse(this.emptyErrorMsgs);
   }
 }

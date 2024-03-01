@@ -30,14 +30,14 @@ export class SupplierdetailsComponent {
     supplierName: '',
     suppliercode: '',
     status: 'ZLS11',
-    registeredsupplier: '',
+    registeredsupplier: 'ZLAS11',
     supplierCategory: '',
     supplierGSTINNumber: '',
     suppliercreditPeriod: '',
     supplierdrugLicenseNo: '',
     supplierPANNo: '',
     suppliercorporteIdentificationNumber: '',
-    supplierapplyTCSforPOStockEntry: '',
+    supplierapplyTCSforPOStockEntry: 'ZLAS12',
     regioncountry: '',
     regionstate: '',
     regioncity: '',
@@ -64,6 +64,7 @@ export class SupplierdetailsComponent {
   public registerSupplierList: any = [];
   public tcsPoStockEntryList: any = [];
   public statusList: any = [];
+  public allowStatusList:any =[];
 
   constructor(
     public _service: MasterserviceService,
@@ -108,18 +109,23 @@ export class SupplierdetailsComponent {
     .subscribe((dt:any)=>{
       this.statusList=dt.data[0].subMasterData ;
     })
-
     this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLRS1"})
+    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
     .subscribe((dt:any)=>{
-      this.registerSupplierList=dt.data[0].subMasterData ;
+      this.allowStatusList=dt.data[0].subMasterData ;
     })
 
-    this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLTcsPoSE1"})
-    .subscribe((dt:any)=>{
-      this.tcsPoStockEntryList=dt.data[0].subMasterData ;
-    })
+    // this._service
+    // .serGetDataobject('getGeneralMaster',{masterid:"ZLRS1"})
+    // .subscribe((dt:any)=>{
+    //   this.registerSupplierList=dt.data[0].subMasterData ;
+    // })
+
+    // this._service
+    // .serGetDataobject('getGeneralMaster',{masterid:"ZLTcsPoSE1"})
+    // .subscribe((dt:any)=>{
+    //   this.tcsPoStockEntryList=dt.data[0].subMasterData ;
+    // })
 
     this._service
       .serGetDataobject('getSupplierCategory', { status: 'ZLS11' })

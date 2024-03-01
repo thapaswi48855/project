@@ -57,17 +57,9 @@ export class GenericdetailsComponent {
     clasificationNameReq: '',
     genericNameReq: '',
   };
-
+public emptyErrorMsgs :any =JSON.stringify(this.errorMsgs);
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
-      case 'clasificationName':
-        this.errorMsgs.clasificationNameReq =
-          this.genericDetails[ctrl] == '' ||
-          this.genericDetails[ctrl] == undefined ||
-          this.genericDetails[ctrl] == null
-            ? this._service.onGetErrorMsgs(ctrl, true, 'Clasification Name')
-            : '';
-        break;
       case 'genericName':
         this.errorMsgs.genericNameReq =
           this.genericDetails[ctrl] == '' ||
@@ -154,7 +146,7 @@ export class GenericdetailsComponent {
     //   this._service.onGetErrorMsgs(this.genericDetails, ctrl, true);
     // });
 
-    let objectstore = ['genericName', 'clasificationName'];
+    let objectstore = ['genericName'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
@@ -180,6 +172,13 @@ export class GenericdetailsComponent {
     this.redirectToGrid = this.pageMode == 'NEW' ? false : true;
   }
   onClearClick() {
-    this.genericDetails = JSON.parse(this.emptyGenericDetails);
+    // this.genericDetails = JSON.parse(this.emptyGenericDetails);
+    if (this.pageMode == 'NEW') {
+      this.genericDetails = JSON.parse(this.emptyGenericDetails);
+      this.isEditable = true;
+    } else {
+      this.isEditable = false;
+    }
+    this.errorMsgs=JSON.parse(this.emptyErrorMsgs);
   }
 }

@@ -34,8 +34,8 @@ export class AdditemcategoryComponent {
     bilable: 'ZLAS11',
     retilable: 'ZLAS11',
     calmiable: 'ZLAS11',
-    validateExpireDate: '08-10-2023',
-    discount: '',
+    validateExpireDate: 'ZLAS11',
+    discount: '0.0',
     prescribable: 'ZLAS11',
     assestsTracking: 'ZLAS12',
     status: 'ZLS11',
@@ -54,7 +54,9 @@ export class AdditemcategoryComponent {
   public prescribableList:any=[];
   public asseststrackingList:any=[];
   public drugList:any=[];
-  public statusList:any=[]
+  public statusList:any=[];
+  public validDateList:any=[];
+  public allowStatusList:any=[];
 
   public emptyItemCategory = JSON.stringify(this.itemCategory);
   constructor(
@@ -65,7 +67,8 @@ export class AdditemcategoryComponent {
 
   public errorMsgs:any={
     categoryName:''
-  }
+  };
+  public emptyErrorMsgs:any=JSON.stringify(this.errorMsgs);
 
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
@@ -97,38 +100,43 @@ export class AdditemcategoryComponent {
     this._service
     .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
     .subscribe((dt:any)=>{
-      this.billableList=dt.data[0].subMasterData ;
+      this.allowStatusList=dt.data[0].subMasterData ;
     })
-    this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
-    .subscribe((dt:any)=>{
-      this.retilableList=dt.data[0].subMasterData ;
-    })
-    this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
-    .subscribe((dt:any)=>{
-      this.clamiableList=dt.data[0].subMasterData ;
-    })
-    this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
-    .subscribe((dt:any)=>{
-      this.prescribableList=dt.data[0].subMasterData ;
-    })
-    this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
-    .subscribe((dt:any)=>{
-      this.asseststrackingList=dt.data[0].subMasterData ;
-    })
+    // this._service
+    // .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
+    // .subscribe((dt:any)=>{
+    //   this.retilableList=dt.data[0].subMasterData ;
+    // })
+    // this._service
+    // .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
+    // .subscribe((dt:any)=>{
+    //   this.clamiableList=dt.data[0].subMasterData ;
+    // })
+    // this._service
+    // .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
+    // .subscribe((dt:any)=>{
+    //   this.validDateList=dt.data[0].subMasterData ;
+    // })
+    // this._service
+    // .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
+    // .subscribe((dt:any)=>{
+    //   this.prescribableList=dt.data[0].subMasterData ;
+    // })
+    // this._service
+    // .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
+    // .subscribe((dt:any)=>{
+    //   this.asseststrackingList=dt.data[0].subMasterData ;
+    // })
     this._service
     .serGetDataobject('getGeneralMaster',{masterid:"ZLS1"})
     .subscribe((dt:any)=>{
       this.statusList=dt.data[0].subMasterData ;
     })
-    this._service
-    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
-    .subscribe((dt:any)=>{
-      this.drugList=dt.data[0].subMasterData ;
-    })
+    // this._service
+    // .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
+    // .subscribe((dt:any)=>{
+    //   this.drugList=dt.data[0].subMasterData ;
+    // })
 
     this._activatedRoute.paramMap.subscribe((param: ParamMap) => {
       let params: any = param.get('param');
@@ -189,7 +197,7 @@ export class AdditemcategoryComponent {
     }else{
       this.isEditable=false;
     }
-   
+   this.errorMsgs=JSON.parse(this.emptyErrorMsgs);
     
   }
 }

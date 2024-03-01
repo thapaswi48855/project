@@ -41,7 +41,9 @@ export class SuppliercategoryComponent {
   public errorMsgs: any = {
     categorynameReq: '',
   };
+  public emptyErrorMsgs :any =JSON.stringify(this.errorMsgs)
   public statusList:any =[];
+  public allowStatusList:any =[];
 
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
@@ -64,6 +66,11 @@ export class SuppliercategoryComponent {
     .serGetDataobject('getGeneralMaster',{masterid:"ZLS1"})
     .subscribe((dt:any)=>{
       this.statusList=dt.data[0].subMasterData ;
+    })
+    this._service
+    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
+    .subscribe((dt:any)=>{
+      this.allowStatusList=dt.data[0].subMasterData ;
     })
 
     this._activatedRoute.paramMap.subscribe((param: ParamMap) => {
@@ -124,7 +131,7 @@ export class SuppliercategoryComponent {
     }else{
       this.isEditable=false;
     }
-
+this.errorMsgs =JSON.parse(this.emptyErrorMsgs);
   }
 
 }

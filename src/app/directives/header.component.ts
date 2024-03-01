@@ -95,6 +95,7 @@ export class HeaderComponent {
     });
   }
   permissions(docPermissions: any, docPermission: any) {
+    console.log('aaa',docPermissions)
     if (docPermissions != null && docPermissions != undefined) {
       this.pageTitle = docPermission['documentname']; //['Document Page Url] ['Document Grid Url']
       this.docAccSubmit = docPermission['docAccSubmit'];

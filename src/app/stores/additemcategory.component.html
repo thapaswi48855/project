@@ -53,7 +53,7 @@
 
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
         <app-dropdown
-          [labelName]="'Bilable'" [options]="billableList"
+          [labelName]="'Bilable'" [options]="allowStatusList"
           [(inputModel)]="itemCategory.bilable"
           [disabled]="!isEditable"
           [optionLabel]="'subMasterName'"
@@ -63,7 +63,7 @@
 
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
         <app-dropdown
-          [labelName]="'Retilable'" [options]="retilableList"
+          [labelName]="'Retilable'" [options]="allowStatusList"
           [(inputModel)]="itemCategory.retilable"
           [disabled]="!isEditable"
           [optionLabel]="'subMasterName'"
@@ -73,7 +73,7 @@
 
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
         <app-dropdown
-          [labelName]="'Calmiable'" [options]="clamiableList"
+          [labelName]="'Calmiable'" [options]="allowStatusList"
           [(inputModel)]="itemCategory.calmiable"
           [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
           [optionValue]="'subMasterId'"
@@ -82,11 +82,17 @@
 
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
         <!-- <p-calendar [(ngModel)]="itemCategory.validateExpireDate" [showIcon]="true"></p-calendar> -->
-        <app-datepicker
+        <!-- <app-datepicker
           [labelName]="'Validate Expire Date'" 
           [(inputModel)]="itemCategory.validateExpireDate"
           [disabled]="!isEditable"
-        ></app-datepicker>
+        ></app-datepicker> -->
+        <app-dropdown
+          [labelName]="'Validate Expire Date'" [options]="allowStatusList"
+          [(inputModel)]="itemCategory.validateExpireDate"
+          [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
+          [optionValue]="'subMasterId'"
+        ></app-dropdown>
       </div>
 
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
@@ -98,7 +104,7 @@
       </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
         <app-dropdown
-          [labelName]="'prescribable'" [options]="prescribableList"
+          [labelName]="'prescribable'" [options]="allowStatusList"
           [(inputModel)]="itemCategory.prescribable"
           [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
           [optionValue]="'subMasterId'"
@@ -106,7 +112,7 @@
       </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
         <app-dropdown
-          [labelName]="'Assests Tracking'" [options]="asseststrackingList"
+          [labelName]="'Assests Tracking'" [options]="allowStatusList"
           [(inputModel)]="itemCategory.assestsTracking"
           [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
           [optionValue]="'subMasterId'"
@@ -122,7 +128,7 @@
       </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
         <app-dropdown
-          [labelName]="'Drug'" [options]="drugList"
+          [labelName]="'Drug'" [options]="allowStatusList"
           [(inputModel)]="itemCategory.drug"
           [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
           [optionValue]="'subMasterId'"

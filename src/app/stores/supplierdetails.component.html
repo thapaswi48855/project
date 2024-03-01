@@ -17,11 +17,11 @@
 
   <div class="div-padding">
     <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
-      <div class="formgrid grid">
+      <div class="formgroup-inline">
         <div class="field col-7">
           <p-fieldset legend="Supplier" [toggleable]="true">
             <div class="formgrid grid">
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
+              <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
                 <app-inputtext
                   [labelName]="'Supplier Name'"
                   [(inputModel)]="supplier.supplierName"
@@ -30,14 +30,14 @@
                   [disabled]="!isEditable"
                 ></app-inputtext>
               </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
+              <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
                 <app-inputtext
                   [labelName]="'Supplier Code'"
                   [(inputModel)]="supplier.suppliercode"
                   [disabled]="!isEditable"
                 ></app-inputtext>
               </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
+              <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
                 <app-dropdown
                   [labelName]="'Status'"
                   [options]="statusList"
@@ -46,14 +46,15 @@
                   [optionValue]="'subMasterId'"
                 ></app-dropdown>
               </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
+              <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
                 <app-dropdown
                   [labelName]="'Register Supplier'"
-                  [options]="registerSupplierList"
+                  [options]="allowStatusList"
                   [(inputModel)]="supplier.registeredsupplier"
                   (onBlur)="onGetErrorMsgs('registeredsupplier', true)"
                   errorMessages="{{ errorMsgs.registeredsupplierReq }}"
-                  [disabled]="!isEditable" [optionLabel]="'subMasterName'"
+                  [disabled]="!isEditable"
+                  [optionLabel]="'subMasterName'"
                   [optionValue]="'subMasterId'"
                 ></app-dropdown>
               </div>
@@ -111,16 +112,20 @@
               <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
                 <app-dropdown
                   [labelName]="'Apply TCS PO Stock Entry'"
-                  [options]="tcsPoStockEntryList"
+                  [options]="allowStatusList"
                   [(inputModel)]="supplier.supplierapplyTCSforPOStockEntry"
-                  [disabled]="!isEditable" [optionLabel]="'subMasterName'"
+                  [disabled]="!isEditable"
+                  [optionLabel]="'subMasterName'"
                   [optionValue]="'subMasterId'"
                 ></app-dropdown>
               </div>
             </div>
           </p-fieldset>
+
+          <!-- <label for="firstname5" class="p-sr-only">Firstname</label>
+            <input id="firstname5" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary" placeholder="Firstname"> -->
         </div>
-        <div class="field col-3">
+        <div class="field col-4">
           <p-fieldset legend="Region" [toggleable]="true">
             <app-inputtext
               [labelName]="'City'"
@@ -139,9 +144,6 @@
             ></app-inputtext>
           </p-fieldset>
         </div>
-      </div>
-
-      <div class="formgrid grid">
         <div class="field col-7">
           <p-fieldset legend="Contact" [toggleable]="true">
             <div class="formgrid grid">

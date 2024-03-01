@@ -28,34 +28,34 @@ export class StoremasterComponent {
 
   public storeMaster: any = {
     store: '',
-    counter: '',
+    counter: 'ZLC11',
     status: 'ZLS11',
     gstinno: '',
     drugLicenceNo: '',
-    autoFillPrecription: '',
-    accountGroup: '',
+    autoFillPrecription: 'ZLAS12',
+    accountGroup: 'ZLAG11',
     salesAcountPrefix: '',
     purcheseAccountPrefix: '',
     storeType: '',
-    isSuperStore: '',
-    salesUnit: '',
-    allowToRiseBill: '',
-    precriptionPrintTemplate: '',
-    precriptionLabelPrintTemplate: '',
-    salesPrintTemplate: '',
-    isSalesStore: '',
-    autoFillIndent: '',
-    isSterileStore: '',
-    storesTariff: '',
-    useSellingPriceFromItemBatch: '',
-    grnPrintTemplate: '',
-    allowAutoPOGeneration: '',
+    isSuperStore: 'ZLAS11',
+    salesUnit: 'ZLSU11',
+    allowToRiseBill: 'ZLAS12',
+    precriptionPrintTemplate: 'ZLPPT11',
+    precriptionLabelPrintTemplate: 'ZLPLPT11',
+    salesPrintTemplate: 'ZLSPT11',
+    isSalesStore: 'ZLAS11',
+    autoFillIndent: 'ZLAS12',
+    isSterileStore: 'ZLIStS11',
+    storesTariff: 'ZLST11',
+    useSellingPriceFromItemBatch: 'ZLAS12',
+    grnPrintTemplate: 'ZLGrnPT11',
+    allowAutoPOGeneration: 'ZLAS12',
     pOGenerationFrequency: '',
-    autoCancelPO: '',
+    autoCancelPO: 'ZLAS12',
     autoCancelPOFreuency: '',
-    salesWebTemplate: '',
-    salesWebPrinter: '',
-    batchExpireThesholdForStockTake: '',
+    salesWebTemplate: 'ZLSWT11',
+    salesWebPrinter: 'ZLSWP11',
+    batchExpireThesholdForStockTake: '0',
     createdt: null,
     createby: '',
     modifydt: null,
@@ -86,11 +86,13 @@ export class StoremasterComponent {
   public autoCancelPoList: any = [];
   public webtemplateList: any = [];
   public webPrinterList: any = [];
+  public allowStatusList:any =[];
 
   public errorMsgs: any = {
     store: '',
     storeType: '',
   };
+  public emptyErrorMsgs=JSON.stringify(this.errorMsgs);
 
   constructor(
     public _service: MasterserviceService,
@@ -136,6 +138,11 @@ export class StoremasterComponent {
       console.log(dt)
       this.statusList=dt.data[0].subMasterData ;
       console.log('this.statusList',this.statusList)
+    })
+    this._service
+    .serGetDataobject('getGeneralMaster',{masterid:"ZLAS1"})
+    .subscribe((dt:any)=>{
+      this.allowStatusList=dt.data[0].subMasterData ;
     })
 
     this._service
@@ -507,6 +514,7 @@ export class StoremasterComponent {
   }
 
   onClearClick() {
+    this.errorMsgs=JSON.parse(this.emptyErrorMsgs)
     if (this.pageMode == 'NEW') {
       this.storeMaster = JSON.parse(this.emptyStoreMaster);
       this.isEditable = true;

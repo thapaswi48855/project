@@ -52,6 +52,7 @@ export class GenericsubclassificationdetailsComponent {
     clasificationNameReq: '',
     subClasificationNameReq: '',
   };
+  public emptyErrorMsgs :any =JSON.stringify(this.errorMsgs);
 
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
@@ -166,8 +167,15 @@ export class GenericsubclassificationdetailsComponent {
     this.onClearClick();
   }
   onClearClick() {
-    this.genericSubClassification = JSON.parse(
-      this.emptyGenericSubClassification
-    );
+    // this.genericSubClassification = JSON.parse(
+    //   this.emptyGenericSubClassification
+    // );
+    if (this.pageMode == 'NEW') {
+      this.genericSubClassification = JSON.parse(this.emptyGenericSubClassification);
+      this.isEditable = true;
+    } else {
+      this.isEditable = false;
+    }
+    this.errorMsgs=JSON.parse(this.emptyErrorMsgs);
   }
 }

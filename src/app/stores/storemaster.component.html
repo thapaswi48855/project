@@ -62,7 +62,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-dropdown
-            [labelName]="'Auto Fill Precription'" [options]="autoFillPrecriptionList"
+            [labelName]="'Auto Fill Precription'" [options]="allowStatusList"
             [(inputModel)]="storeMaster.autoFillPrecription" [disabled]="!isEditable"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
@@ -113,7 +113,7 @@
         </div>
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-dropdown
-            [labelName]="'Is Super Store'" [options]="isSuperStoreList"
+            [labelName]="'Is Super Store'" [options]="allowStatusList"
             [(inputModel)]="storeMaster.isSuperStore" [disabled]="!isEditable"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
@@ -131,7 +131,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-dropdown
-            [labelName]="'Allow To Rise Bill'" [options]="riseBillList"
+            [labelName]="'Allow To Rise Bill'" [options]="allowStatusList"
             [(inputModel)]="storeMaster.allowToRiseBill" [disabled]="!isEditable"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
@@ -167,7 +167,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-dropdown
-            [labelName]="'Is Sales Store'" [options]="isSalesStoreList"
+            [labelName]="'Is Sales Store'" [options]="allowStatusList"
             [(inputModel)]="storeMaster.isSalesStore" [disabled]="!isEditable"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
@@ -176,7 +176,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-dropdown
-            [labelName]="'Auto fill Indent'" [options]="autoFillIndentList"
+            [labelName]="'Auto fill Indent'" [options]="allowStatusList"
             [(inputModel)]="storeMaster.autoFillIndent" [disabled]="!isEditable"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
@@ -203,7 +203,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-dropdown
-            [labelName]="'Use Selling Price from Item Batch'" [options]="sellingPriceItemList"
+            [labelName]="'Use Selling Price from Item Batch'" [options]="allowStatusList"
             [(inputModel)]="storeMaster.useSellingPriceFromItemBatch" [disabled]="!isEditable"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
@@ -221,7 +221,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-dropdown
-            [labelName]="'Allow Auto PO Generation'" [options]="autoPoGenerationList"
+            [labelName]="'Allow Auto PO Generation'" [options]="allowStatusList"
             [(inputModel)]="storeMaster.allowAutoPOGeneration" [disabled]="!isEditable"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
@@ -237,7 +237,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-dropdown
-            [labelName]="'Auto Cancel PO'" [options]="autoCancelPoList"
+            [labelName]="'Auto Cancel PO'" [options]="allowStatusList"
             [(inputModel)]="storeMaster.autoCancelPO" [disabled]="!isEditable"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
