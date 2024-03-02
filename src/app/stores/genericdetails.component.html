@@ -28,7 +28,7 @@
       [(inputModel)]="genericDetails.clasificationName" 
       [options]="geneticClassificationList" [disabled]="!isEditable"
           [optionLabel]="'clasificationName'"
-          [optionValue]="'_id'"></app-dropdown>
+          [optionValue]="'_id'" (onChange)="onSubClasification(genericDetails.clasificationName)"></app-dropdown>
     </div>
     <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
       <app-dropdown [labelName]="'Sub Classification Name'" 

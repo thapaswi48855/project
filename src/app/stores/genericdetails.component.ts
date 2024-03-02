@@ -96,11 +96,7 @@ public emptyErrorMsgs :any =JSON.stringify(this.errorMsgs);
         this.geneticClassificationList=dt.data;        
       });
 
-    this._service
-      .serGetDataobject('getGenericSubClassificationDetails', { status: 'ZLS11' })
-      .subscribe((dt: any) => {
-        this.geneticSubClassificationList=dt.data;
-      });
+    
 
       this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLS1' })
@@ -124,6 +120,14 @@ public emptyErrorMsgs :any =JSON.stringify(this.errorMsgs);
           value: ident._id,
         });
       });
+    });
+  }
+
+  onSubClasification(clasificationId:any){
+    this._service
+    .serGetDataobject('getGenericSubClassificationDetails', { status: 'ZLS11', _id:clasificationId })
+    .subscribe((dt: any) => {
+      this.geneticSubClassificationList=dt.data;
     });
   }
 
