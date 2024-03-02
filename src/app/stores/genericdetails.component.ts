@@ -125,7 +125,7 @@ public emptyErrorMsgs :any =JSON.stringify(this.errorMsgs);
 
   onSubClasification(clasificationId:any){
     this._service
-    .serGetDataobject('getGenericSubClassificationDetails', { status: 'ZLS11', _id:clasificationId })
+    .serGetDataobject('getGenericSubClassificationDetails', { status: 'ZLS11', clasificationName:clasificationId })
     .subscribe((dt: any) => {
       this.geneticSubClassificationList=dt.data;
     });
