@@ -29,6 +29,8 @@
               [(inputModel)]="taxgroup.taxgroup"
               [labelName]="'Tax Group'"
               [disabled]="!isEditable"
+              (onBlur)="onGetErrorMsgs('taxgroup', true)"
+              errorMessages="{{errorMsgs.taxgroupNameReq}}"
             ></app-inputtext>
             <app-dropdown
               [(inputModel)]="taxgroup.taxgroupcode"
@@ -36,6 +38,8 @@
               [disabled]="!isEditable" [options]="taxGrpCodeList"
               [optionLabel]="'subMasterName'"
               [optionValue]="'subMasterId'"
+              (onBlur)="onGetErrorMsgs('taxgroupcode', true)"
+              errorMessages="{{errorMsgs.taxgroupcodeNameReq}}"
             ></app-dropdown>           
            
             <app-inputtext

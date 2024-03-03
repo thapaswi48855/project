@@ -24,19 +24,19 @@ export class TaxsubgroupComponent {
   public isEditable: any = false;
   public isShowEditable: any = true;
   public redirectToGrid: boolean = false;
-  public serviceGroupList:any =[];
-  public statusList:any=[];
-  public taxGroupList:any=[];
+  public serviceGroupList: any = [];
+  public statusList: any = [];
+  public taxGroupList: any = [];
 
   public taxsubgroup: any = {
     taxgroup: '',
-    taxsubgroup:'',
+    taxsubgroup: '',
     status: 'ZLS11',
-    displayorder:'',
-    taxrate:'',  
-    validityStartDt:null,
-    validityEndDt:null,
-    taxrateexpression:'', 
+    displayorder: '',
+    taxrate: '',
+    validityStartDt: null,
+    validityEndDt: null,
+    taxrateexpression: '',
     createdt: null,
     createby: '',
     modifydt: null,
@@ -51,21 +51,44 @@ export class TaxsubgroupComponent {
   ) {}
 
   public errorMsgs: any = {
-    servicegroupname: '',
+    taxgroupeNameReq: '',
+    taxsubgroupNameReq: '',
+    taxrateReq: '',
+    validityStartDtReq: '',
   };
   public emptyErrorMsgs = JSON.stringify(this.errorMsgs);
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
-      case 'servicegroupname':
-        this.errorMsgs.servicegroupname =
+      case 'taxgroup':
+        this.errorMsgs.taxgroupeNameReq =
           this.taxsubgroup[ctrl] == '' ||
           this.taxsubgroup[ctrl] == undefined ||
           this.taxsubgroup[ctrl] == null
-            ? this._service.onGetErrorMsgs(
-                'servicegroupname',
-                true,
-                'Service Group Name'
-              )
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Tax Group Name')
+            : '';
+        break;
+      case 'taxsubgroup':
+        this.errorMsgs.taxsubgroupNameReq =
+          this.taxsubgroup[ctrl] == '' ||
+          this.taxsubgroup[ctrl] == undefined ||
+          this.taxsubgroup[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Tax Sub Group Name')
+            : '';
+        break;
+      case 'taxrate':
+        this.errorMsgs.taxrateReq =
+          this.taxsubgroup[ctrl] == '' ||
+          this.taxsubgroup[ctrl] == undefined ||
+          this.taxsubgroup[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Tax Rate')
+            : '';
+        break;
+      case 'validityStartDt':
+        this.errorMsgs.validityStartDtReq =
+          this.taxsubgroup[ctrl] == '' ||
+          this.taxsubgroup[ctrl] == undefined ||
+          this.taxsubgroup[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Tax Start Date')
             : '';
         break;
     }
@@ -76,17 +99,17 @@ export class TaxsubgroupComponent {
       await this._service.getConfigData();
     }
     this._service
-    .serGetDataobject('getTaxGroup', { status:'ZLS11' })
-    .subscribe((dt: any) => {
-      this.taxGroupList = dt.data;
-      console.log('categoryList', this.serviceGroupList);
-    });
+      .serGetDataobject('getTaxGroup', { status: 'ZLS11' })
+      .subscribe((dt: any) => {
+        this.taxGroupList = dt.data;
+        console.log('categoryList', this.serviceGroupList);
+      });
 
     this._service
-    .serGetDataobject('getGeneralMaster', { masterid: 'ZLS1' })
-    .subscribe((dt: any) => {
-      this.statusList = dt.data[0].subMasterData;
-    });
+      .serGetDataobject('getGeneralMaster', { masterid: 'ZLS1' })
+      .subscribe((dt: any) => {
+        this.statusList = dt.data[0].subMasterData;
+      });
 
     this._activatedRoute.paramMap.subscribe((param: ParamMap) => {
       let params: any = param.get('param');
@@ -115,21 +138,21 @@ export class TaxsubgroupComponent {
   }
 
   async onSaveClick() {
-    let objectstore = ['servicegroupname'];
+    let objectstore = ['taxgroup', 'taxsubgroup', 'taxrate', 'validityStartDt'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
 
     let errorExist = this._service.showErr(this.errorMsgs);
-    // if (errorExist) {
-    //   this._messageService.add({
-    //     sticky: true,
-    //     severity: 'warn',
-    //     summary: 'Warn',
-    //     detail: 'Please Check the below Errors',
-    //   });
-    //   return;
-    // }
+    if (errorExist) {
+      this._messageService.add({
+        sticky: true,
+        severity: 'warn',
+        summary: 'Warn',
+        detail: 'Please Check the below Errors',
+      });
+      return;
+    }
 
     let savingJson = this.taxsubgroup;
 

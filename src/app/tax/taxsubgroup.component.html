@@ -26,6 +26,8 @@
                 [disabled]="!isEditable" [options]="taxGroupList"
                 [optionLabel]="'taxgroup'"
                 [optionValue]="'_id'"
+                (onBlur)="onGetErrorMsgs('taxgroup', true)"
+              errorMessages="{{errorMsgs.taxgroupeNameReq}}"
               ></app-dropdown>
             </div>
             <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
@@ -33,12 +35,13 @@
                 [labelName]="'Tax Sub Group'"
                 [(inputModel)]="taxsubgroup.taxsubgroup"
                 [disabled]="!isEditable"
+                (onBlur)="onGetErrorMsgs('taxsubgroup', true)"
+              errorMessages="{{errorMsgs.taxsubgroupNameReq}}"
               ></app-inputtext>
             </div>
             <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
               <app-dropdown
-                [labelName]="'Status'"
-               
+                [labelName]="'Status'"               
                 [(inputModel)]="taxsubgroup.status"
                 [disabled]="!isEditable"  [optionLabel]="'subMasterName'"
                 [optionValue]="'subMasterId'" [options]="statusList"
@@ -61,6 +64,8 @@
                 [labelName]="'Tax Rate'"
                 [(inputModel)]="taxsubgroup.taxrate"
                 [disabled]="!isEditable"
+                (onBlur)="onGetErrorMsgs('taxrate', true)"
+              errorMessages="{{errorMsgs.taxrateReq}}"
               ></app-inputtext>
             </div>
             <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
@@ -68,6 +73,8 @@
                 [labelName]="'Validity Start'"
                 [(inputModel)]="taxsubgroup.validityStartDt"
                 [disabled]="!isEditable"
+                (onBlur)="onGetErrorMsgs('validityStartDt', true)"
+              errorMessages="{{errorMsgs.validityStartDtReq}}"
               ></app-datepicker>
             </div>
             <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">

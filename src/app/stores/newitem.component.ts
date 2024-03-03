@@ -43,30 +43,28 @@ export class NewitemComponent {
   public batchNumberApplicableList: any = [];
   public highCostConsumablesList: any = [];
   public allowZeroCalimAmntList: any = [];
-  public storeWiseCols:any=[];
-  public storeWiselist:any=
-    {
-      store:'',
-      bin:'',
-      danger:'',
-      minLevel:'',
-      recorderLevel:'',
-      maxLevel:''
-    }
-  ;
-  public storeWiseList:any=[];
-  public taxlist:any=
-    {
-      taxGrpType:'ZLTGT11',
-      taxGrp:'',
-      taxSubGrp:''
-    };
-    public taxList :any =[];
-  public taxCols:any=[];
-  public storeList:any=[];
-  public taxGroupList :any =[];
-  public taxGrpTypeList :any =[];
-  public taxSubGroupList :any =[];
+  public storeWiseCols: any = [];
+  public storeWiselist: any = {
+    store: '',
+    bin: '',
+    danger: '',
+    minLevel: '',
+    recorderLevel: '',
+    maxLevel: '',
+  };
+  public storeWiseList: any = [];
+  public taxlist: any = {
+    taxGrpType: 'ZLTGT11',
+    taxGrp: '',
+    taxSubGrp: '',
+  };
+  public taxList: any = [];
+  public taxCols: any = [];
+  public storeList: any = [];
+  public taxGroupList: any = [];
+  public taxGrpTypeList: any = [];
+  public taxSubGroupList: any = [];
+  public allowStatusList: any = [];
 
   public _service = inject(MasterserviceService);
   public _messageService = inject(MessageService);
@@ -106,10 +104,10 @@ export class NewitemComponent {
     binRack: '',
     batchNumberApplicable: 'ZLAS11',
     itemSellingPrice: '',
-    highCostConsumables: 'ZLAS11',
-    allowZeroCalimAmnt: 'ZLAZCA11',
-    storeWise:[],
-    taxlist:[]
+    highCostConsumables: 'ZLAS12',
+    allowZeroCalimAmnt: 'ZLAS12',
+    storeWise: [],
+    taxlist: [],
   };
   public emptyNewItem = JSON.stringify(this.newItem);
   async ngOnInit() {
@@ -120,7 +118,7 @@ export class NewitemComponent {
     this.storeWiseCols = await this._service.getGridColumns('storeWiseCols');
     this.taxCols = await this._service.getGridColumns('taxCols');
     this.taxList.push(this.taxlist);
-    this.storeWiseList.push(this.storeWiselist)
+    this.storeWiseList.push(this.storeWiselist);
 
     // this._service.serGetData('getGeneralMaster').subscribe((dt: any) => {
     //   this.zeroLevelEntity = dt.data;
@@ -170,89 +168,74 @@ export class NewitemComponent {
       });
 
     this._service
-      .serGetDataobject('getUomCreation', { status: 'ZLS11' })
-      .subscribe((dt: any) => {
-        this.packageUomList = dt.data;
-        console.log('categoryList', this.categoryList);
-      });
-
-    this._service
       .serGetDataobject('getServiceGroupMaster', { status: 'ZLS11' })
       .subscribe((dt: any) => {
         this.serviceGrpList = dt.data;
       });
+   
     this._service
-      .serGetDataobject('getServiceSubGroupMaster', { status: 'ZLS11' })
-      .subscribe((dt: any) => {
-        this.serviceSubGrpList = dt.data;
-      });
-      this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLPS1' })
       .subscribe((dt: any) => {
         this.preferredSupplierList = dt.data[0].subMasterData;
       });
-      this._service
+    this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLCT1' })
       .subscribe((dt: any) => {
         this.controlTypeList = dt.data[0].subMasterData;
       });
-      this._service
+    this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLPAR1' })
       .subscribe((dt: any) => {
         this.preAuthRequiredList = dt.data[0].subMasterData;
       });
-      this._service
+    this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLBG1' })
       .subscribe((dt: any) => {
         this.billingGroupList = dt.data[0].subMasterData;
-      });//taxBasisList
-      this._service
+      }); //taxBasisList
+    this._service
       .serGetDataobject('getGeneralMaster', { masterid: '	ZLTB1' })
       .subscribe((dt: any) => {
         this.taxBasisList = dt.data[0].subMasterData;
       });
-      this._service
+    this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLAS1' })
       .subscribe((dt: any) => {
-        this.batchNumberApplicableList = dt.data[0].subMasterData;
+        this.allowStatusList = dt.data[0].subMasterData;
       });
-      this._service
-      .serGetDataobject('getGeneralMaster', { masterid: 'ZLAS1' })
-      .subscribe((dt: any) => {
-        this.highCostConsumablesList = dt.data[0].subMasterData;
-      });
-      this._service
-      .serGetDataobject('getGeneralMaster', { masterid: 'ZLAZCA1' })
-      .subscribe((dt: any) => {
-        this.allowZeroCalimAmntList = dt.data[0].subMasterData;
-      });
-      this._service
+    // this._service
+    // .serGetDataobject('getGeneralMaster', { masterid: 'ZLAS1' })
+    // .subscribe((dt: any) => {
+    //   this.highCostConsumablesList = dt.data[0].subMasterData;
+    // });
+    // this._service
+    // .serGetDataobject('getGeneralMaster', { masterid: 'ZLAZCA1' })
+    // .subscribe((dt: any) => {
+    //   this.allowZeroCalimAmntList = dt.data[0].subMasterData;
+    // });
+    this._service
       .serGetDataobject('getStoreMaster', { status: 'ZLS11' })
       .subscribe((dt: any) => {
         this.storeList = dt.data;
       });
 
-      this._service
-    .serGetDataobject('getGeneralMaster', { masterid: 'ZLTGT1' })
-    .subscribe((dt: any) => {
-      this.taxGrpTypeList = dt.data[0].subMasterData;
-    });
+    this._service
+      .serGetDataobject('getGeneralMaster', { masterid: 'ZLTGT1' })
+      .subscribe((dt: any) => {
+        this.taxGrpTypeList = dt.data[0].subMasterData;
+      });
 
     this._service
-    .serGetDataobject('getTaxGroup', { status:'ZLS11' })
-    .subscribe((dt: any) => {
-      this.taxGroupList = dt.data;
-    
-    });
+      .serGetDataobject('getTaxGroup', { status: 'ZLS11' })
+      .subscribe((dt: any) => {
+        this.taxGroupList = dt.data;
+      });
 
     this._service
-    .serGetDataobject('getTaxSubGroup', { status:'ZLS11' })
-    .subscribe((dt: any) => {
-      this.taxSubGroupList = dt.data;
-     
-    });
-   
-
+      .serGetDataobject('getTaxSubGroup', { status: 'ZLS11' })
+      .subscribe((dt: any) => {
+        this.taxSubGroupList = dt.data;
+      });
 
     this._activatedRoute.paramMap.subscribe((param: ParamMap) => {
       let params: any = param.get('param');
@@ -271,15 +254,15 @@ export class NewitemComponent {
 
   getMasterData(masterid: any) {
     this._service
-    .serGetDataobject('getNewItem', { _id: masterid })
-    .subscribe((dt: any) => {
-      console.log('dt', dt);
-      this.newItem = dt.data[0];
-      this.newItem['_id']=this.newItem._id;
-      this.taxList=this.newItem.taxlist ;
-      this.storeWiseList=this.newItem.storeWise ;
-      this.isShowEditable= !this.isEditable && this.pageMode !='NEW';
-    });
+      .serGetDataobject('getNewItem', { _id: masterid })
+      .subscribe((dt: any) => {
+        console.log('dt', dt);
+        this.newItem = dt.data[0];
+        this.newItem['_id'] = this.newItem._id;
+        this.taxList = this.newItem.taxlist;
+        this.storeWiseList = this.newItem.storeWise;
+        this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
+      });
   }
 
   onSaveClick() {
@@ -299,8 +282,8 @@ export class NewitemComponent {
     //   return;
     // }
 
-    this.newItem.taxlist=this.taxList;
-    this.newItem.storeWise=this.storeWiseList
+    this.newItem.taxlist = this.taxList;
+    this.newItem.storeWise = this.storeWiseList;
     let savingJson = this.newItem;
     let Date = this._service.getDate();
     console.log('Date', this._service.getDate());
@@ -313,16 +296,37 @@ export class NewitemComponent {
   onClearClick() {
     this.newItem = JSON.parse(this.emptyNewItem);
   }
-  onAddTaxItem(){
-    this.taxList.push(JSON.parse(JSON.stringify(this.taxlist)))
+  onAddTaxItem() {
+    this.taxList.push(JSON.parse(JSON.stringify(this.taxlist)));
   }
-  onRemoveTaxItem(ind:any){
-    this.taxList =this.taxList.slice(0,ind);
+  onRemoveTaxItem(ind: any) {
+    this.taxList = this.taxList.slice(0, ind);
   }
-  onAddStoreItem(){
-    this.storeWiseList.push(JSON.parse(JSON.stringify(this.storeWiselist)))
+  onAddStoreItem() {
+    this.storeWiseList.push(JSON.parse(JSON.stringify(this.storeWiselist)));
   }
-  onRemoveStoreItem(ind:any){
-    this.storeWiseList =this.storeWiseList.slice(0,ind);
+  onRemoveStoreItem(ind: any) {
+    this.storeWiseList = this.storeWiseList.slice(0, ind);
+  }
+  onSelectPkgUOM(SelectPkgUOM: any) {
+    this.newItem.packageSize = _.filter(this.packageUomList, {
+      _id: SelectPkgUOM,
+    })[0].pkgSize;
+  }
+  onServiceGrp(serviceGrp:any){
+    this._service
+    .serGetDataobject('getServiceSubGroupMaster', { status: 'ZLS11',servicegroupname:serviceGrp })
+    .subscribe((dt: any) => {
+      this.serviceSubGrpList = dt.data;
+    });
+  }
+  onSelectUnitUom(unitUom:any){
+    this._service
+    .serGetDataobject('getUomCreation', { status: 'ZLS11',unitUom:unitUom })
+    .subscribe((dt: any) => {
+      this.packageUomList = dt.data;
+      console.log('categoryList', this.categoryList);
+    });
+
   }
 }

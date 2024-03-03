@@ -118,6 +118,7 @@
                   [options]="unitUomList"
                   [optionLabel]="'subMasterName'"
                   [optionValue]="'subMasterId'"
+                  (onChange)="onSelectUnitUom(newItem.unitUOM)"
                 ></app-dropdown>
               </div>
               <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
@@ -128,6 +129,7 @@
                   [options]="packageUomList"
                   [optionLabel]="'packageUom'"
                   [optionValue]="'_id'"
+                  (onChange)="onSelectPkgUOM(newItem.packageUOM)"
                 ></app-dropdown>
               </div>
               <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
@@ -176,6 +178,7 @@
                   [options]="serviceGrpList"
                   [optionLabel]="'servicegroupname'"
                   [optionValue]="'_id'"
+                  (onChange)="onServiceGrp(newItem.serviceGroup)"
                 ></app-dropdown>
               </div>
               <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
@@ -285,7 +288,7 @@
                   [labelName]="'Batch Number Applicable'"
                   [(inputModel)]="newItem.batchNumberApplicable"
                   [disabled]="!isEditable"
-                  [options]="batchNumberApplicableList"
+                  [options]="allowStatusList"
                   [optionLabel]="'subMasterName'"
                   [optionValue]="'subMasterId'"
                 ></app-dropdown>
@@ -302,7 +305,7 @@
                   [labelName]="'High Cost Consumables'"
                   [(inputModel)]="newItem.highCostConsumables"
                   [disabled]="!isEditable"
-                  [options]="highCostConsumablesList"
+                  [options]="allowStatusList"
                   [optionLabel]="'subMasterName'"
                   [optionValue]="'subMasterId'"
                 ></app-dropdown>
@@ -312,7 +315,7 @@
                   [labelName]="'Allow Zero Calim Amount'"
                   [(inputModel)]="newItem.allowZeroCalimAmnt"
                   [disabled]="!isEditable"
-                  [options]="allowZeroCalimAmntList"
+                  [options]="allowStatusList"
                   [optionLabel]="'subMasterName'"
                   [optionValue]="'subMasterId'"
                 ></app-dropdown>

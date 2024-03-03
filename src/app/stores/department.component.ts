@@ -118,7 +118,7 @@ export class DepartmentComponent {
         this.genderList = dt.data[0].subMasterData;
       });
       this._service
-      .serGetDataobject('getGeneralMaster', { masterid: '	ZLAS1' })
+      .serGetDataobject('getGeneralMaster', { masterid: '	ZLAS2' })
       .subscribe((dt: any) => {
         this.referralDoctor = dt.data[0].subMasterData;
       });

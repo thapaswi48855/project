@@ -47,7 +47,8 @@ export class TaxgroupComponent {
   ) {}
 
   public errorMsgs: any = {
-    servicegroupname: '',
+    taxgroupNameReq: '',
+    taxgroupcodeNameReq:''
   };
   public taxGrpCodeList:any=[];
   public taxGrpTypeList:any=[];
@@ -55,19 +56,24 @@ export class TaxgroupComponent {
   public emptyErrorMsgs = JSON.stringify(this.errorMsgs);
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
-      case 'servicegroupname':
-        this.errorMsgs.servicegroupname =
+      case 'taxgroup':
+        this.errorMsgs.taxgroupNameReq =
           this.taxgroup[ctrl] == '' ||
           this.taxgroup[ctrl] == undefined ||
           this.taxgroup[ctrl] == null
-            ? this._service.onGetErrorMsgs(
-                'servicegroupname',
-                true,
-                'Service Group Name'
-              )
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Tax Group Name')
+            : '';
+        break;
+        case 'taxgroupcode':
+        this.errorMsgs.taxgroupcodeNameReq =
+          this.taxgroup[ctrl] == '' ||
+          this.taxgroup[ctrl] == undefined ||
+          this.taxgroup[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Tax Group Code')
             : '';
         break;
     }
+   
   }
 
   async ngOnInit() {
@@ -119,21 +125,21 @@ export class TaxgroupComponent {
   }
 
   async onSaveClick() {
-    let objectstore = ['servicegroupname'];
+    let objectstore = ['taxgroup','taxgroupcode'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
 
     let errorExist = this._service.showErr(this.errorMsgs);
-    // if (errorExist) {
-    //   this._messageService.add({
-    //     sticky: true,
-    //     severity: 'warn',
-    //     summary: 'Warn',
-    //     detail: 'Please Check the below Errors',
-    //   });
-    //   return;
-    // }
+    if (errorExist) {
+      this._messageService.add({
+        sticky: true,
+        severity: 'warn',
+        summary: 'Warn',
+        detail: 'Please Check the below Errors',
+      });
+      return;
+    }
 
     let savingJson = this.taxgroup;
 
