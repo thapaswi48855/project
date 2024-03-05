@@ -58,7 +58,7 @@ export class NewitemComponent {
     taxGrp: '',
     taxSubGrp: '',
   };
-  public taxList: any = [];
+  // public taxList: any = [];
   public taxCols: any = [];
   public storeList: any = [];
   public taxGroupList: any = [];
@@ -117,7 +117,8 @@ export class NewitemComponent {
 
     this.storeWiseCols = await this._service.getGridColumns('storeWiseCols');
     this.taxCols = await this._service.getGridColumns('taxCols');
-    this.taxList.push(this.taxlist);
+    console.log(this.taxlist)
+    this.newItem.taxlist.push(JSON.parse(JSON.stringify(this.taxlist)));
     this.storeWiseList.push(this.storeWiselist);
 
     // this._service.serGetData('getGeneralMaster').subscribe((dt: any) => {
@@ -172,7 +173,7 @@ export class NewitemComponent {
       .subscribe((dt: any) => {
         this.serviceGrpList = dt.data;
       });
-   
+
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLPS1' })
       .subscribe((dt: any) => {
@@ -259,7 +260,7 @@ export class NewitemComponent {
         console.log('dt', dt);
         this.newItem = dt.data[0];
         this.newItem['_id'] = this.newItem._id;
-        this.taxList = this.newItem.taxlist;
+        // this.taxList = this.newItem.taxlist;
         this.storeWiseList = this.newItem.storeWise;
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
@@ -282,7 +283,7 @@ export class NewitemComponent {
     //   return;
     // }
 
-    this.newItem.taxlist = this.taxList;
+    // this.newItem.taxlist = this.taxList;
     this.newItem.storeWise = this.storeWiseList;
     let savingJson = this.newItem;
     let Date = this._service.getDate();
@@ -297,10 +298,10 @@ export class NewitemComponent {
     this.newItem = JSON.parse(this.emptyNewItem);
   }
   onAddTaxItem() {
-    this.taxList.push(JSON.parse(JSON.stringify(this.taxlist)));
+    this.newItem.taxlist.push(JSON.parse(JSON.stringify(this.taxlist)));
   }
   onRemoveTaxItem(ind: any) {
-    this.taxList = this.taxList.slice(0, ind);
+    this.newItem.taxlist = this.newItem.taxlist.slice(0, ind);
   }
   onAddStoreItem() {
     this.storeWiseList.push(JSON.parse(JSON.stringify(this.storeWiselist)));
@@ -313,20 +314,31 @@ export class NewitemComponent {
       _id: SelectPkgUOM,
     })[0].pkgSize;
   }
-  onServiceGrp(serviceGrp:any){
+  onServiceGrp(serviceGrp: any) {
     this._service
-    .serGetDataobject('getServiceSubGroupMaster', { status: 'ZLS11',servicegroupname:serviceGrp })
-    .subscribe((dt: any) => {
-      this.serviceSubGrpList = dt.data;
-    });
+      .serGetDataobject('getServiceSubGroupMaster', {
+        status: 'ZLS11',
+        servicegroupname: serviceGrp,
+      })
+      .subscribe((dt: any) => {
+        this.serviceSubGrpList = dt.data;
+      });
   }
-  onSelectUnitUom(unitUom:any){
+  onSelectUnitUom(unitUom: any) {
     this._service
-    .serGetDataobject('getUomCreation', { status: 'ZLS11',unitUom:unitUom })
-    .subscribe((dt: any) => {
-      this.packageUomList = dt.data;
-      console.log('categoryList', this.categoryList);
-    });
-
+      .serGetDataobject('getUomCreation', { status: 'ZLS11', unitUom: unitUom })
+      .subscribe((dt: any) => {
+        this.packageUomList = dt.data;
+        console.log('categoryList', this.categoryList);
+      });
+  }
+  onTaxGrp(taxGrpId: any,ind:any) {
+    // console.log('this.taxList', this.taxList);
+   let selectTaxGrp =_.filter(this.newItem.taxlist, { taxGrp: taxGrpId });
+   if(selectTaxGrp.length >1){
+    alert('Already')
+    taxGrpId="";
+    this.newItem.taxlist[ind].taxGrp="0";
+   }
   }
 }

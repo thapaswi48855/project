@@ -136,7 +136,7 @@
                 <app-inputtext
                   [labelName]="'Package Size'"
                   [(inputModel)]="newItem.packageSize"
-                  [disabled]="!isEditable"
+                  [disabled]="true"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
@@ -405,7 +405,7 @@
             <p-table
             #dt
             [columns]="taxCols"
-            [value]="taxList"
+            [value]="newItem.taxlist"
             [paginator]="false"
             [rows]="25"
             [responsive]="true"
@@ -440,12 +440,14 @@
                     [optionLabel]="'subMasterName'"
                   [optionValue]="'subMasterId'"></app-dropdown>
                 </td>
+                <!-- {{tax.taxGrp}} -->
                 <td>
                   <app-dropdown [(inputModel)]="tax.taxGrp"
                   [disabled]="!isEditable"
                   [options]="taxGroupList"
                   [optionLabel]="'taxgroup'"
-                  [optionValue]="'_id'"></app-dropdown>
+                  [optionValue]="'_id'"
+                  (onChange)="onTaxGrp(tax.taxGrp,rowIndex)"></app-dropdown>
                 </td>
                 <td>
                   <app-dropdown [(inputModel)]="tax.taxSubGrp"
