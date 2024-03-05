@@ -65,6 +65,7 @@ export class NewitemComponent {
   public taxGrpTypeList: any = [];
   public taxSubGroupList: any = [];
   public allowStatusList: any = [];
+  public manufactureList: any = [];
 
   public _service = inject(MasterserviceService);
   public _messageService = inject(MessageService);
@@ -117,7 +118,7 @@ export class NewitemComponent {
 
     this.storeWiseCols = await this._service.getGridColumns('storeWiseCols');
     this.taxCols = await this._service.getGridColumns('taxCols');
-    console.log(this.taxlist)
+    console.log(this.taxlist);
     this.newItem.taxlist.push(JSON.parse(JSON.stringify(this.taxlist)));
     this.storeWiseList.push(this.storeWiselist);
 
@@ -215,6 +216,12 @@ export class NewitemComponent {
     //   this.allowZeroCalimAmntList = dt.data[0].subMasterData;
     // });
     this._service
+      .serGetDataobject('getManufacureCreation', { status: 'ZLS11' })
+      .subscribe((dt: any) => {
+        this.manufactureList = dt.data;
+      });
+
+    this._service
       .serGetDataobject('getStoreMaster', { status: 'ZLS11' })
       .subscribe((dt: any) => {
         this.storeList = dt.data;
@@ -301,13 +308,13 @@ export class NewitemComponent {
     this.newItem.taxlist.push(JSON.parse(JSON.stringify(this.taxlist)));
   }
   onRemoveTaxItem(ind: any) {
-    this.newItem.taxlist = this.newItem.taxlist.slice(0, ind);
+    this.newItem.taxlist = this.newItem.taxlist.slice(ind, 1);
   }
   onAddStoreItem() {
     this.storeWiseList.push(JSON.parse(JSON.stringify(this.storeWiselist)));
   }
   onRemoveStoreItem(ind: any) {
-    this.storeWiseList = this.storeWiseList.slice(0, ind);
+    this.storeWiseList = this.storeWiseList.slice(ind, 1);
   }
   onSelectPkgUOM(SelectPkgUOM: any) {
     this.newItem.packageSize = _.filter(this.packageUomList, {
@@ -332,13 +339,17 @@ export class NewitemComponent {
         console.log('categoryList', this.categoryList);
       });
   }
-  onTaxGrp(taxGrpId: any,ind:any) {
+  onTaxGrp(taxGrpId: any, ind: any) {
     // console.log('this.taxList', this.taxList);
-   let selectTaxGrp =_.filter(this.newItem.taxlist, { taxGrp: taxGrpId });
-   if(selectTaxGrp.length >1){
-    alert('Already')
-    taxGrpId="";
-    this.newItem.taxlist[ind].taxGrp="0";
-   }
+    let selectTaxGrp = _.filter(this.newItem.taxlist, { taxGrp: taxGrpId });
+    if (selectTaxGrp.length > 1) {
+      alert('Already');
+      taxGrpId = '';
+      this.newItem.taxlist[ind].taxGrp = '0';
+    }
+  }
+  onLoopUpAdd(event: any) {
+    console.log('event', event);
+    this.newItem.manufacture = event.manufacturename;
   }
 }

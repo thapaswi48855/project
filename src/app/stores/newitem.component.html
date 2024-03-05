@@ -70,11 +70,18 @@
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
-                <app-inputtext
+                <!-- <app-inputtext
                   [labelName]="'Manufacture'"
                   [(inputModel)]="newItem.manufacture"
                   [disabled]="!isEditable"
-                ></app-inputtext>
+                ></app-inputtext> -->
+                <app-lookup
+              [labelName]="'Manufacture'"
+              [(inputModel)]="newItem.manufacture"
+              [filteredOptions]="manufactureList"
+              [filterName]="'manufacturename'"
+              (onLoopUp)="onLoopUpAdd($event)"
+            ></app-lookup>
               </div>
               <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
                 <app-inputtext
