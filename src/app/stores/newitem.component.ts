@@ -44,7 +44,8 @@ export class NewitemComponent {
   public highCostConsumablesList: any = [];
   public allowZeroCalimAmntList: any = [];
   public storeWiseCols: any = [];
-  public storeWiselist: any = {
+
+  public storelist: any = {
     store: '',
     bin: '',
     danger: '',
@@ -120,7 +121,7 @@ export class NewitemComponent {
     this.taxCols = await this._service.getGridColumns('taxCols');
     console.log(this.taxlist);
     this.newItem.taxlist.push(JSON.parse(JSON.stringify(this.taxlist)));
-    this.storeWiseList.push(this.storeWiselist);
+    this.newItem.storeWise.push(this.storelist);
 
     // this._service.serGetData('getGeneralMaster').subscribe((dt: any) => {
     //   this.zeroLevelEntity = dt.data;
@@ -308,13 +309,15 @@ export class NewitemComponent {
     this.newItem.taxlist.push(JSON.parse(JSON.stringify(this.taxlist)));
   }
   onRemoveTaxItem(ind: any) {
-    this.newItem.taxlist = this.newItem.taxlist.slice(ind, 1);
+    this.newItem.taxlist.splice(ind, 1);
   }
   onAddStoreItem() {
-    this.storeWiseList.push(JSON.parse(JSON.stringify(this.storeWiselist)));
+    this.newItem.storeWise.push(JSON.parse(JSON.stringify(this.storelist)));
   }
   onRemoveStoreItem(ind: any) {
-    this.storeWiseList = this.storeWiseList.slice(ind, 1);
+    // this.storeWiseList = this.storeWiseList.slice(ind, 1);
+    // let array1=JSON.parse(JSON.stringify(this.newItem.storeWise))
+    this.newItem.storeWise.splice(ind, 1);
   }
   onSelectPkgUOM(SelectPkgUOM: any) {
     this.newItem.packageSize = _.filter(this.packageUomList, {

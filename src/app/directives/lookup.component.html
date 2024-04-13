@@ -5,10 +5,10 @@
         class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"
         htmlFor="{{ labelName }}"
         title="{{ labelName }}"
-        >{{ labelName }}</label
+        >{{ labelName }} :</label
       >
 
-      <p-autoComplete
+      <p-autoComplete 
         [(ngModel)]="inputModel"
         [suggestions]="filteredOption"
         (completeMethod)="filterCountry($event)"
@@ -29,5 +29,8 @@
 <style>
   .displayBlock {
     display: contents;
+  }
+  :host ::ng-deep .p-autocomplete {
+    width: 100% !important;
   }
 </style>

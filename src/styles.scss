@@ -16,6 +16,7 @@ $gutter: 1rem; //for primeflex grid system
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 /* Track */
@@ -35,4 +36,45 @@ small{
 
 layout-topbar-logo{
   color: rgb(26, 26, 88);
+}
+.div-padding{
+  padding: 0.5rem ;
+  }
+  .card {
+    padding: 0.5rem !important ;
+  }
+//  :host .p-dialog {
+//   max-height: 100% !important ;
+//   }
+.reg-img-view{
+  background: var(--primary-100);
+  padding: 4px 10px;
+  border: 1px solid var(--primary-300);
+  border-radius: 4px;
+  font-size: 1.1rem;
+  color: var(--primar-color);
+  vertical-align: middle;
+  display: table-cell;
+  text-align: center;
+}
+
+.reg-img-view a i {
+  font-size: 1.2rem;
+  color: var(--primar-color);
+}
+.mobile-view-stack-header-color {
+ color: var(--primary-500) !important ;
+}
+
+.p-datatable .p-sortable-column .p-icon-wrapper {
+  color: white !important ;
+}
+.p-button {
+  background-color: var(--primary-400)!important;
+  color: white !important;
+}
+.p-calendar-w-btn .p-datepicker-trigger.p-button .p-icon {
+  color: white !important;
+width: 16px;
+height: 16px;
 }

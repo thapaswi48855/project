@@ -60,12 +60,11 @@ export class RaisepurchaseorderComponent {
     transportationCharges: 0,
     poTotal: 0,
     status: 'ZLS11',
-    approvalStatus:'',
+    approvalStatus: '',
     createdt: null,
     createby: '',
     modifydt: null,
     modifyby: '',
-
   };
   public emptyRaisePurchaseOrder = JSON.stringify(this.raisePurchaseOrder);
   public newItemList: any = [];
@@ -76,22 +75,25 @@ export class RaisepurchaseorderComponent {
   public poallowedToList: any = [];
   public poDiscountTypeList: any = [];
   public supplierList: any = [];
-  public approveStatusList:any =[];
-  public errorMsgs:any={
-    'storeReq':'',
-    'supplierReq':'',
-    'poallowedToReq':'',
-    'itemNameReq':'',
-    'mrpReq':'',
-    'rateReq':'',
-    'qtyReq':''
-  }
-
+  public approveStatusList: any = [];
+  public errorMsgs: any = {
+    storeReq: '',
+    supplierReq: '',
+    poallowedToReq: '',
+    itemNameReq: '',
+    mrpReq: '',
+    rateReq: '',
+    qtyReq: '',
+  };
+public layoutRes:any ;
   constructor(
     public _service: MasterserviceService,
     public _activatedRoute: ActivatedRoute,
     public _messageService: MessageService
-  ) {}
+  ) {
+    this.mobileState =this._service.isMobileDevice();
+    this.layoutRes =this.mobileState ?'stack':'scroll'
+  }
 
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
@@ -103,7 +105,7 @@ export class RaisepurchaseorderComponent {
             ? this._service.onGetErrorMsgs(ctrl, true, 'Store')
             : '';
         break;
-        case 'supplier':
+      case 'supplier':
         this.errorMsgs.supplierReq =
           this.raisePurchaseOrder[ctrl] == '' ||
           this.raisePurchaseOrder[ctrl] == undefined ||
@@ -111,53 +113,56 @@ export class RaisepurchaseorderComponent {
             ? this._service.onGetErrorMsgs(ctrl, true, 'Supplier')
             : '';
         break;
-        case 'poallowedTo':
-          this.errorMsgs.poallowedToReq =
-            this.raisePurchaseOrder[ctrl] == '' ||
-            this.raisePurchaseOrder[ctrl] == undefined ||
-            this.raisePurchaseOrder[ctrl] == null
-              ? this._service.onGetErrorMsgs(ctrl, true, 'Po allowed to')
-              : '';
-          break;
-          case 'itemName':
-            this.errorMsgs.itemNameReq =
-              this.itemDetails[ctrl] == '' ||
-              this.itemDetails[ctrl] == undefined ||
-              this.itemDetails[ctrl] == null
-                ? this._service.onGetErrorMsgs(ctrl, true, 'Item name')
-                : '';
-            break;
-            case 'mrp':
-              this.errorMsgs.mrpReq =
-                this.itemDetails[ctrl] == '' ||
-                this.itemDetails[ctrl] == undefined ||
-                this.itemDetails[ctrl] == null
-                  ? this._service.onGetErrorMsgs(ctrl, true, 'Mrp')
-                  : '';
-              break;
-              case 'rate':
-              this.errorMsgs.rateReq =
-                this.itemDetails[ctrl] == '' ||
-                this.itemDetails[ctrl] == undefined ||
-                this.itemDetails[ctrl] == null
-                  ? this._service.onGetErrorMsgs(ctrl, true, 'Rate')
-                  : '';
-              break;
-              case 'qty':
-                this.errorMsgs.qtyReq =
-                  this.itemDetails[ctrl] == '' ||
-                  this.itemDetails[ctrl] == undefined ||
-                  this.itemDetails[ctrl] == null
-                    ? this._service.onGetErrorMsgs(ctrl, true, 'Qty')
-                    : '';
-                break;
+      case 'poallowedTo':
+        this.errorMsgs.poallowedToReq =
+          this.raisePurchaseOrder[ctrl] == '' ||
+          this.raisePurchaseOrder[ctrl] == undefined ||
+          this.raisePurchaseOrder[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Po allowed to')
+            : '';
+        break;
+      case 'itemName':
+        this.errorMsgs.itemNameReq =
+          this.itemDetails[ctrl] == '' ||
+          this.itemDetails[ctrl] == undefined ||
+          this.itemDetails[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Item name')
+            : '';
+        break;
+      case 'mrp':
+        this.errorMsgs.mrpReq =
+          this.itemDetails[ctrl] == '' ||
+          this.itemDetails[ctrl] == undefined ||
+          this.itemDetails[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Mrp')
+            : '';
+        break;
+      case 'rate':
+        this.errorMsgs.rateReq =
+          this.itemDetails[ctrl] == '' ||
+          this.itemDetails[ctrl] == undefined ||
+          this.itemDetails[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Rate')
+            : '';
+        break;
+      case 'qty':
+        this.errorMsgs.qtyReq =
+          this.itemDetails[ctrl] == '' ||
+          this.itemDetails[ctrl] == undefined ||
+          this.itemDetails[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Qty')
+            : '';
+        break;
     }
   }
-
+  public mobileState = false;
   async ngOnInit() {
     if (Object.keys(this._service.appConfig).length == 0) {
       await this._service.getConfigData();
     }
+
+    this.mobileState =this._service.isMobileDevice();
+    this.layoutRes =this.mobileState ?'stack':'scroll'
 
     this._service
       .serGetDataobject('getStoreMaster', { status: 'ZLS11' })
@@ -183,7 +188,7 @@ export class RaisepurchaseorderComponent {
         this.quantityUomList = dt.data[0].subMasterData;
       });
 
-      this._service
+    this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLARS1' })
       .subscribe((dt: any) => {
         this.approveStatusList = dt.data[0].subMasterData;
@@ -242,11 +247,28 @@ export class RaisepurchaseorderComponent {
 
   onGridClick() {}
   onBasicUploadAuto(fileUpload: any) {
-    console.log('fileUpload', fileUpload);
+    // console.log('fileUpload', fileUpload.files[0]);
+    if (fileUpload.files.length > 0) {
+      this.uploadFile(fileUpload.files[0]);
+    }
+  }
+  public url: any = '';
+  public showImg: boolean = false;
+  uploadFile(files: File): void {
+    let reader = new FileReader();
+    reader.onload = (e: any) => {
+      let base64 = e.target.result;
+      this.url = base64;
+      console.log(this.url);
+    };
+    reader.readAsDataURL(files);
+  }
+  onShowImg() {
+    this.showImg = true;
   }
 
   onSaveClick() {
-    let objectstore = ['store', 'supplier','poallowedTo'];
+    let objectstore = ['store', 'supplier', 'poallowedTo'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
@@ -391,7 +413,7 @@ export class RaisepurchaseorderComponent {
     //   this.itemDetails.disAmt +
     //   item.taxAmt;
 
-    let objectstore = ['qty', 'rate','mrp','itemName'];
+    let objectstore = ['qty', 'rate', 'mrp', 'itemName'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
@@ -439,7 +461,6 @@ export class RaisepurchaseorderComponent {
     this.raisePurchaseOrder.poTotal = this.raisePurchaseOrder.totalItemAmount;
   }
   onRateWiseTaxAmt(qty: any) {
-   
     if (this.itemDetails.disAmt !== '') {
       this.itemDetails.taxAmt =
         ((parseFloat(this.itemDetails.rate) * parseFloat(qty) -
@@ -483,15 +504,17 @@ export class RaisepurchaseorderComponent {
     this.itemDetails.manufacture = event.manufacture;
     this.itemDetails.stock = event.stock;
     this.itemDetails.allStoreStock = event.allStoreStock;
+    event.taxlist;
+    //  _.filter(this.cgstList,{taxsubgroup:event.taxSubGrp} )
   }
   onEditSelect(ind: any, row: any) {
     row['rowInd'] = ind;
     this.visible = true;
     this.itemDetails = row;
   }
-  onLoopUpAdd(event: any) {
+  async onLoopUpAdd(event: any) {
     console.log('event', event);
-    this.raisePurchaseOrder.supplier = event.regionstate;
+    this.raisePurchaseOrder.supplier = await event.regionstate;
     this.raisePurchaseOrder.supplierAdderss = event.contactaddress;
   }
   onDisPer(Amt: any) {
@@ -518,8 +541,11 @@ export class RaisepurchaseorderComponent {
       parseFloat(this.raisePurchaseOrder.transportationCharges);
   }
   async onSaveApproveClick() {
-    this.raisePurchaseOrder.approvalStatus='ZLARS11';
+    this.raisePurchaseOrder.approvalStatus = 'ZLARS11';
     this.onSaveClick();
   }
   onSavePrintClick() {}
+
+  onRemoveImg() {}
+  onCancelItem(itemDet:any) {}
 }

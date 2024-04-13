@@ -16,66 +16,73 @@
   </div>
 
   <div class="div-padding">
-    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+    <div class="card">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 120px)' }">
       <div class="formgrid grid">
-        <div class="col-4 md:col-6 sm:col-6 lg:col-4 xl:col-4">
-          <p-fieldset legend="Manufacture" [toggleable]="true">
-            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
-              <app-inputtext
-                [labelName]="'Manufacture Name'"
-                [(inputModel)]="manufacture.manufacturename"
-                (onBlur)="_service.onGetErrorMsgs(manufacture, 'name', true)"
-                errorMessages="{{ this._service.errorMsgs.name }}"
-                [disabled]="!isEditable"
-              ></app-inputtext>
-            </div>
+        
+          <div class="col-4 md:col-6 sm:col-6 lg:col-4 xl:col-4">
+            <!-- <div class="col-12 md:col-12 sm:col-2 lg:col-12 xl:col-12"> -->
+            <p-fieldset legend="Manufacture" [toggleable]="true">
+              <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+                <app-inputtext
+                  [labelName]="'Manufacture Name'"
+                  [(inputModel)]="manufacture.manufacturename"
+                  (onBlur)="_service.onGetErrorMsgs(manufacture, 'name', true)"
+                  errorMessages="{{ this._service.errorMsgs.name }}"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
 
-            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
-              <app-dropdown
-                [labelName]="'Status'"
-                [options]="statusList"
-                [(inputModel)]="manufacture.status"
-                [optionLabel]="'subMasterName'"
-                [optionValue]="'subMasterId'"
-              ></app-dropdown>
-            </div>
-            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
-              <app-inputtext
-                [labelName]="'Manufacture Description'"
-                [(inputModel)]="manufacture.manufacturecode"
-                (onBlur)="_service.onGetErrorMsgs(manufacture, 'code', true)"
-                errorMessages="{{ this._service.errorMsgs.code }}"
-                [disabled]="!isEditable"
-              ></app-inputtext>
-            </div>
-          </p-fieldset>
+              <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+                <app-dropdown
+                  [labelName]="'Status'"
+                  [options]="statusList"
+                  [(inputModel)]="manufacture.status"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+              <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+                <app-inputtext
+                  [labelName]="'Manufacture Description'"
+                  [(inputModel)]="manufacture.manufacturecode"
+                  (onBlur)="_service.onGetErrorMsgs(manufacture, 'code', true)"
+                  errorMessages="{{ this._service.errorMsgs.code }}"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+            </p-fieldset>
+            <!-- </div> -->
+          </div>
         </div>
-        <div class="col-4 md:col-6 sm:col-6 lg:col-4 xl:col-4">
-          <p-fieldset legend="Region" [toggleable]="true">
-            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
-              <app-inputtext
-                [labelName]="'Country'"
-                [(inputModel)]="manufacture.regioncountry"
-                [disabled]="!isEditable"
-              ></app-inputtext>
-            </div>
-            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
-              <app-inputtext
-                [labelName]="'State'"
-                [(inputModel)]="manufacture.regionstate"
-                [disabled]="!isEditable"
-              ></app-inputtext>
-            </div>
-            <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
-              <app-inputtext
-                [labelName]="'City'"
-                [(inputModel)]="manufacture.regioncity"
-                [disabled]="!isEditable"
-              ></app-inputtext>
-            </div>
-          </p-fieldset>
-        </div>
-      </div>
+        <!-- <div class="card"> -->
+          <div class="col-4 md:col-6 sm:col-6 lg:col-4 xl:col-4">
+            <p-fieldset legend="Region" [toggleable]="true">
+              <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+                <app-inputtext
+                  [labelName]="'Country'"
+                  [(inputModel)]="manufacture.regioncountry"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+                <app-inputtext
+                  [labelName]="'State'"
+                  [(inputModel)]="manufacture.regionstate"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+              <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
+                <app-inputtext
+                  [labelName]="'City'"
+                  [(inputModel)]="manufacture.regioncity"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+            </p-fieldset>
+          </div>
+        <!-- </div> -->
+      <!-- </div> -->
       <div class="col-7 md:col-8 sm:col-8 lg:col-6 xl:col-6">
         <p-fieldset legend="Contact" [toggleable]="true">
           <div class="grid">
@@ -132,6 +139,7 @@
         </p-fieldset>
       </div>
     </p-scrollPanel>
+    </div>
   </div>
 </div>
 <app-saving #saving></app-saving>

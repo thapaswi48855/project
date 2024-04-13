@@ -104,12 +104,17 @@ export class StockentryComponent {
     rateReq: '',
     qtyReq: '',
   };
+  public mobileState = false;
+  public layoutRes :any ='';
 
   constructor(
     private _service: MasterserviceService,
     private _activatedRoute: ActivatedRoute,
     public _messageService: MessageService
-  ) {}
+  ) {
+    this.mobileState =this._service.isMobileDevice();
+    this.layoutRes =this.mobileState ?'stack':'scroll'
+  }
 
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
@@ -184,6 +189,9 @@ export class StockentryComponent {
     if (Object.keys(this._service.appConfig).length == 0) {
       await this._service.getConfigData();
     }
+
+    this.mobileState =this._service.isMobileDevice();
+    this.layoutRes =this.mobileState ?'stack':'scroll'
 
     this.gridCols = this._service.getGridColumns('purchaseItemListCols');
 
@@ -318,8 +326,22 @@ export class StockentryComponent {
       });
   }
 
-  onBasicUploadAuto(event: any) {
+  onBasicUploadAuto(fileUpload: any) {
     console.log('event', event);
+    if (fileUpload.files.length > 0) {
+      this.uploadFile(fileUpload.files[0]);
+    }
+  }
+  public url: any = '';
+  public showImg: boolean = false;
+  uploadFile(files: File): void {
+    let reader = new FileReader();
+    reader.onload = (e: any) => {
+      let base64 = e.target.result;
+      this.url = base64;
+      console.log(this.url);
+    };
+    reader.readAsDataURL(files);
   }
 
   onSaveClick() {
@@ -730,5 +752,10 @@ export class StockentryComponent {
     this.itemDetails.manufacture = event.manufacture;
     this.itemDetails.stock = event.stock;
     this.itemDetails.allStoreStock = event.allStoreStock;
+  }
+  onRemoveImg(){}
+  onShowImg(){ this.showImg = true;}
+  onCancelItem(itemDet:any){
+
   }
 }

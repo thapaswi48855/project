@@ -15,8 +15,9 @@
     ></app-header>
   </div>
 
-  <div class="div-padding-fieldset">
-    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+  <div class="div-padding">
+    <div class="card">
+    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 120px)' }">
       <div class="formgrid grid">
         <div class="col-12">
           <p-fieldset legend="Item Details" [toggleable]="true">
@@ -336,7 +337,7 @@
             <p-table
               #dt
               [columns]="storeWiseCols"
-              [value]="storeWiseList"
+              [value]="newItem.storeWise"
               [paginator]="false"
               [rows]="25"
               [responsive]="true"
@@ -479,7 +480,7 @@
           </p-fieldset>
         </div>
       </div>
-    </p-scrollPanel>
+    </p-scrollPanel></div>
   </div>
 </div>
 <app-saving #saving></app-saving>

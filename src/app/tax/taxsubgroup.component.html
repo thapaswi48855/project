@@ -15,10 +15,11 @@
     </div>
   
     <div class="div-padding">
-      <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
+      <div class="card">
+      <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 120px)' }">
         <p-fieldset legend="Tax Sub Group" [toggleable]="true">
           <div class="formgrid grid">
-            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
               <app-dropdown
                 [labelName]="'Tax Group'"
                 
@@ -30,7 +31,7 @@
               errorMessages="{{errorMsgs.taxgroupeNameReq}}"
               ></app-dropdown>
             </div>
-            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
               <app-inputtext
                 [labelName]="'Tax Sub Group'"
                 [(inputModel)]="taxsubgroup.taxsubgroup"
@@ -39,7 +40,7 @@
               errorMessages="{{errorMsgs.taxsubgroupNameReq}}"
               ></app-inputtext>
             </div>
-            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
               <app-dropdown
                 [labelName]="'Status'"               
                 [(inputModel)]="taxsubgroup.status"
@@ -47,7 +48,7 @@
                 [optionValue]="'subMasterId'" [options]="statusList"
               ></app-dropdown>
             </div>
-            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
               <app-inputtext
                 [labelName]="'Display Order'"
                 [(inputModel)]="taxsubgroup.displayorder"
@@ -59,7 +60,7 @@
   
         <p-fieldset legend="Tax Sub Group Details" [toggleable]="true">
           <div class="formgrid grid">
-            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
               <app-inputtext
                 [labelName]="'Tax Rate'"
                 [(inputModel)]="taxsubgroup.taxrate"
@@ -68,7 +69,7 @@
               errorMessages="{{errorMsgs.taxrateReq}}"
               ></app-inputtext>
             </div>
-            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
               <app-datepicker
                 [labelName]="'Validity Start'"
                 [(inputModel)]="taxsubgroup.validityStartDt"
@@ -77,14 +78,14 @@
               errorMessages="{{errorMsgs.validityStartDtReq}}"
               ></app-datepicker>
             </div>
-            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
               <app-datepicker
                 [labelName]="'Validity End'"
                 [(inputModel)]="taxsubgroup.validityEndDt"
                 [disabled]="!isEditable"
               ></app-datepicker>
             </div>
-            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
+            <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
               <app-textarea
                 [labelName]="'Tax Rate Expression'"
                 [(inputModel)]="taxsubgroup.taxrateexpression"
@@ -95,6 +96,7 @@
         </p-fieldset>
        
       </p-scrollPanel>
+    </div>
     </div>
   </div>
   <app-saving #saving></app-saving>

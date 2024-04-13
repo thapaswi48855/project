@@ -16,11 +16,12 @@
   </div>
  
     <div class="div-padding">
+      <div class="card">
       <p-scrollPanel
-      [style]="{ width: '100%', height: ' calc(100vh - 164px)' }"
-      styleClass="custombar1"
+      [style]="{ width: '100%', height: ' calc(100vh - 120px)' }"
+    
     >
-      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+      <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
         <app-inputtext
           [labelName]="'Suplier Category Name'"
           [(inputModel)]="supplierCategory.categoryname"
@@ -28,8 +29,8 @@
           errorMessages="{{errorMsgs.categorynameReq}}"
           [disabled]="!isEditable"
         ></app-inputtext>
-      </div>
-      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+      <!-- </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
         <app-dropdown
         [labelName]="'Status'"
         [options]="statusList"
@@ -37,8 +38,8 @@
         [optionLabel]="'subMasterName'"
         [optionValue]="'subMasterId'"
         ></app-dropdown>
-      </div>
-      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
+      <!-- </div>
+      <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
         <app-inputtext
           [labelName]="'Suplier Category Description'"
           [(inputModel)]="supplierCategory.categorydescription"
@@ -47,6 +48,6 @@
       </div>
     </p-scrollPanel>
     </div>
-  
+  </div>
 </div>
 <app-saving #saving></app-saving>

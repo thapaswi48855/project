@@ -1,17 +1,17 @@
   
-  <div class="flex justify-content-between flex-wrap p-1" style="background-color: antiquewhite;">
+  <div class="flex justify-content-between flex-wrap p-1" style="background-image: linear-gradient(to bottom right , var(--primary-50),var(--primary-100));">
     <div class="flex align-items-center justify-content-center font-bold border-round m-2">
-      <span style="text-align: center"> {{ pageTitle }}</span>
+      <span style="text-align: center" class="text-primary"> {{ pageTitle }}</span>
     </div>
     <div class="flex align-items-center justify-content-center  font-bold border-round gap-1">
-      <button pButton pRipple label="Submit" class="p-button-success" *ngIf="onSubmit && docAccSubmit" (click)="onSaveClick()"></button>
-      <button pButton pRipple label="GridView" class="p-button-success" *ngIf="onGrid && docAccGridView" (click)="onGridClick()"> </button>
-      <button pButton pRipple label="Add New" class="p-button-success" *ngIf="onAddNew && docAccAddNew " (click)="onAddNewClick()"></button>
-      <button pButton pRipple label="Clear" class="p-button-success" *ngIf="onClear && docAccClear" (click)="onClearClick()"></button>
-      <button pButton pRipple label="Edit" class="p-button-success" *ngIf="onEdit && docAccEdit" (click)="onEditClick()"></button>
+      <button pButton pRipple label="Submit" *ngIf="onSubmit && docAccSubmit" (click)="onSaveClick()"></button>
+      <button pButton pRipple label="GridView" *ngIf="onGrid && docAccGridView" (click)="onGridClick()"> </button>
+      <button pButton pRipple label="Add New" *ngIf="onAddNew && docAccAddNew " (click)="onAddNewClick()"></button>
+      <button pButton pRipple label="Clear" *ngIf="onClear && docAccClear" (click)="onClearClick()"></button>
+      <button pButton pRipple label="Edit" *ngIf="onEdit && docAccEdit" (click)="onEditClick()"></button>
       <!-- <button pButton pRipple label="Edit" class="p-button-success" *ngIf="onView && docAccView" (click)="onViewClick()"></button> -->
-      <button pButton pRipple label="Save & Approve" class="p-button-success" *ngIf="onSaveApprove" (click)="onSaveApproveClick()"></button>
-      <button pButton pRipple label="Save & Print" class="p-button-success" *ngIf="onSavePrint" (click)="onSavePrintClick()"></button>
+      <button pButton pRipple label="Save & Approve" *ngIf="onSaveApprove" (click)="onSaveApproveClick()"></button>
+      <button pButton pRipple label="Save & Print" *ngIf="onSavePrint" (click)="onSavePrintClick()"></button>
     </div>
 </div>
 <p-toast (onClose)="onMessageClose()"></p-toast>

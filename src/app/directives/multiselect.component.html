@@ -1,15 +1,21 @@
 <div class="justify-content-center">
-    <div class="flex flex-column gap-2 ">
-      <label class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis" htmlFor="{{ labelName }}">{{ labelName }}</label>
-      <!-- <input pInputText id="username" aria-describedby="username-help"  /> -->
-      <p-multiSelect [style]="{width:'100%'}" aria-describedby="username-help"
+  <div class="flex flex-column gap-2">
+    <label
+      class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"
+      htmlFor="{{ labelName }}"
+      >{{ labelName }} :</label
+    >
+    <!-- <input pInputText id="username" aria-describedby="username-help"  /> -->
+    <p-multiSelect
+      [style]="{ width: '100%' }"
+      aria-describedby="username-help"
       [filter]="true"
       filterBy="label"
       [options]="options"
       [(ngModel)]="inputModel"
       optionLabel="label"
       optionValue="value"
-      (onBlur)="onLeaveControl();"
+      (onBlur)="onLeaveControl()"
       [appendTo]="appendTo"
       [ngClass]="{
         'ng-invalid': errorMessages !== '',
@@ -18,7 +24,12 @@
       [disabled]="disabled"
       (ngModelChange)="inputModelChange.emit(inputModel)"
     ></p-multiSelect>
-      <small id="username-help" class="errorMessages" pTooltip="{{ errorMessages }}" tooltipPosition="top" >{{errorMessages}}</small>
-    </div>
-    </div>
-    
+    <small
+      id="username-help"
+      class="errorMessages"
+      pTooltip="{{ errorMessages }}"
+      tooltipPosition="top"
+      >{{ errorMessages }}</small
+    >
+  </div>
+</div>

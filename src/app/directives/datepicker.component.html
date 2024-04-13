@@ -5,9 +5,9 @@
       class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"
       htmlFor="{{ labelName }}"
       title="{{ labelName }}"
-      >{{ labelName }}</label
+      >{{ labelName }} :</label
     >
-    <p-calendar
+    <p-calendar [appendTo]="appendTo"
     [style]="{width:'100%'}"
       [(ngModel)]="inputModel"
       [inline]="false"

@@ -1417,98 +1417,98 @@
             }
         },
         {
-            "field":"itemName",
+            "field":"code",
             "header":"Code",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"pkg",
             "header":"Package",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"pkgType",
             "header":"Package Type",
             "style":{
                 "width":"100px"
             }
         },
                {
-            "field":"itemName",
+            "field":"mrp",
             "header":"MRP",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"adjMrp",
             "header":"Adj MRP",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"rate",
             "header":"Rate",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"qty",
             "header":"Qty",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"bouns",
             "header":"Bonus",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"pckUOM",
             "header":"UOM",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"taxRate",
             "header":"Tax(%)",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"taxBasis",
             "header":"Tax Basis",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"disAmt",
             "header":"Disc",
             "style":{
                 "width":"100px"
             }
         },
              {
-            "field":"itemName",
+            "field":"taxAmt",
             "header":"Tax Amt",
             "style":{
                 "width":"100px"
             }
         },
         {
-            "field":"itemName",
+            "field":"totalAmt",
             "header":"Total",
             "style":{
                 "width":"100px"
@@ -1744,105 +1744,105 @@
             }
         },
         {
-            "field": "itemName",
+            "field": "generateItemCode",
             "header": "Code",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "batch",
             "header": "B/S No.",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "expiry",
             "header": "Expiry",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "mrp",
             "header": "Package",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "mrp",
             "header": "MRP",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "rate",
             "header": "Rate",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "qty",
             "header": "Qty",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "bouns",
             "header": "Bonus",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "pckUOM",
             "header": "UOM",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "taxRate",
             "header": "Tax(%)",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "disAmt",
             "header": "Tax Basis",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "disAmt",
             "header": "Disc",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "schDiscount",
             "header": "Sch Disc",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "taxAmt",
             "header": "Tax Amt",
             "style": {
                 "width": "100px"
             }
         },
         {
-            "field": "itemName",
+            "field": "totalAmt",
             "header": "Amount",
             "style": {
                 "width": "100px"

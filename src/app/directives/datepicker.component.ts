@@ -16,6 +16,7 @@ export class DatepickerComponent {
   @Input() public showSeconds:boolean=false;
   @Input() public minDate:Date ;
   @Input() public maxDate:Date ;
+  @Input() appendTo ="body";
   // @Input() public dateFormat:any="dd/mm/yy";
   @Input() public view:any="";
   @Input() public labelAxis:boolean=false;

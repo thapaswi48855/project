@@ -186,4 +186,7 @@ export class MasterserviceService {
       return errorMessage;
     });
   }
+  isMobileDevice() {
+    return window.innerWidth <= 768; // Adjust the threshold as needed
+}
 }

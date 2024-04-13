@@ -56,7 +56,9 @@ export class HeaderComponent {
   //     clear: true,
   //   },
   // ];
-
+public gridCols =[];
+public mastersGridColumns :any=[];
+public gridData:any =[];
   constructor(
     private _router: Router,
     private _service: MasterserviceService,
@@ -93,6 +95,12 @@ export class HeaderComponent {
         this._router.navigate(['/home'], { relativeTo: this._activatedRoute });
       }
     });
+    this.gridCols = await this._service.getGridColumns(this.mastersGridColumns);
+    // this.exportColumns = this.gridCols.map((col) => ({
+    //   title: 'Deparment',
+    //   dataKey: 'deparment',
+    // }));
+
   }
   permissions(docPermissions: any, docPermission: any) {
     console.log('aaa',docPermissions)
@@ -146,7 +154,57 @@ export class HeaderComponent {
   onSaveApproveClick() {
     this.saveApproveClick.emit(true);
   }
+  public exportColumns: any = [];
+  
   onSavePrintClick(){
-    this.savePrintClick.emit(true);
+    // // this.savePrintClick.emit(true);
+    // import('jspdf').then((jsPDF) => {
+    //   import('jspdf-autotable').then((x) => {
+    //     const doc = new jsPDF.default('p', 'px', 'a4');
+
+    //     // Define the title and date for the PDF
+    //     const title: any = 'Name';
+    //     const date: any = 'Date: 23-10-2023';
+
+    //     const subTitle:any = `GST : ${title}`;
+
+    //     // Add a hook to add the title and date to the header of each page
+    //     (doc as any).autoTable({
+    //       head: [this.exportColumns], // Table header
+    //       body: this.gridData, // Empty table data
+    //       didDrawPage: function (data: any) {
+    //         // Add the title to the header
+    //         doc.setFontSize(16);
+    //         const titleWidth =
+    //           (doc.getStringUnitWidth(title) * doc.getFontSize()) /
+    //           doc.internal.scaleFactor;
+    //         const titleX: any =
+    //           (doc.internal.pageSize.getWidth() - titleWidth) / 2;
+    //         doc.text(titleX, 10, title);
+
+
+    //         // Add the subtitle below the title
+    //     doc.setFontSize(12);
+    //     const subTitleWidth =
+    //       (doc.getStringUnitWidth(subTitle) * doc.getFontSize()) /
+    //       doc.internal.scaleFactor;
+    //     const subTitleX :any=
+    //       (doc.internal.pageSize.getWidth() - subTitleWidth) / 3;
+    //     doc.text(subTitleX, 20, subTitle);
+
+
+    //         // Add the date below the title
+    //         doc.setFontSize(12);
+    //         const dateWidth =
+    //           (doc.getStringUnitWidth(date) * doc.getFontSize()) /
+    //           doc.internal.scaleFactor;
+    //         const dateX: any =
+    //           (doc.internal.pageSize.getWidth() - dateWidth) / 2;
+    //         doc.text(dateX, 20, date);
+    //       },
+    //     });
+    //     doc.save('products.pdf');
+    //   });
+    // });
   }
 }
