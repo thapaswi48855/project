@@ -34,7 +34,7 @@ export class MasterserviceService {
   }
 
   getDateFromServer() {
-    return this.ht.get(`${this.appConfig.apiHostUrl}`);
+    return this.ht.get(`https://node-1-bi29.onrender.com/`);
   }
   getDate() {
     return this.getDateFromServer().subscribe((dt: any) => {
@@ -102,7 +102,7 @@ export class MasterserviceService {
   // }
 
   serGetData(methode: any) {
-    return this.ht.get(`${this.appConfig.apiHostUrl}${methode}`);
+    return this.ht.get(`https://node-1-bi29.onrender.com/${methode}`);
   }
   serTokenGetData(methode: any, obj: any) {
     let resultData;
@@ -112,7 +112,7 @@ export class MasterserviceService {
     let header = new HttpHeaders({
       authorization: window.localStorage.getItem('UserInfo') || '',
     });
-    return this.ht.get(`${this.appConfig.apiHostUrl}${methode}?${queryString}`, {
+    return this.ht.get(`https://node-1-bi29.onrender.com/${methode}?${queryString}`, {
       headers: header,
     });
     // .toPromise()
@@ -122,7 +122,7 @@ export class MasterserviceService {
   }
 
   serpostData(methode: any, obj: any) {
-    return this.ht.post(`${this.appConfig.apiHostUrl}${methode}`, obj);
+    return this.ht.post(`https://node-1-bi29.onrender.com/${methode}`, obj);
   }
   login(methode: any, obj: any) {
     const queryString = Object.keys(obj)
@@ -130,7 +130,7 @@ export class MasterserviceService {
       .join('&');
 
     return this.ht
-      .get(`${this.appConfig.apiHostUrl}getNewUsers?${queryString}`, obj)
+      .get(`https://node-1-bi29.onrender.com/getNewUsers?${queryString}`, obj)
       .pipe(retry(1), catchError(this.handleError));
   }
   // const encryptedData = AES.encrypt(JSON.stringify(loginJson), this.secretKey).toString();
@@ -145,20 +145,20 @@ export class MasterserviceService {
       .join('&');
 
     //moduleid
-    return this.ht.get(`${this.appConfig.apiHostUrl}${methode}?${queryString}`, obj);
+    return this.ht.get(`https://node-1-bi29.onrender.com/${methode}?${queryString}`, obj);
   }
 
   serGetSelectedDataobject(methode: any, obj: any) {
     //moduleid
     return this.ht.get(
-      `${this.appConfig.apiHostUrl}${methode}?moduleid=${obj._id}`,
+      `https://node-1-bi29.onrender.com/${methode}?moduleid=${obj._id}`,
       obj
     );
   }
 
   getDocPermissions(obj: any) {
     return this.ht.get(
-      `${this.appConfig.apiHostUrl}getAssigneByPermissions?moduleid=${obj.moduleid}&documentid=${obj.documentid}`,
+      `$https://node-1-bi29.onrender.com/getAssigneByPermissions?moduleid=${obj.moduleid}&documentid=${obj.documentid}`,
       obj
     );
     // return this
