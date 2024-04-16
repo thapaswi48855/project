@@ -158,7 +158,7 @@ export class MasterserviceService {
 
   getDocPermissions(obj: any) {
     return this.ht.get(
-      `$https://node-1-bi29.onrender.com/getAssigneByPermissions?moduleid=${obj.moduleid}&documentid=${obj.documentid}`,
+      `https://node-1-bi29.onrender.com/getAssigneByPermissions?moduleid=${obj.moduleid}&documentid=${obj.documentid}`,
       obj
     );
     // return this

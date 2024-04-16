@@ -95,7 +95,7 @@ public gridData:any =[];
         this._router.navigate(['/home'], { relativeTo: this._activatedRoute });
       }
     });
-    this.gridCols = await this._service.getGridColumns(this.mastersGridColumns);
+    // this.gridCols = await this._service.getGridColumns(this.mastersGridColumns);
     // this.exportColumns = this.gridCols.map((col) => ({
     //   title: 'Deparment',
     //   dataKey: 'deparment',
