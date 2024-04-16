@@ -30,10 +30,11 @@ export class MasterserviceService {
       .getConfig()
       .toPromise()
       .then((re) => (this.appConfig = re));
+      console.log('apiHostUrl',this.appConfig.apiHostUrl)
   }
 
   getDateFromServer() {
-    return this.ht.get(`http://localhost:1000/`);
+    return this.ht.get(`${this.appConfig.apiHostUrl}`);
   }
   getDate() {
     return this.getDateFromServer().subscribe((dt: any) => {
@@ -101,7 +102,7 @@ export class MasterserviceService {
   // }
 
   serGetData(methode: any) {
-    return this.ht.get(`http://localhost:1000/${methode}`);
+    return this.ht.get(`${this.appConfig.apiHostUrl}${methode}`);
   }
   serTokenGetData(methode: any, obj: any) {
     let resultData;
@@ -111,7 +112,7 @@ export class MasterserviceService {
     let header = new HttpHeaders({
       authorization: window.localStorage.getItem('UserInfo') || '',
     });
-    return this.ht.get(`http://localhost:1000/${methode}?${queryString}`, {
+    return this.ht.get(`${this.appConfig.apiHostUrl}${methode}?${queryString}`, {
       headers: header,
     });
     // .toPromise()
@@ -121,7 +122,7 @@ export class MasterserviceService {
   }
 
   serpostData(methode: any, obj: any) {
-    return this.ht.post(`http://localhost:1000/${methode}`, obj);
+    return this.ht.post(`${this.appConfig.apiHostUrl}${methode}`, obj);
   }
   login(methode: any, obj: any) {
     const queryString = Object.keys(obj)
@@ -129,7 +130,7 @@ export class MasterserviceService {
       .join('&');
 
     return this.ht
-      .get(`http://localhost:1000/getNewUsers?${queryString}`, obj)
+      .get(`${this.appConfig.apiHostUrl}getNewUsers?${queryString}`, obj)
       .pipe(retry(1), catchError(this.handleError));
   }
   // const encryptedData = AES.encrypt(JSON.stringify(loginJson), this.secretKey).toString();
@@ -144,20 +145,20 @@ export class MasterserviceService {
       .join('&');
 
     //moduleid
-    return this.ht.get(`http://localhost:1000/${methode}?${queryString}`, obj);
+    return this.ht.get(`${this.appConfig.apiHostUrl}${methode}?${queryString}`, obj);
   }
 
   serGetSelectedDataobject(methode: any, obj: any) {
     //moduleid
     return this.ht.get(
-      `http://localhost:1000/${methode}?moduleid=${obj._id}`,
+      `${this.appConfig.apiHostUrl}${methode}?moduleid=${obj._id}`,
       obj
     );
   }
 
   getDocPermissions(obj: any) {
     return this.ht.get(
-      `http://localhost:1000/getAssigneByPermissions?moduleid=${obj.moduleid}&documentid=${obj.documentid}`,
+      `${this.appConfig.apiHostUrl}getAssigneByPermissions?moduleid=${obj.moduleid}&documentid=${obj.documentid}`,
       obj
     );
     // return this

@@ -64,7 +64,7 @@ export class SalesComponent {
     billType: '',
     remarks: '',
     narration: '',
-    patientItems:[]
+    patientItems: [],
   };
   public patientTypeList: any = [
     { label: 'Retail', value: '1' },
@@ -77,10 +77,10 @@ export class SalesComponent {
   public newItemList: any = [];
   public zeroLevelEntity: any = [];
   public filteredOptions: any = [];
-  public saleUomList:any =[];
+  public saleUomList: any = [];
 
   public _service = inject(MasterserviceService);
-  public _messageService= inject(MessageService)
+  public _messageService = inject(MessageService);
   // public _messageService: MessageService
   // public countries:any=[];
   public name = '';
@@ -89,12 +89,17 @@ export class SalesComponent {
     { name: 'asia', value: '2' },
   ];
   public poDiscountTypeList: any = [];
-  public errorMsgs:any={
-    nameReq:'',
-    doctorReq:'',
-    mobileNoReq:''
+  public errorMsgs: any = {
+    nameReq: '',
+    doctorReq: '',
+    mobileNoReq: '',
+  };
+  public mobileState: boolean = false;
+  public layoutRes: any;
+  constructor() {
+    this.mobileState = this._service.isMobileDevice();
+    this.layoutRes = this.mobileState ? 'stack' : 'scroll';
   }
-
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
       case 'name':
@@ -105,7 +110,7 @@ export class SalesComponent {
             ? this._service.onGetErrorMsgs(ctrl, true, 'Name')
             : '';
         break;
-        case 'doctor':
+      case 'doctor':
         this.errorMsgs.doctorReq =
           this.sales[ctrl] == '' ||
           this.sales[ctrl] == undefined ||
@@ -113,54 +118,54 @@ export class SalesComponent {
             ? this._service.onGetErrorMsgs(ctrl, true, 'Doctor')
             : '';
         break;
-        case 'mobileNo':
-          this.errorMsgs.mobileNoReq =
-            this.sales[ctrl] == '' ||
-            this.sales[ctrl] == undefined ||
-            this.sales[ctrl] == null
-              ? this._service.onGetErrorMsgs(ctrl, true, 'Mobile no.')
-              : '';
-          break;
-          case 'itemName':
-          this.errorMsgs.itemNameReq =
-            this.itemDetails[ctrl] == '' ||
-            this.itemDetails[ctrl] == undefined ||
-            this.itemDetails[ctrl] == null
-              ? this._service.onGetErrorMsgs(ctrl, true, 'Item Name')
-              : '';
-          break;
-          case 'cgst':
-          this.errorMsgs.cgstReq =
-            this.itemDetails[ctrl] == '' ||
-            this.itemDetails[ctrl] == undefined ||
-            this.itemDetails[ctrl] == null
-              ? this._service.onGetErrorMsgs(ctrl, true, 'Cgst')
-              : '';
-          break;
-          case 'sgst':
-            this.errorMsgs.sgstReq =
-              this.itemDetails[ctrl] == '' ||
-              this.itemDetails[ctrl] == undefined ||
-              this.itemDetails[ctrl] == null
-                ? this._service.onGetErrorMsgs(ctrl, true, 'Sgst')
-                : '';
-            break;
-            case 'saleQty':
-            this.errorMsgs.saleQtyReq =
-              this.itemDetails[ctrl] == '' ||
-              this.itemDetails[ctrl] == undefined ||
-              this.itemDetails[ctrl] == null
-                ? this._service.onGetErrorMsgs(ctrl, true, 'Sale Qty')
-                : '';
-            break;
-            case 'saleUom':
-              this.errorMsgs.saleUomReq =
-                this.itemDetails[ctrl] == '' ||
-                this.itemDetails[ctrl] == undefined ||
-                this.itemDetails[ctrl] == null
-                  ? this._service.onGetErrorMsgs(ctrl, true, 'Sale Uom')
-                  : '';
-              break;
+      case 'mobileNo':
+        this.errorMsgs.mobileNoReq =
+          this.sales[ctrl] == '' ||
+          this.sales[ctrl] == undefined ||
+          this.sales[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Mobile no.')
+            : '';
+        break;
+      case 'itemName':
+        this.errorMsgs.itemNameReq =
+          this.itemDetails[ctrl] == '' ||
+          this.itemDetails[ctrl] == undefined ||
+          this.itemDetails[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Item Name')
+            : '';
+        break;
+      case 'cgst':
+        this.errorMsgs.cgstReq =
+          this.itemDetails[ctrl] == '' ||
+          this.itemDetails[ctrl] == undefined ||
+          this.itemDetails[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Cgst')
+            : '';
+        break;
+      case 'sgst':
+        this.errorMsgs.sgstReq =
+          this.itemDetails[ctrl] == '' ||
+          this.itemDetails[ctrl] == undefined ||
+          this.itemDetails[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Sgst')
+            : '';
+        break;
+      case 'saleQty':
+        this.errorMsgs.saleQtyReq =
+          this.itemDetails[ctrl] == '' ||
+          this.itemDetails[ctrl] == undefined ||
+          this.itemDetails[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Sale Qty')
+            : '';
+        break;
+      case 'saleUom':
+        this.errorMsgs.saleUomReq =
+          this.itemDetails[ctrl] == '' ||
+          this.itemDetails[ctrl] == undefined ||
+          this.itemDetails[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Sale Uom')
+            : '';
+        break;
     }
   }
 
@@ -169,19 +174,24 @@ export class SalesComponent {
       await this._service.getConfigData();
     }
 
+    this.mobileState = this._service.isMobileDevice();
+    this.layoutRes = this.mobileState ? 'stack' : 'scroll';
+
     this.gridCols = this._service.getGridColumns('newItemCols');
 
     // this._service.serGetDataobject('getNewItem', {}).subscribe((dt: any) => {
     //   console.log(dt);
     //   this.newItemList = dt.data;
     // });
-    this._service.serGetDataobject('getStockEntryMaster', {}).subscribe((dt: any) => {
-      console.log(dt);
-      this.newItemList = dt.data[10].seletedItemList;
-      // _.forEach(this.newItemList, (item, ind) => {
-      //   item['selected'] = false;
-      // });
-    });
+    this._service
+      .serGetDataobject('getStockEntryMaster', {})
+      .subscribe((dt: any) => {
+        console.log(dt);
+        this.newItemList = dt.data[10].seletedItemList;
+        // _.forEach(this.newItemList, (item, ind) => {
+        //   item['selected'] = false;
+        // });
+      });
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLPoDT' })
       .subscribe((dt: any) => {
@@ -205,7 +215,7 @@ export class SalesComponent {
   onApplyDiscount() {}
 
   onSaveClick() {
-    let objectstore = ['name', 'doctor','mobileNo'];
+    let objectstore = ['name', 'doctor', 'mobileNo'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
@@ -221,7 +231,7 @@ export class SalesComponent {
     //   return;
     // }
 
-this.sales.patientItems=this.newItemsList ;
+    this.sales.patientItems = this.newItemsList;
     let savingJson = this.sales;
     let Date = this._service.getDate();
     console.log('Date', this._service.getDate());
@@ -361,9 +371,9 @@ this.sales.patientItems=this.newItemsList ;
   // }
 
   public itemName: any = '';
-  public itemDet:any ='';
+  public itemDet: any = '';
   onLoopUp(event: any) {
-    this.itemDet=event;
+    this.itemDet = event;
     console.log('onLoopUp', event);
     this.itemName = event.itemName;
     this.itemDetails.pckUOM = event.packageUOM;
@@ -444,9 +454,7 @@ this.sales.patientItems=this.newItemsList ;
   }
 
   onAddItemClick(item: any) {
-
-
-    let objectstore = ['itemName','cgst','sgst','saleQty','saleUom'];
+    let objectstore = ['itemName', 'cgst', 'sgst', 'saleQty', 'saleUom'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
@@ -465,12 +473,12 @@ this.sales.patientItems=this.newItemsList ;
     // }
 
     // item.itemName = this.itemName;i
-  
+
     // item.totalAmt =
     //   parseFloat(item.rate) -
     //   parseFloat(item.disAmt);
     this.itemDetails.itemName = this.itemName;
-    this.itemDetails=this.itemDet ;
+    this.itemDetails = this.itemDet;
     if (item['rowInd'] == undefined) {
       this.newItemsList.push(this.itemDetails);
     } else {
@@ -491,18 +499,22 @@ this.sales.patientItems=this.newItemsList ;
     this.sales.secClaimTax = 0;
 
     _.forEach(this.newItemsList, (item, ind) => {
-      this.sales.billedAmnt += parseFloat(item.rate) ;
-      this.sales.billDiscount += item.disAmt ;
-      this.sales.patientAmnt += parseFloat(item.rate) + parseFloat(item.taxAmt) ;
-      this.sales.tataltaxAmt += item.taxAmt ;
-      this.sales.grandTotal += parseFloat(item.rate) + parseFloat(item.taxAmt) ;
+      this.sales.billedAmnt += parseFloat(item.rate);
+      this.sales.billDiscount += item.disAmt;
+      this.sales.patientAmnt += parseFloat(item.rate) + parseFloat(item.taxAmt);
+      this.sales.tataltaxAmt += item.taxAmt;
+      this.sales.grandTotal += parseFloat(item.rate) + parseFloat(item.taxAmt);
       // this.sales.itemDiscount += item. ;
       // this.sales.priClaim += item. ;
-      // this.sales.priClaimtax +=  item. 
+      // this.sales.priClaimtax +=  item.
       // this.sales.itemTotal += item. ;
       // this.sales.billLevelTotal += item. ;
       // this.sales.secClaim += item. ;
       // this.sales.secClaimTax += item. ;
     });
+  }
+
+  onCancelItem(itemDet:any){
+
   }
 }

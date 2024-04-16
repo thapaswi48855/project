@@ -85,14 +85,14 @@ export class RaisepurchaseorderComponent {
     rateReq: '',
     qtyReq: '',
   };
-public layoutRes:any ;
+  public layoutRes: any;
   constructor(
     public _service: MasterserviceService,
     public _activatedRoute: ActivatedRoute,
     public _messageService: MessageService
   ) {
-    this.mobileState =this._service.isMobileDevice();
-    this.layoutRes =this.mobileState ?'stack':'scroll'
+    this.mobileState = this._service.isMobileDevice();
+    this.layoutRes = this.mobileState ? 'stack' : 'scroll';
   }
 
   onGetErrorMsgs(ctrl: any, showToast: any) {
@@ -161,8 +161,8 @@ public layoutRes:any ;
       await this._service.getConfigData();
     }
 
-    this.mobileState =this._service.isMobileDevice();
-    this.layoutRes =this.mobileState ?'stack':'scroll'
+    this.mobileState = this._service.isMobileDevice();
+    this.layoutRes = this.mobileState ? 'stack' : 'scroll';
 
     this._service
       .serGetDataobject('getStoreMaster', { status: 'ZLS11' })
@@ -547,5 +547,5 @@ public layoutRes:any ;
   onSavePrintClick() {}
 
   onRemoveImg() {}
-  onCancelItem(itemDet:any) {}
+  onCancelItem(itemDet: any) {}
 }

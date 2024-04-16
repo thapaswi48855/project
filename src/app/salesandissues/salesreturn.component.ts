@@ -62,13 +62,22 @@ export class SalesreturnComponent {
 
   public gridCols = [];
   public newItemList = [];
+  public layoutRes:any ;
+  public mobileState :boolean =false;
 
   public _service = inject(MasterserviceService);
+  constructor(){
+    this.mobileState =this._service.isMobileDevice();
+    this.layoutRes =this.mobileState ?'stack':'scroll'
+  }
 
   async ngOnInit() {
     if (Object.keys(this._service.appConfig).length == 0) {
       await this._service.getConfigData();
     }
+
+    this.mobileState =this._service.isMobileDevice();
+    this.layoutRes =this.mobileState ?'stack':'scroll'
 
     this.gridCols = this._service.getGridColumns('newItemCols');
 
