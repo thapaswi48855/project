@@ -36,7 +36,7 @@
                 <tr [pSelectableRow]="role">
                   <td >
                     <p-checkbox [(ngModel)]="role.selected" [binary]="true" inputId="binary" (click)="onSelectRole(role,role.selected)"></p-checkbox>
-                   {{role['Role Name']}}
+                   {{role['roleName']}}
                   </td>
                 </tr>
               </ng-template>

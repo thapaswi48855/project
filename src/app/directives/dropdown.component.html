@@ -3,10 +3,10 @@
     <div
       [ngClass]="dropdownAxis === true ? 'formgroup-inline' : 'displayBlock'"
     >
-      <label
+      <label *ngIf="labelText"
         class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"
         htmlFor="{{ labelName }}"
-        >{{ labelName }} :</label
+        >{{ labelName }} <span>:</span> </label
       >
       <!-- <input pInputText id="username" aria-describedby="username-help"  /> -->
 

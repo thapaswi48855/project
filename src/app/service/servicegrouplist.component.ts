@@ -13,7 +13,7 @@ export class ServicegrouplistComponent {
 
   public mastersGridColumns ="serviceGroupColumns";
   public masterGridData="getServiceGroupMaster";
-  public paramKey=["_id"];
+  public paramKey=["serviceGrpId"];
   
   public showEdit =true;
   public showView=true;

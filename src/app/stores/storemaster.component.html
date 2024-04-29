@@ -41,7 +41,7 @@
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-dropdown
             [labelName]="'Status'" [options]="statusList"
-            [(inputModel)]="storeMaster.status" [disabled]="!isEditable"
+            [(inputModel)]="storeMaster.status"  [disabled]="pageMode !='EDIT'"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
           ></app-dropdown>

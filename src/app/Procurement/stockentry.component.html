@@ -31,7 +31,9 @@
                 [options]="storeList"
                 [(inputModel)]="stockEntry.store"
                 [optionLabel]="'store'"
-                [optionValue]="'_id'"
+                [optionValue]="'storemasterid'"
+                (onBlur)="onGetErrorMsgs('store', true)"
+                errorMessages="{{ errorMsgs.storeReq }}"
               ></app-dropdown>
             </div>
             <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
@@ -53,21 +55,22 @@
                 [disabled]="!isEditable"
               ></app-dropdown>
             </div>
-            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
-              <app-inputtext
+            <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">             
+              <app-lookup
                 [labelName]="'Supplier'"
                 [(inputModel)]="stockEntry.supplier"
-                [disabled]="!isEditable"
+                [filteredOptions]="supplierList"
+                [filterName]="'regionstate'"
+                (onLoopUp)="onLoopUpAdd($event)"
                 (onBlur)="onGetErrorMsgs('supplier', true)"
                 errorMessages="{{ errorMsgs.supplierReq }}"
-              ></app-inputtext>
+              ></app-lookup>
             </div>
             <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
-              <app-inputtext
+              <app-labelbind
                 [labelName]="'Supplier Address'"
-                [(inputModel)]="stockEntry.supplieraddress"
-                [disabled]="!isEditable"
-              ></app-inputtext>
+                [labelValue]="stockEntry.supplieraddress"
+              ></app-labelbind>             
             </div>
             <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
               <app-inputtext
@@ -162,7 +165,8 @@
             ></app-inputtext> -->
               <div class="flex flex-column w-full gap-1 reltive">
                 <label for=""> Upload Document :</label>
-                <p-fileUpload  *ngIf="url == ''"
+                <p-fileUpload
+                  *ngIf="url == ''"
                   mode="basic"
                   name="demo[]"
                   url="https://www.primefaces.org/cdn/api/upload.php"
@@ -241,7 +245,8 @@
             [responsive]="true"
             [resizableColumns]="true"
             styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm pb-1"
-            scrollHeight="flex" [responsiveLayout]="layoutRes"
+            scrollHeight="flex"
+            [responsiveLayout]="layoutRes"
             [breakpoint]="'575.98px'"
           >
             <ng-template pTemplate="header" let-columns>
@@ -251,8 +256,12 @@
                   *ngFor="let col of columns"
                   pResizableColumn
                   [pSortableColumn]="col.field"
-                  [ngStyle]="col.style" style="background-color: rgb(138 138 233);color: white;text-align: center;"
-               
+                  [ngStyle]="col.style"
+                  style="
+                    background-color: rgb(138 138 233);
+                    color: white;
+                    text-align: center;
+                  "
                 >
                   {{ col.header }}
                   <p-sortIcon [field]="col.field"></p-sortIcon>
@@ -266,12 +275,17 @@
               let-columns="columns"
               let-rowIndex="rowIndex"
             >
-             <tr>
-              <td *ngFor="let col of columns">
-                <span *ngIf="mobileState" class="ui-column-title mobile-view-stack-header-color"> {{ [col.field] }} </span>
-                {{ rowData[col.field] }}
-              </td>
-            </tr>
+              <tr>
+                <td *ngFor="let col of columns">
+                  <span
+                    *ngIf="mobileState"
+                    class="ui-column-title mobile-view-stack-header-color"
+                  >
+                    {{ [col.field] }}
+                  </span>
+                  {{ rowData[col.field] }}
+                </td>
+              </tr>
               <!-- <tr>
                 <td>
                   {{ rowData.itemName }}
@@ -331,8 +345,15 @@
             </ng-template>
           </p-table>
           <div class="flex justify-content-end">
-            <button pButton pRipple (click)="onItemClick()" style="padding: 4px;justify-content: center;"> Add</button>
-           </div>
+            <button
+              pButton
+              pRipple
+              (click)="onItemClick()"
+              style="padding: 4px; justify-content: center"
+            >
+              Add
+            </button>
+          </div>
         </div>
         <p-fieldset legend="Total" [toggleable]="true">
           <div class="formgrid grid">
@@ -439,9 +460,12 @@
   </div>
 </div>
 <app-saving #saving></app-saving>
-<p-dialog [(visible)]="visible" [dismissableMask]="true"
-[breakpoints]="{ '425px': '100vw' }"
-[style]="{ width: '700px', height: '100vh' }">
+<p-dialog
+  [(visible)]="visible"
+  [dismissableMask]="true"
+  [breakpoints]="{ '425px': '100vw' }"
+  [style]="{ width: '700px', height: '100vh' }"
+>
   <p-fieldset legend="Total" [toggleable]="true">
     <div class="formgrid grid">
       <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-3">
@@ -455,7 +479,6 @@
           errorMessages="{{ errorMsgs.itemNameReq }}"
         ></app-lookup>
       </div>
-      {{ itemDetails.itemName }}
       <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-3">
         <!-- <app-labelbind [labelName]="'MRP'" [labelValue]=""></app-labelbind> -->
         <app-inputtext
@@ -609,7 +632,7 @@
             [(inputModel)]="itemDetails.cgst"
             [options]="cgstList"
             [optionLabel]="'taxsubgroup'"
-            [optionValue]="'_id'"
+            [optionValue]="'taxSubGrpId'"
             (onChange)="onCgstTaxAmt(itemDetails.cgst)"
           ></app-dropdown>
         </div>
@@ -619,7 +642,7 @@
             [(inputModel)]="itemDetails.sgst"
             [options]="sgstList"
             [optionLabel]="'taxsubgroup'"
-            [optionValue]="'_id'"
+            [optionValue]="'taxSubGrpId'"
             (onChange)="onSgstTaxAmt(itemDetails.sgst)"
           ></app-dropdown>
         </div>
@@ -629,16 +652,30 @@
             [(inputModel)]="itemDetails.igst"
             [options]="igstList"
             [optionLabel]="'taxsubgroup'"
-            [optionValue]="'_id'"
+            [optionValue]="'taxSubGrpId'"
           ></app-dropdown>
         </div>
       </div>
     </p-fieldset>
   </p-fieldset>
   <div class="m-2">
-    <button pButton pRipple (click)="onAddItemClick(itemDetails)" style="padding: 4px;justify-content: center;margin-right: 4px;"> Add</button>
-    <button pButton pRipple (click)="onCancelItem(itemDetails)" style="padding: 4px;justify-content: center;"> Cancel</button> 
-   </div>  
+    <button
+      pButton
+      pRipple
+      (click)="onAddItemClick(itemDetails)"
+      style="padding: 4px; justify-content: center; margin-right: 4px"
+    >
+      Add
+    </button>
+    <button
+      pButton
+      pRipple
+      (click)="onCancelItem(itemDetails)"
+      style="padding: 4px; justify-content: center"
+    >
+      Cancel
+    </button>
+  </div>
 </p-dialog>
 <p-dialog
   header="Image Viewer"
@@ -651,6 +688,5 @@
 <style>
   :host ::ng-deep .p-dialog-draggable .p-dialog-header {
     padding: 0rem;
-  }  
+  }
 </style>
-

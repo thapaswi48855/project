@@ -27,11 +27,13 @@ export class GenericclassificationdetailsComponent {
   public redirectToGrid: boolean = false;
 
   public genericClassification: any = {
+    genericClassificationId:0,
+    clasificationid:0,
     clasificationName: '',
     clasificationDesc: '',
     status: 'ZLS11',
     createdt: null,
-    createby: '',
+    createby:  this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
     // status: true,
@@ -78,8 +80,8 @@ export class GenericclassificationdetailsComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let genericClassificationId: number = params['genericClassificationId'];
+        this.getMasterData(genericClassificationId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -92,12 +94,23 @@ export class GenericclassificationdetailsComponent {
   getMasterData(genericClassificationId: any) {
     this._service
       .serGetDataobject('getGenericClassificationDetails', {
-        _id: genericClassificationId,
+        genericClassificationId: genericClassificationId,
       })
       .subscribe((dt: any) => {
         console.log('dt', dt);
-        this.genericClassification = dt.data[0];
-        this.genericClassification['_id'] = this.genericClassification._id;
+        // this.genericClassification = dt.data[0];
+        // this.genericClassification['_id'] = this.genericClassification._id;
+        this.genericClassification= {
+          genericClassificationId:dt.data[0].genericClassificationId,
+          clasificationid:dt.data[0].clasificationid,
+          clasificationName: dt.data[0].clasificationName,
+          clasificationDesc: dt.data[0].clasificationDesc,
+          status: dt.data[0].status,
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby:  this._service.getUserVal('userid'),
+        }
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
   }
@@ -120,6 +133,11 @@ export class GenericclassificationdetailsComponent {
       return;
     }
     let savingJson = this.genericClassification;
+
+    // let savingJson =this.store ;
+    // savingJson.clasificationid =savingJson.clasificationid ==0 ? this._service.getNextSequenceNumber('Generic Classification Details') :savingJson.clasificationid ;
+
+
     console.log(this.genericClassification);
     this.saving.onSaveJson('Generic ClassificationDetails', 'insertGenericClassificationDetails', [
       savingJson,
@@ -136,4 +154,6 @@ export class GenericclassificationdetailsComponent {
     }
     this.errorMsgs=JSON.parse(this.emptyErrorMsgs);
   }
+
+ 
 }

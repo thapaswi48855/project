@@ -13,7 +13,7 @@ export class StoremasterlistComponent {
 
   public mastersGridColumns ="storeMastersGridColumns";
   public masterGridData="getStoreMaster";
-  public paramKey=["_id"];
+  public paramKey=["storemasterid"];
 
   public pageTitle = 'Module List';
   public onSubmit = true;
@@ -28,7 +28,7 @@ export class StoremasterlistComponent {
   ]
   public printOptions=[
     
-    {reportName:'cancel',iconClass:'pi pi-times-circle'}
+    // {reportName:'cancel',iconClass:'pi pi-times-circle'}
   ]
 
 

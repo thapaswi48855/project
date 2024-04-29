@@ -54,10 +54,6 @@ export class ModuledocumentComponent {
   }
 
   onSelectmodule(selectModule: any, event: any) {
-    console.log(selectModule);
-    console.log(event);
-    // selectModule.selected =event.target.selected;
-    // // Get
     this.subModulesLists = [];
     if (event == true) {
       this.selectmodulesLists = this._service
@@ -68,10 +64,6 @@ export class ModuledocumentComponent {
           this.selectGetModule(selectModule, event);
         });
     }
-
-    // console.log('this.selectmodulesLists', this.selectmodulesLists);
-
-    // this.selectGetModule(selectModule);
   }
   public filterSubmodule: any = [];
   selectGetModule(selectModule: any, event: any) {
@@ -79,93 +71,86 @@ export class ModuledocumentComponent {
     this.selectedModule = selectModule;
     this.filterSubmodule = [];
     this.filterSubmodule = _.filter(this.selectmodulesLists, {
-      moduleid: selectModule._id,
+      moduleid: selectModule.moduleid,
     });
-    // console.log('a',a)
-    // if (this.filterSubmodule.length > 0 ) {
-    //   _.filter(this.filterSubmodule, (subM, subMI) => {
-    //     _.filter(selectModule.submodel, (subL, subLI) => {
-    //       if (subM.submoduleid == subL._id) {
-    //         subL['selected'] = true;
-    //       }
-    //     });
-    //   });
-    // }
-
     this.subModulesLists = selectModule.submodel;
-    _.filter(this.filterSubmodule,(doc,ind)=>{
-      if(doc.submoduleid == undefined){
-        this.onSelectSubmodule(null, false)
+    _.filter(this.filterSubmodule, (doc, ind) => {
+      if (doc.submoduleid == undefined) {
+        this.onSelectSubmodule(null, false);
       }
-     
-    })
-    
-    //   // _.forEach( this.selectmodulesLists,(module,ind)=>{
-    //   //   console.log(module);
-
-    //   // })
+    });
   }
 
   onSelectSubmodule(subModulesList: any, event: any) {
-    this.selectedSubModule=[];
+    this.selectedSubModule = [];
     this.selectedSubModule = subModulesList;
-    // subModulesList.selected = event.target.selected;
-    //   this.selectedSubModule = subModulesList;
-    //   // console.log(this.filterSubmodule)//documentid, documentname
-    //   // console.log(subModulesList.submoduleid)
 
     if (this.filterSubmodule.length > 0) {
       _.filter(this.filterSubmodule, (doc, docI) => {
         _.filter(this.documentLists, (docL, docLI) => {
-          if (doc.documentid == docL._id) {
+          if (doc.documentid == docL.documentid) {
             docL['selected'] = doc.documentstatus;
           }
         });
       });
     }
   }
+  public modDoc: any = [];
   onSelectDocuments(documents: any, event: any) {
-    console.log(event);
-    documents.selected = event;
-    documents['id']=0;
-    console.log(this.documentLists);
+    // console.log(event);
+    // documents.selected = event;
+    // documents['id'] = 0;
+    // console.log(this.documentLists);
     //   this.selectedDocuments.push(documents);
+    this.modDoc.push({
+      moduledocMapid: 0,
+      moduleid: this.selectedModule.moduleid,
+      modulename: this.selectedModule.modulename,
+      submoduleid:
+        this.selectedSubModule == null ? null : this.selectedSubModule._id,
+      submodulename:
+        this.selectedSubModule == null
+          ? null
+          : this.selectedSubModule.submodulename,
+      documentid: documents.documentid,
+      documentname: documents.document,
+      documentstatus: documents.selected,
+      documentpageurl: documents.documentpageurl,
+      documentgridUrl: documents.documentgridUrl,
+    });
   }
   onGridClick() {}
   onSaveClick() {
-    console.log(this.selectedModule);
-    console.log(this.selectedSubModule);
-    console.log(this.documentLists);
+    let savingJson: any = []; //submoduleid: this.selectedSubModule._id,
+    // let modDoc: any = [];
+    // _.forEach(this.documentLists, (document, docInd) => {
+    //   modDoc = _.filter(this.selectmodulesLists, {
+    //     moduleid: this.selectedModule.moduleid,
+    //     documentid: document.documentid,
+    //   });
+    // });
 
-    // _.filter(this.documentLists)
-    this.selectedDocuments = _.filter(this.documentLists, {id:0});
+    // // console.log(id);
 
-    let savingJson: any = [];//submoduleid: this.selectedSubModule._id,
-    _.forEach(this.selectedDocuments, (document, docInd) => {
-      let id = _.filter(this.selectmodulesLists, {
-        moduleid: this.selectedModule._id,        
-        documentid: document._id,
-      });
-      console.log(id);
-      savingJson.push({
-        _id: id.length > 0 ?id[0]._id : 0,
-        moduleid: this.selectedModule._id,
-        modulename: this.selectedModule.modulename,
-        submoduleid: this.selectedSubModule == null ?null :this.selectedSubModule._id,
-        submodulename: this.selectedSubModule == null ? null :this.selectedSubModule.submodulename,
-        documentid: document._id,
-        documentname: document.document,
-        documentstatus:document.selected,
-        documentpageurl:document.documentpageurl,
-        documentgridUrl:document.documentgridUrl,
-      });
-    });
-    _.forEach(savingJson,(obj,ind)=>{
-      if(obj._id == 0){
-        delete obj._id ;
-      }
-    })
-
+    // _.filter(modDoc, (mDL, mdlI) => {
+    //   savingJson.push({
+    //     moduledocMapid: 0,
+    //     moduleid: this.selectedModule.moduleid,
+    //     modulename: this.selectedModule.modulename,
+    //     submoduleid:
+    //       this.selectedSubModule == null ? null : this.selectedSubModule._id,
+    //     submodulename:
+    //       this.selectedSubModule == null
+    //         ? null
+    //         : this.selectedSubModule.submodulename,
+    //     documentid: mDL.documentid,
+    //     documentname: mDL.document,
+    //     documentstatus: mDL.selected,
+    //     documentpageurl: mDL.documentpageurl,
+    //     documentgridUrl: mDL.documentgridUrl,
+    //   });
+    // });
+    savingJson=this.modDoc ;
     this._service.onSaveJson(
       this.pageTitle,
       'insertModuleDocuments',
@@ -174,10 +159,10 @@ export class ModuledocumentComponent {
     this.onClearClick();
   }
   onClearClick() {
-    this.selectedModule.selected=false;
-    this.selectedSubModule.selected =false;
-    _.forEach(this.selectedDocuments,(doc,ind)=>{
-      doc.selected=false
-    })
+    this.selectedModule.selected = false;
+    this.selectedSubModule.selected = false;
+    _.forEach(this.selectedDocuments, (doc, ind) => {
+      doc.selected = false;
+    });
   }
 }

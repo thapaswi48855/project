@@ -27,12 +27,13 @@ export class ServicegroupComponent {
   public redirectToGrid: boolean = false;
 
   public servicegroup: any = {
+    serviceGrpId:0,
     servicegroupname: '',
     displayorder: '',
     status: 'ZLS11',
     code: '',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -81,8 +82,8 @@ export class ServicegroupComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let serviceGrpId: number = params['serviceGrpId'];
+        this.getMasterData(serviceGrpId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -94,11 +95,22 @@ export class ServicegroupComponent {
 
   getMasterData(servicegrpId: any) {
     this._service
-      .serGetDataobject('getServiceGroupMaster', { _id: servicegrpId })
+      .serGetDataobject('getServiceGroupMaster', { serviceGrpId: servicegrpId })
       .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.servicegroup = dt.data[0];
-        this.servicegroup['_id'] = this.servicegroup._id;
+        // console.log('dt', dt);
+        // this.servicegroup = dt.data[0];
+        // this.servicegroup['_id'] = this.servicegroup._id;
+        this.servicegroup = {
+          serviceGrpId:dt.data[0].serviceGrpId,
+          servicegroupname: dt.data[0].servicegroupname,
+          displayorder: dt.data[0].displayorder,
+          status: dt.data[0].status,
+          code: dt.data[0].code,
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        };
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
   }

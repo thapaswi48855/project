@@ -56,17 +56,12 @@ export class AssignepermissionsComponent {
         _.forEach(this.modulesLists, (module, moduleI) => {
           module['selected'] = false;
         });
-        // return (this.modulesLists = _.unionBy(
-        //   dt.data,
-        //   (obj: any) => obj['Module Id']
-        // ));
       });
     this.getAssigneByPermission = this._service
       .serGetData('getAssigneByPermissions')
       .subscribe((dt: any) => {
         console.log(dt);
         this.getAssigneByPermission = dt.data;
-        // this.onSelectSubModuleList(selectModule);
       });
     console.log('this.getAssigneByPermission', this.getAssigneByPermission);
   }
@@ -143,13 +138,13 @@ export class AssignepermissionsComponent {
     this.documentLists = [];
 
     this.getFliterAssigneByPermission = _.filter(this.getAssigneByPermission, {
-      roleid: this.selectedRole._id,
-      moduleid: selectModule._id,
+      roleid: this.selectedRole.roleid,
+      moduleid: selectModule.moduleid,
     });
 
     if (event == true) {
       this.submodulesLists = _.filter(this.selectmodulesLists, {
-        moduleid: selectModule._id,
+        moduleid: selectModule.moduleid,
       });
       if (this.submodulesLists.length > 0) {
         _.forEach(this.submodulesLists, (subM, subI) => {
@@ -163,7 +158,7 @@ export class AssignepermissionsComponent {
       }
       if (this.submodulesLists.length > 0) {
         let documentListLists = _.filter(this.selectmodulesLists, {
-          moduleid: selectModule._id,
+          moduleid: selectModule.moduleid,
         });
         _.forEach(documentListLists, (doc, docI) => {
           // if (doc.submoduleid != undefined || doc.submoduleid != null) {
@@ -483,6 +478,7 @@ export class AssignepermissionsComponent {
       documents.documentgridUrl = documents.documentgridUrl;
     }
     this.selectDocumentLists.push(documents);
+    // this.onSaveClick();
   }
 
   onGridClick() {}
@@ -495,10 +491,10 @@ export class AssignepermissionsComponent {
 
     _.forEach(this.selectDocumentLists, (document, documentInd) => {
       savingJson.push({
-        _id: document._id == undefined ? 0 : document._id,
-        roleid: this.selectedRole._id,
-        rolename: this.selectedRole['Role Name'],
-        moduleid: this.selectedModule._id,
+        assignepermissionid:0,
+        roleid: this.selectedRole.roleid,
+        rolename: this.selectedRole['roleName'],
+        moduleid: this.selectedModule.moduleid,
         modulename: this.selectedModule.modulename,
         submoduleid: this.selectedSubModule.submoduleid,
         submodulename: this.selectedSubModule.submodulename,
@@ -590,11 +586,11 @@ export class AssignepermissionsComponent {
     //     });
     //   });
     // }
-    _.forEach(savingJson, (doc, ind) => {
-      if (doc._id == 0) {
-        delete doc._id;
-      }
-    });
+    // _.forEach(savingJson, (doc, ind) => {
+    //   if (doc._id == 0) {
+    //     delete doc._id;
+    //   }
+    // });
 
     console.log(savingJson);
 

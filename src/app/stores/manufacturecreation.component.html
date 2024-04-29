@@ -27,8 +27,8 @@
                 <app-inputtext
                   [labelName]="'Manufacture Name'"
                   [(inputModel)]="manufacture.manufacturename"
-                  (onBlur)="_service.onGetErrorMsgs(manufacture, 'name', true)"
-                  errorMessages="{{ this._service.errorMsgs.name }}"
+                  (onBlur)="onGetErrorMsgs('manufacturename', true)"
+          errorMessages="{{errorMsgs.manufacturenameReq}}"
                   [disabled]="!isEditable"
                 ></app-inputtext>
               </div>
@@ -36,7 +36,7 @@
               <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
                 <app-dropdown
                   [labelName]="'Status'"
-                  [options]="statusList"
+                  [options]="statusList" [disabled]="pageMode !='EDIT'"
                   [(inputModel)]="manufacture.status"
                   [optionLabel]="'subMasterName'"
                   [optionValue]="'subMasterId'"
@@ -46,8 +46,8 @@
                 <app-inputtext
                   [labelName]="'Manufacture Description'"
                   [(inputModel)]="manufacture.manufacturecode"
-                  (onBlur)="_service.onGetErrorMsgs(manufacture, 'code', true)"
-                  errorMessages="{{ this._service.errorMsgs.code }}"
+                  (onBlur)="onGetErrorMsgs('manufacturecode', true)"
+          errorMessages="{{errorMsgs.manufacturecodeReq}}"
                   [disabled]="!isEditable"
                 ></app-inputtext>
               </div>

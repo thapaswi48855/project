@@ -13,7 +13,7 @@ export class DepartmentlistComponent {
 
   public mastersGridColumns ="departmentGridColumns";
   public masterGridData="getDepartment";
-  public paramKey=["_id"];
+  public paramKey=["departmentId"];
   
   public showEdit =true;
   public showView=true;

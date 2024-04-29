@@ -29,6 +29,7 @@ export class ServicesubgroupComponent {
   public accountHeadList:any =[];
 
   public servicesubgroup: any = {
+    serviceSubGrpId:0,
     servicegroupname: '',
     accounthead:'',
     status: 'ZLS11',
@@ -36,7 +37,7 @@ export class ServicesubgroupComponent {
     displayorder: '',   
     code: '',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -111,9 +112,22 @@ export class ServicesubgroupComponent {
     this._service
       .serGetDataobject('getServiceSubGroupMaster', { _id: serviceSubGrpId })
       .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.servicesubgroup = dt.data[0];
-        this.servicesubgroup['_id'] = this.servicesubgroup._id;
+        // console.log('dt', dt);
+        // this.servicesubgroup = dt.data[0];
+        // this.servicesubgroup['_id'] = this.servicesubgroup._id;
+        this.servicesubgroup = {
+          serviceSubGrpId:dt.data[0].serviceSubGrpId,
+          servicegroupname: dt.data[0].servicegroupname,
+          accounthead:dt.data[0].accounthead,
+          status: dt.data[0].status,
+          servicesubgroupname:dt.data[0].servicesubgroupname,
+          displayorder: dt.data[0].displayorder,   
+          code: dt.data[0].code,
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        };
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
   }

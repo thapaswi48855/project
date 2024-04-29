@@ -27,11 +27,12 @@ export class StoretypemasterComponent {
   public redirectToGrid:boolean =false;
 
   public store: any = {
+    storetypeid:0,
     storetypename: '',
     storedescription: '',
     status: 'ZLS11',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -61,8 +62,8 @@ export class StoretypemasterComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let storetypeid: number = params['storetypeid'];
+        this.getMasterData(storetypeid);
         this.pageMode =params['mode'];
       }else{
         this.isEditable=true;
@@ -74,11 +75,21 @@ export class StoretypemasterComponent {
 
   getMasterData(storeTypeMasterId: any) {
     this._service
-      .serGetDataobject('getStoreTypeMaster', { _id: storeTypeMasterId })
+      .serGetDataobject('getStoreTypeMaster', { storetypeid: storeTypeMasterId })
       .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.store = dt.data[0];
-        this.store['_id']=this.store._id;
+
+        this.store ={ 
+        storetypeid:dt.data[0].storetypeid,
+        storetypename: dt.data[0].storetypename,
+        storedescription: dt.data[0].storedescription,
+        status: dt.data[0].status,
+        createdt: dt.data[0].createdt,
+        createby: dt.data[0].createby,
+        modifydt: dt.data[0].modifydt,
+        modifyby: this._service.getUserVal('userid'),
+        }
+
+        // this.store['_id']=this.store._id;
         this.isShowEditable= !this.isEditable && this.pageMode !='NEW';
       });
   }
@@ -115,7 +126,11 @@ export class StoretypemasterComponent {
       return;
     }
 
+
+
     let savingJson =this.store ;
+    // savingJson.storetypeid =savingJson.storetypeid ==0 ? this._service.getNextSequenceNumber('Store Type Master') :this.store.storetypeid ;
+// this.store.recCnt =this.store.storetypeid;
       // {
       //   'storetypename': this.store.storetypename,
       //   'storedescription': this.store.storedescription,
@@ -140,4 +155,21 @@ export class StoretypemasterComponent {
     }
    this.errorMsgs=JSON.parse(this.emptyErrorMsgs);
   }
+
+
+// public currentId=0;
+// public newId:any;
+// generateId(): number {
+//   return this.currentId++;
+// }
+// generateNewId(): void {
+//   this.newId = this.generateId();
+//   console.log('New ID:', this.newId);
+// }
+
+// generateSequenceNumber(): any {
+//   const componentId = 'component2'; // Unique identifier for the component
+//   return this._service.getNextSequenceNumber(componentId);
+// }
+
 }

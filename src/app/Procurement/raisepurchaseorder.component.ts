@@ -26,6 +26,7 @@ export class RaisepurchaseorderComponent {
   public isShowEditable: any = true;
 
   public raisePurchaseOrder: any = {
+    poNumId:0,
     store: '',
     department: '',
     quantityUom: 'ZLQU11',
@@ -62,7 +63,7 @@ export class RaisepurchaseorderComponent {
     status: 'ZLS11',
     approvalStatus: '',
     createdt: null,
-    createby: '',
+    createby:  this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -79,7 +80,7 @@ export class RaisepurchaseorderComponent {
   public errorMsgs: any = {
     storeReq: '',
     supplierReq: '',
-    poallowedToReq: '',
+    poDateReq: '',
     itemNameReq: '',
     mrpReq: '',
     rateReq: '',
@@ -113,12 +114,12 @@ export class RaisepurchaseorderComponent {
             ? this._service.onGetErrorMsgs(ctrl, true, 'Supplier')
             : '';
         break;
-      case 'poallowedTo':
-        this.errorMsgs.poallowedToReq =
+      case 'poDate':
+        this.errorMsgs.poDateReq =
           this.raisePurchaseOrder[ctrl] == '' ||
           this.raisePurchaseOrder[ctrl] == undefined ||
           this.raisePurchaseOrder[ctrl] == null
-            ? this._service.onGetErrorMsgs(ctrl, true, 'Po allowed to')
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Po Dte')
             : '';
         break;
       case 'itemName':
@@ -213,8 +214,8 @@ export class RaisepurchaseorderComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let poNumId: number = params['poNumId'];
+        this.getMasterData(poNumId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -224,9 +225,9 @@ export class RaisepurchaseorderComponent {
     });
   }
 
-  getMasterData(itemCategoryId: any) {
+  getMasterData(poNumberId: any) {
     this._service
-      .serGetDataobject('getRasiePurchaseOrderMaster', { _id: itemCategoryId })
+      .serGetDataobject('getRasiePurchaseOrderMaster', { poNumId: poNumberId })
       .subscribe((dt: any) => {
         console.log('dt', dt);
         this.raisePurchaseOrder = dt.data[0];
@@ -268,7 +269,7 @@ export class RaisepurchaseorderComponent {
   }
 
   onSaveClick() {
-    let objectstore = ['store', 'supplier', 'poallowedTo'];
+    let objectstore = ['store', 'supplier', 'poDate'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
@@ -283,6 +284,19 @@ export class RaisepurchaseorderComponent {
       });
       return;
     }
+
+    this.errorMsgs.itemsErr=this.newItemsList.length == 0 ?"Atleast select one item":'';
+    let errorExist1 = this._service.showErr(this.errorMsgs);
+    if (errorExist1) {
+    this._messageService.add({
+      sticky: true,
+      severity: 'warn',
+      summary: 'Warn',
+      detail: this.errorMsgs.itemsErr,
+    });
+    return;
+  }
+
     this.raisePurchaseOrder.purchuseItems = this.newItemsList;
     let savingJson = this.raisePurchaseOrder;
     console.log(this.raisePurchaseOrder);
@@ -348,9 +362,9 @@ export class RaisepurchaseorderComponent {
       .serGetDataobject('getTaxSubGroup', { status: 'ZLS11' })
       .subscribe((dt: any) => {
         this.taxSubGrpList = dt.data;
-        this.cgstList = this.taxSubGrpList; //_.filter(this.taxSubGrpList);
-        this.sgstList = this.taxSubGrpList; //_.filter(this.taxSubGrpList);
-        this.igstList = this.taxSubGrpList; //_.filter(this.taxSubGrpList)
+        this.cgstList = _.filter(this.taxSubGrpList,{taxgrpcd:'cgst'}); //_.filter(this.taxSubGrpList);
+        this.sgstList = _.filter(this.taxSubGrpList,{taxgrpcd:'sgst'});; //_.filter(this.taxSubGrpList);
+        this.igstList = _.filter(this.taxSubGrpList,{taxgrpcd:'igst'});; //_.filter(this.taxSubGrpList)
       });
 
     this._service
@@ -430,7 +444,7 @@ export class RaisepurchaseorderComponent {
     }
 
     this.itemDetails.totalAmt =
-      parseFloat(item.rate) - parseFloat(item.disAmt) + parseFloat(item.taxAmt);
+      (parseFloat(item.rate) * parseFloat(item.qty) ) - parseFloat(item.disAmt) + parseFloat(item.taxAmt);
 
     item.itemName = this.itemName;
     if (item['rowInd'] == undefined) {
@@ -461,12 +475,11 @@ export class RaisepurchaseorderComponent {
     this.raisePurchaseOrder.poTotal = this.raisePurchaseOrder.totalItemAmount;
   }
   onRateWiseTaxAmt(qty: any) {
-    if (this.itemDetails.disAmt !== '') {
+    if (this.itemDetails.disAmt !== '' ) {
       this.itemDetails.taxAmt =
         ((parseFloat(this.itemDetails.rate) * parseFloat(qty) -
-          parseFloat(this.itemDetails.disAmt)) *
-          this.itemDetails.taxRate) /
-        100;
+          parseFloat(this.itemDetails.disAmt))
+          * this.itemDetails.taxRate) /100;
     }
     this.itemDetails.cgsttaxAmt =
       (parseFloat(this.itemDetails.rate) * this.itemDetails.cgstTaxRate) / 100;
@@ -496,7 +509,6 @@ export class RaisepurchaseorderComponent {
     }
   }
   onLoopUp(event: any) {
-    console.log('onLoopUp', event);
     this.itemName = event.itemName;
     this.itemDetails.pckUOM = event.packageUOM;
     this.itemDetails.unitUOM = event.unitUOM;
@@ -506,6 +518,15 @@ export class RaisepurchaseorderComponent {
     this.itemDetails.allStoreStock = event.allStoreStock;
     event.taxlist;
     //  _.filter(this.cgstList,{taxsubgroup:event.taxSubGrp} )
+    // this.itemDetails.cgst =_.filter(this.cgstList,{taxsubgroup:event.taxSubGrp})
+    let cgst = _.filter(event.taxlist,{taxgrpcd:'cgst'});
+    this.itemDetails.cgst =cgst[0].taxSubGrp ;
+    console.log(this.itemDetails.cgst)
+    let sgst = _.filter(event.taxlist,{taxgrpcd:'sgst'});
+    this.itemDetails.sgst =sgst[0].taxSubGrp ;
+    let igst = _.filter(event.taxlist,{taxgrpcd:'igst'});
+    this.itemDetails.igst =igst[0].taxSubGrp ;
+    // itemDetails.sgst
   }
   onEditSelect(ind: any, row: any) {
     row['rowInd'] = ind;

@@ -58,6 +58,7 @@ export class NewitemComponent {
     taxGrpType: 'ZLTGT11',
     taxGrp: '',
     taxSubGrp: '',
+    taxgrpcd: '',
   };
   // public taxList: any = [];
   public taxCols: any = [];
@@ -73,6 +74,7 @@ export class NewitemComponent {
   public _activatedRoute = inject(ActivatedRoute);
 
   public newItem: any = {
+    newItemId: 0,
     itemName: '',
     shortName: '',
     status: 'ZLS11',
@@ -110,8 +112,55 @@ export class NewitemComponent {
     allowZeroCalimAmnt: 'ZLAS12',
     storeWise: [],
     taxlist: [],
+    createdt: null,
+    createby: this._service.getUserVal('userid'),
+    modifydt: null,
+    modifyby: '',
   };
   public emptyNewItem = JSON.stringify(this.newItem);
+  public errorMsgs: any = {
+    shortNameReq: '',
+    categoryReq: '',
+    serviceGroupReq: '',
+    serviceSubGroupReq: '',
+  };
+  public emptyErrorMsgs: any = JSON.stringify(this.errorMsgs);
+  onGetErrorMsgs(ctrl: any, showToast: any) {
+    switch (ctrl) {
+      case 'shortName':
+        this.errorMsgs.shortNameReq =
+          this.newItem[ctrl] == '' ||
+          this.newItem[ctrl] == undefined ||
+          this.newItem[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Short Name')
+            : '';
+        break;
+      case 'category':
+        this.errorMsgs.categoryReq =
+          this.newItem[ctrl] == '' ||
+          this.newItem[ctrl] == undefined ||
+          this.newItem[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Category Name')
+            : '';
+        break;
+      case 'serviceGroup':
+        this.errorMsgs.serviceGroupReq =
+          this.newItem[ctrl] == '' ||
+          this.newItem[ctrl] == undefined ||
+          this.newItem[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Service Group Name')
+            : '';
+        break;
+      case 'serviceSubGroup':
+        this.errorMsgs.serviceSubGroupReq =
+          this.newItem[ctrl] == '' ||
+          this.newItem[ctrl] == undefined ||
+          this.newItem[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Service Sub Group Name')
+            : '';
+        break;
+    }
+  }
   async ngOnInit() {
     if (Object.keys(this._service.appConfig).length == 0) {
       await this._service.getConfigData();
@@ -121,21 +170,7 @@ export class NewitemComponent {
     this.taxCols = await this._service.getGridColumns('taxCols');
     console.log(this.taxlist);
     this.newItem.taxlist.push(JSON.parse(JSON.stringify(this.taxlist)));
-    this.newItem.storeWise.push(this.storelist);
-
-    // this._service.serGetData('getGeneralMaster').subscribe((dt: any) => {
-    //   this.zeroLevelEntity = dt.data;
-
-    //   let statusList = _.filter(this.zeroLevelEntity, {
-    //     masterid: 'ZLC9',
-    //   });
-    //   _.forEach(statusList, (ident, index) => {
-    //     this.statusList.push({
-    //       label: ident.mastername,
-    //       value: ident._id,
-    //     });
-    //   });
-    // });
+    this.newItem.storeWise.push(JSON.parse(JSON.stringify(this.storelist)));
 
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLS1' })
@@ -151,12 +186,12 @@ export class NewitemComponent {
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLStreU1' })
       .subscribe((dt: any) => {
-        this.strengthUnitsList = dt.data[0].subMasterData;
+        this.strengthUnitsList = dt.data.length > 0 ? dt.data[0].subMasterData : [];
       });
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLIF1' })
       .subscribe((dt: any) => {
-        this.itemFromList = dt.data[0].subMasterData;
+        this.itemFromList = dt.data.length > 0 ?dt.data[0].subMasterData : [];
       });
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLUU1' })
@@ -167,7 +202,7 @@ export class NewitemComponent {
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLCU1' })
       .subscribe((dt: any) => {
-        this.consumptionUOMList = dt.data[0].subMasterData;
+        this.consumptionUOMList = dt.data.length > 0 ? dt.data[0].subMasterData : [];
       });
 
     this._service
@@ -179,7 +214,7 @@ export class NewitemComponent {
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLPS1' })
       .subscribe((dt: any) => {
-        this.preferredSupplierList = dt.data[0].subMasterData;
+        this.preferredSupplierList = dt.data.length > 0 ? dt.data[0].subMasterData : [];
       });
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLCT1' })
@@ -194,7 +229,7 @@ export class NewitemComponent {
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLBG1' })
       .subscribe((dt: any) => {
-        this.billingGroupList = dt.data[0].subMasterData;
+        this.billingGroupList = dt.data.length > 0 ? dt.data[0].subMasterData : [];
       }); //taxBasisList
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: '	ZLTB1' })
@@ -206,16 +241,6 @@ export class NewitemComponent {
       .subscribe((dt: any) => {
         this.allowStatusList = dt.data[0].subMasterData;
       });
-    // this._service
-    // .serGetDataobject('getGeneralMaster', { masterid: 'ZLAS1' })
-    // .subscribe((dt: any) => {
-    //   this.highCostConsumablesList = dt.data[0].subMasterData;
-    // });
-    // this._service
-    // .serGetDataobject('getGeneralMaster', { masterid: 'ZLAZCA1' })
-    // .subscribe((dt: any) => {
-    //   this.allowZeroCalimAmntList = dt.data[0].subMasterData;
-    // });
     this._service
       .serGetDataobject('getManufacureCreation', { status: 'ZLS11' })
       .subscribe((dt: any) => {
@@ -237,6 +262,7 @@ export class NewitemComponent {
     this._service
       .serGetDataobject('getTaxGroup', { status: 'ZLS11' })
       .subscribe((dt: any) => {
+        console.log('dt.data', dt.data);
         this.taxGroupList = dt.data;
       });
 
@@ -250,8 +276,8 @@ export class NewitemComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let newItemId: number = params['newItemId'];
+        this.getMasterData(newItemId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -263,36 +289,84 @@ export class NewitemComponent {
 
   getMasterData(masterid: any) {
     this._service
-      .serGetDataobject('getNewItem', { _id: masterid })
+      .serGetDataobject('getNewItem', { newItemId: masterid })
       .subscribe((dt: any) => {
         console.log('dt', dt);
-        this.newItem = dt.data[0];
-        this.newItem['_id'] = this.newItem._id;
-        // this.taxList = this.newItem.taxlist;
         this.storeWiseList = this.newItem.storeWise;
+        this.newItem = {
+          newItemId: dt.data[0].newItemId,
+          itemName: dt.data[0].itemName,
+          shortName: dt.data[0].shortName,
+          status: dt.data[0].status,
+          category: dt.data[0].category,
+          generateItemCode: dt.data[0].generateItemCode,
+          customItemCode: dt.data[0].customItemCode,
+          manufacture: dt.data[0].manufacture,
+          strength: dt.data[0].strength,
+          strengthUnits: dt.data[0].strengthUnits,
+          itemFrom: dt.data[0].itemFrom,
+          root: dt.data[0].root,
+          unitUOM: dt.data[0].unitUOM,
+          packageUOM: dt.data[0].packageUOM,
+          packageSize: dt.data[0].packageSize,
+          packageType: dt.data[0].packageType,
+          consumptionUOM: dt.data[0].consumptionUOM,
+          consumptionCapacity: dt.data[0].consumptionCapacity,
+          genericName: dt.data[0].genericName,
+          serviceGroup: dt.data[0].serviceGroup,
+          serviceSubGroup: dt.data[0].serviceSubGroup,
+          maxCostPrice: dt.data[0].maxCostPrice,
+          supplierName: dt.data[0].supplierName,
+          preferredSupplier: dt.data[0].preferredSupplier,
+          invoiceDetails: dt.data[0].invoiceDetails,
+          controlType: dt.data[0].controlType,
+          insurenceCategory: dt.data[0].insurenceCategory,
+          preAuthRequired: dt.data[0].preAuthRequired,
+          billingGroup: dt.data[0].billingGroup,
+          taxBasis: dt.data[0].taxBasis,
+          tax: dt.data[0].tax,
+          binRack: dt.data[0].binRack,
+          batchNumberApplicable: dt.data[0].batchNumberApplicable,
+          itemSellingPrice: dt.data[0].itemSellingPrice,
+          highCostConsumables: dt.data[0].highCostConsumables,
+          allowZeroCalimAmnt: dt.data[0].allowZeroCalimAmnt,
+          storeWise: [],
+          taxlist: [],
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        };
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
   }
 
   onSaveClick() {
-    let objectstore = ['store', 'storeType'];
+    let objectstore = [
+      'shortName',
+      'category',
+      'serviceGroup',
+      'serviceSubGroup',
+    ];
     _.forEach(objectstore, (ctrl) => {
-      this._service.onGetErrorMsgs(this.newItem, ctrl, true);
+      this.onGetErrorMsgs(ctrl, true);
     });
 
-    // let errorExist = this._service.showErr(this._service.errorMsgs);
-    // if (errorExist) {
-    //   this._messageService.add({
-    //     sticky: true,
-    //     severity: 'warn',
-    //     summary: 'Warn',
-    //     detail: `Please Check the below Errors`,
-    //   });
-    //   return;
-    // }
+    let errorExist = this._service.showErr(this.errorMsgs);
+    if (errorExist) {
+      this._messageService.add({
+        sticky: true,
+        severity: 'warn',
+        summary: 'Warn',
+        detail: `Please Check the below Errors`,
+      });
+      return;
+    }
 
-    // this.newItem.taxlist = this.taxList;
-    this.newItem.storeWise = this.storeWiseList;
+    // this.newItem.storeWise = this.storeWiseList;
+    _.forEach(this.newItem.taxlist, (tax, taxInd) => {
+      delete tax.taxSubGroupList;
+    });
     let savingJson = this.newItem;
     let Date = this._service.getDate();
     console.log('Date', this._service.getDate());
@@ -304,6 +378,8 @@ export class NewitemComponent {
 
   onClearClick() {
     this.newItem = JSON.parse(this.emptyNewItem);
+    this.newItem.taxlist.push(JSON.parse(JSON.stringify(this.taxlist)));
+    this.newItem.storeWise.push(JSON.parse(JSON.stringify(this.storelist)));
   }
   onAddTaxItem() {
     this.newItem.taxlist.push(JSON.parse(JSON.stringify(this.taxlist)));
@@ -344,11 +420,22 @@ export class NewitemComponent {
   }
   onTaxGrp(taxGrpId: any, ind: any) {
     // console.log('this.taxList', this.taxList);
-    let selectTaxGrp = _.filter(this.newItem.taxlist, { taxGrp: taxGrpId });
-    if (selectTaxGrp.length > 1) {
-      alert('Already');
-      taxGrpId = '';
+    let selectTaxGrp = _.filter(this.taxSubGroupList, { taxgroup: taxGrpId });
+    let getSelectTaxGrp = _.filter(this.newItem.taxlist, { taxGrp: taxGrpId });
+    this.newItem.taxlist[ind].taxgrpcd = selectTaxGrp[0].taxgrpcd;
+    if (getSelectTaxGrp.length > 1) {
       this.newItem.taxlist[ind].taxGrp = '0';
+      return;
+    }
+    if (selectTaxGrp.length > 0) {
+      this.newItem.taxlist[ind].taxSubGroupList = selectTaxGrp;
+    }
+  }
+  onStoreChange(storeId: any, ind: any) {
+    let selectStoreitems = _.filter(this.newItem.storeWise, { store: storeId });
+    if (selectStoreitems.length > 1) {
+      this.newItem.storeWise[ind].store = 0;
+      return;
     }
   }
   onLoopUpAdd(event: any) {

@@ -13,7 +13,7 @@ export class AdditemcategorylistComponent {
 
   public mastersGridColumns ="addItemCategoryGridColumns";
   public masterGridData="getAddItemCategory";
-  public paramKey=["_id"];
+  public paramKey=["addcategoryid"];
   
   public showEdit =true;
   public showView=true;

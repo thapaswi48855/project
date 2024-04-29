@@ -11,16 +11,17 @@ import { SavingComponent } from '../directives/saving.component';
 })
 export class NewUserComponent {
   @ViewChild(HeaderComponent) header: HeaderComponent;
-  @ViewChild(SavingComponent) saving:SavingComponent;
+  @ViewChild(SavingComponent) saving: SavingComponent;
 
   public pageTitle: string = 'User';
   public onSubmit: boolean = true;
   public onGrid: boolean = true;
   public onAddNew: boolean = true;
 
-  public rolesLists: any = [{label:'Select One',value:''}];
+  public rolesLists: any = [{ label: 'Select One', value: '' }];
 
   public user: any = {
+    userid: '',
     userRoleid: '',
     userName: '',
     userPhno: '',
@@ -50,13 +51,14 @@ export class NewUserComponent {
 
   onSaveClick() {
     let savingJson = {
-      'userRoleid' : this.user.userRoleid,
-      'userName' : this.user.userName,
-      'userPhno' : this.user.userPhno,
-      'userEmail' : this.user.userEmail,
-      'userPwd' : this.user.userPwd,
-      'useraddress' : this.user.useraddress,
-      'userstatus' : this.user.userstatus,
+      userid: 0,
+      userRoleid: this.user.userRoleid,
+      userName: this.user.userName,
+      userPhno: this.user.userPhno,
+      userEmail: this.user.userEmail,
+      userPwd: this.user.userPwd,
+      useraddress: this.user.useraddress,
+      userstatus: this.user.userstatus,
     };
 
     this.saving.onSaveJson(this.pageTitle, 'insertNewUsers', [savingJson]);

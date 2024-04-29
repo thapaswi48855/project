@@ -13,7 +13,7 @@ export class StoretypemasterlistComponent {
 
   public mastersGridColumns ="storeTypeMastersGridColumns";
   public masterGridData="getStoreTypeMaster";
-  public paramKey=["_id"];
+  public paramKey=["storetypeid"];
   
   // public showEdit =true;
   // public showView=true;
@@ -29,7 +29,7 @@ export class StoretypemasterlistComponent {
   ]
   public printOptions=[
     
-    {reportName:'cancel',iconClass:'pi pi-times-circle'}
+    // {reportName:'cancel',iconClass:'pi pi-times-circle'}
   ]
 
  

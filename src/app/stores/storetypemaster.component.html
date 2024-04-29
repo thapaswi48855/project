@@ -33,6 +33,7 @@
             [options]="statusList"
             [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
+            [disabled]="pageMode !='EDIT'"
           ></app-dropdown>         
           <app-textarea
             [labelName]="'Store Type Description'"
@@ -41,10 +42,6 @@
             [disabled]="!isEditable"
             [(inputModel)]="store.storedescription"
           ></app-textarea>
-          <!-- <app-checkbox
-            [labelName]="'Status'"
-            [(inputModel)]="store.status"
-          ></app-checkbox> -->
         </div>
       </div>
     </p-scrollPanel>
@@ -52,3 +49,5 @@
   </div>
 </div>
 <app-saving #saving></app-saving>
+
+

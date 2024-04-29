@@ -27,6 +27,7 @@ export class GenericdetailsComponent {
   public redirectToGrid: boolean = false;
 
   public genericDetails: any = {
+    generDetId:0,
     genericName: '',
     clasificationName: '',
     subClassificationName: '',
@@ -34,7 +35,7 @@ export class GenericdetailsComponent {
     status: 'ZLS11',
     crability: '',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -80,8 +81,8 @@ public emptyErrorMsgs :any =JSON.stringify(this.errorMsgs);
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let generDetId: number = params['generDetId'];
+        this.getMasterData(generDetId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -133,11 +134,22 @@ public emptyErrorMsgs :any =JSON.stringify(this.errorMsgs);
 
   getMasterData(genericDetailsId: any) {
     this._service
-      .serGetDataobject('getGenericDetails', { _id: genericDetailsId })
-      .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.genericDetails = dt.data[0];
-        this.genericDetails['_id'] = this.genericDetails._id;
+      .serGetDataobject('getGenericDetails', { generDetId: genericDetailsId })
+      .subscribe( async (dt: any) => {       
+        await this.onSubClasification(dt.data[0].clasificationName);
+        this.genericDetails = {
+          generDetId:dt.data[0].generDetId,
+          genericName: dt.data[0].genericName,
+          clasificationName: dt.data[0].clasificationName,
+          subClassificationName: dt.data[0].subClassificationName,
+          standrdAdultDose: dt.data[0].standrdAdultDose,
+          status: dt.data[0].status,
+          crability: dt.data[0].crability,
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        };
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
   }
@@ -145,11 +157,7 @@ public emptyErrorMsgs :any =JSON.stringify(this.errorMsgs);
   onGridClick() {}
 
   onSaveClick() {
-    // let objectstore = ['genericName'];
-    // _.forEach(objectstore, (ctrl) => {
-    //   this._service.onGetErrorMsgs(this.genericDetails, ctrl, true);
-    // });
-
+  
     let objectstore = ['genericName'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);

@@ -13,7 +13,7 @@ export class SuppliercategorylistComponent {
 
   public mastersGridColumns ="supplierCategoryGridColumns";
   public masterGridData="getSupplierCategory";
-  public paramKey=["_id"];
+  public paramKey=["supplierCatId"];
   
   public showEdit =true;
   public showView=true;

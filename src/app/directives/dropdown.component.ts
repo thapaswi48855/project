@@ -17,6 +17,7 @@ export class DropdownComponent {
   @Input() optionLabel:any="";
   @Input() optionValue:any="";
   @Input() public options: any = [{'optionValue':'','optionLabel':'Select One'}];
+  @Input() labelText :boolean=true;
 
   @Output() public onBlur = new EventEmitter();
   @Output() public onChange = new EventEmitter();

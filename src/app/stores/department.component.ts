@@ -27,6 +27,7 @@ export class DepartmentComponent {
   public redirectToGrid: boolean = false;
 
   public department: any = {
+    departmentId:0,
     department: '',
     departmentType: '',
     allowedGender: 'ZLG11',
@@ -34,7 +35,7 @@ export class DepartmentComponent {
     referralDoctorAsOrderingClinician:'ZLAS11',
     status: 'ZLS11',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -54,8 +55,8 @@ export class DepartmentComponent {
   ) {}
 
   public errorMsgs: any = {
-    clasificationNameReq: '',
-    genericNameReq: '',
+    departmentReq: '',
+    departmentTypeReq: '',
   };
   public departmentTypeList:any=[];
   public genderList:any=[];
@@ -63,22 +64,22 @@ export class DepartmentComponent {
 
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
-      case 'clasificationName':
-        this.errorMsgs.clasificationNameReq =
+      case 'department':
+        this.errorMsgs.departmentReq =
           this.department[ctrl] == '' ||
           this.department[ctrl] == undefined ||
           this.department[ctrl] == null
-            ? this._service.onGetErrorMsgs(ctrl, true, 'Clasification Name')
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Department Name')
             : '';
         break;
-      case 'genericName':
-        this.errorMsgs.genericNameReq =
-          this.department[ctrl] == '' ||
-          this.department[ctrl] == undefined ||
-          this.department[ctrl] == null
-            ? this._service.onGetErrorMsgs(ctrl, true, 'Generic Name')
-            : '';
-        break;
+        case 'departmentType':
+          this.errorMsgs.departmentTypeReq =
+            this.department[ctrl] == '' ||
+            this.department[ctrl] == undefined ||
+            this.department[ctrl] == null
+              ? this._service.onGetErrorMsgs(ctrl, true, 'Department Type')
+              : '';
+          break;
     }
   }
 
@@ -91,8 +92,8 @@ export class DepartmentComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let departmentId: number = params['departmentId'];
+        this.getMasterData(departmentId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -124,13 +125,23 @@ export class DepartmentComponent {
       });
   }
 
-  getMasterData(genericDetailsId: any) {
+  getMasterData(departmentId: any) {
     this._service
-      .serGetDataobject('getGenericDetails', { _id: genericDetailsId })
+      .serGetDataobject('getDepartment', { departmentId: departmentId })
       .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.department = dt.data[0];
-        this.department['_id'] = this.department._id;
+        this.department = {
+          departmentId:dt.data[0].departmentId,
+          department: dt.data[0].department,
+          departmentType: dt.data[0].departmentType,
+          allowedGender: dt.data[0].allowedGender,
+          costCenterCode: dt.data[0].costCenterCode,
+          referralDoctorAsOrderingClinician:dt.data[0].referralDoctorAsOrderingClinician,
+          status: dt.data[0].status,
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        };
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
   }
@@ -143,7 +154,7 @@ export class DepartmentComponent {
     //   this._service.onGetErrorMsgs(this.genericDetails, ctrl, true);
     // });
 
-    let objectstore = ['genericName', 'clasificationName'];
+    let objectstore = ['department', 'departmentType'];
     _.forEach(objectstore, (ctrl) => {
       // this.onGetErrorMsgs(ctrl, true);
     });

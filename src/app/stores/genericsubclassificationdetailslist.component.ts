@@ -13,7 +13,7 @@ export class GenericsubclassificationdetailslistComponent {
 
   public mastersGridColumns ="genericSubClassificationDetailsGridColumns";
   public masterGridData="getGenericSubClassificationDetails";
-  public paramKey=["_id"];
+  public paramKey=["genSubClasiId"];
   
   public showEdit =true;
   public showView=true;

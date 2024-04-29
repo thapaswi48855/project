@@ -29,13 +29,13 @@
       [(inputModel)]="genericDetails.clasificationName" 
       [options]="geneticClassificationList" [disabled]="!isEditable"
           [optionLabel]="'clasificationName'"
-          [optionValue]="'_id'" (onChange)="onSubClasification(genericDetails.clasificationName)"></app-dropdown>
+          [optionValue]="'genericClassificationId'" (onChange)="onSubClasification(genericDetails.clasificationName)"></app-dropdown>
     <!-- </div>
     <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
       <app-dropdown [labelName]="'Sub Classification Name'" 
       [(inputModel)]="genericDetails.subClassificationName" [options]="geneticSubClassificationList" 
       [disabled]="!isEditable" [optionLabel]="'subClasificationName'"
-      [optionValue]="'_id'"></app-dropdown>
+      [optionValue]="'genSubClasiId'"></app-dropdown>
     <!-- </div>
     <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
       <app-inputtext [labelName]="'standrd Adult Dose'" [(inputModel)]="genericDetails.standrdAdultDose" [disabled]="!isEditable"></app-inputtext>
@@ -48,7 +48,7 @@
     <!-- </div>
     <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
       <app-dropdown [labelName]="'Status'" [(inputModel)]="genericDetails.status"
-       [disabled]="!isEditable" [options]="statusList" 
+      [disabled]="pageMode !='EDIT'" [options]="statusList" 
        [optionLabel]="'subMasterName'"
       [optionValue]="'subMasterId'"></app-dropdown>
     </div>

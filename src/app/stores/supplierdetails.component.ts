@@ -27,6 +27,7 @@ export class SupplierdetailsComponent {
   public redirectToGrid: boolean = false;
 
   public supplier: any = {
+    supplierDetId:0,
     supplierName: '',
     suppliercode: '',
     status: 'ZLS11',
@@ -52,7 +53,7 @@ export class SupplierdetailsComponent {
     helpdeskphno: '',
     helpdeskemail: '',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -75,7 +76,8 @@ export class SupplierdetailsComponent {
 
   public errorMsgs:any={
     supplierNameReq:'',
-    registeredsupplierReq:''
+    registeredsupplierReq:'',
+    supplierGSTINNumberReq:''
   };
 
   onGetErrorMsgs(ctrl: any, showToast: any) {
@@ -95,7 +97,15 @@ export class SupplierdetailsComponent {
           this.supplier[ctrl] == null
             ? this._service.onGetErrorMsgs(ctrl, true, 'Registered Supplier Name')
             : '';
-        break;     
+        break;   
+        case 'supplierGSTINNumber':
+          this.errorMsgs.supplierGSTINNumberReq =
+            this.supplier[ctrl] == '' ||
+            this.supplier[ctrl] == undefined ||
+            this.supplier[ctrl] == null
+              ? this._service.onGetErrorMsgs(ctrl, true, 'Supplier GSTIN Number')
+              : '';
+          break;     
     }
   }
 
@@ -137,8 +147,8 @@ export class SupplierdetailsComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let supplierDetId: number = params['supplierDetId'];
+        this.getMasterData(supplierDetId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -150,11 +160,42 @@ export class SupplierdetailsComponent {
 
   getMasterData(supplierDetailsId: any) {
     this._service
-      .serGetDataobject('getSupplierDetails', { _id: supplierDetailsId })
+      .serGetDataobject('getSupplierDetails', { supplierDetId: supplierDetailsId })
       .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.supplier = dt.data[0];
-        this.supplier['_id'] = this.supplier._id;
+        // console.log('dt', dt);
+        // this.supplier = dt.data[0];
+        // this.supplier['_id'] = this.supplier._id;
+        this.supplier = {
+          supplierDetId:dt.data[0].supplierDetId,
+          supplierName: dt.data[0].supplierName,
+          suppliercode: dt.data[0].suppliercode,
+          status: dt.data[0].status,
+          registeredsupplier: dt.data[0].registeredsupplier,
+          supplierCategory: dt.data[0].supplierCategory,
+          supplierGSTINNumber: dt.data[0].supplierGSTINNumber,
+          suppliercreditPeriod: dt.data[0].suppliercreditPeriod,
+          supplierdrugLicenseNo: dt.data[0].supplierdrugLicenseNo,
+          supplierPANNo: dt.data[0].supplierPANNo,
+          suppliercorporteIdentificationNumber: dt.data[0].suppliercorporteIdentificationNumber,
+          supplierapplyTCSforPOStockEntry: dt.data[0].supplierapplyTCSforPOStockEntry,
+          regioncountry: dt.data[0].regioncountry,
+          regionstate: dt.data[0].regionstate,
+          regioncity: dt.data[0].regioncity,
+          contactaddress: dt.data[0].contactaddress,
+          contactphone1: dt.data[0].contactphone1,
+          contactphone2: dt.data[0].contactphone2,
+          contactpostalCode: dt.data[0].contactpostalCode,
+          contactfax: dt.data[0].contactfax,
+          contactemail: dt.data[0].contactemail,
+          contactwebsite: dt.data[0].contactwebsite,
+          helpdeskname: dt.data[0].helpdeskname,
+          helpdeskphno: dt.data[0].helpdeskphno,
+          helpdeskemail: dt.data[0].helpdeskemail,
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        };
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
   }
@@ -163,7 +204,7 @@ export class SupplierdetailsComponent {
 
   onSaveClick() {
     // console.log(this.store);
-    let objectstore = ['supplierName','registeredsupplier'];
+    let objectstore = ['supplierName','registeredsupplier','supplierGSTINNumber'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl,true);
     });

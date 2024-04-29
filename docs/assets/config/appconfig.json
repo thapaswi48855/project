@@ -2,8 +2,6 @@
     "ErrorMsgs":{
         "erroeReq":"this  is error"
     },
-    
-    
     "drMastersGridColumns":[
         {
             "field":"",

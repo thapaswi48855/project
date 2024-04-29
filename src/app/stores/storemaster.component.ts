@@ -15,7 +15,7 @@ export class StoremasterComponent {
   @ViewChild(HeaderComponent) header: HeaderComponent;
   @ViewChild(SavingComponent) saving: SavingComponent;
 
-  public pageTitle: string = 'Store Type Master';
+  public pageTitle: string = 'Store Master';
   public onSubmit: boolean = true;
   public onClear: boolean = true;
   public onEdit: boolean = false;
@@ -27,6 +27,7 @@ export class StoremasterComponent {
   public redirectToGrid:boolean =false;
 
   public storeMaster: any = {
+    storemasterid:0,
     store: '',
     counter: 'ZLC11',
     status: 'ZLS11',
@@ -57,7 +58,7 @@ export class StoremasterComponent {
     salesWebPrinter: 'ZLSWP11',
     batchExpireThesholdForStockTake: '0',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
     // status:'A'
@@ -463,8 +464,8 @@ export class StoremasterComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let storemasterid: number = params['storemasterid'];
+        this.getMasterData(storemasterid);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -475,11 +476,47 @@ export class StoremasterComponent {
   }
   getMasterData(storeMasterId: any) {
     this._service
-      .serGetDataobject('getStoreMaster', { _id: storeMasterId })
+      .serGetDataobject('getStoreMaster', { storemasterid: storeMasterId })
       .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.storeMaster = dt.data[0];
-        this.storeMaster['_id'] = this.storeMaster._id;
+        // console.log('dt', dt);
+        // this.storeMaster = dt.data[0];
+        // this.storeMaster['_id'] = this.storeMaster._id;
+        this.storeMaster = {
+          storemasterid:dt.data[0].storemasterid,
+          store: dt.data[0].store,
+          counter: dt.data[0].counter,
+          status: dt.data[0].status,
+          gstinno: dt.data[0].gstinno,
+          drugLicenceNo: dt.data[0].drugLicenceNo,
+          autoFillPrecription: dt.data[0].autoFillPrecription,
+          accountGroup: dt.data[0].accountGroup,
+          salesAcountPrefix: dt.data[0].salesAcountPrefix,
+          purcheseAccountPrefix: dt.data[0].purcheseAccountPrefix,
+          storeType: dt.data[0].storeType,
+          isSuperStore: dt.data[0].isSuperStore,
+          salesUnit: dt.data[0].salesUnit,
+          allowToRiseBill: dt.data[0].allowToRiseBill,
+          precriptionPrintTemplate: dt.data[0].precriptionPrintTemplate,
+          precriptionLabelPrintTemplate: dt.data[0].precriptionLabelPrintTemplate,
+          salesPrintTemplate: dt.data[0].salesPrintTemplate,
+          isSalesStore: dt.data[0].isSalesStore,
+          autoFillIndent: dt.data[0].autoFillIndent,
+          isSterileStore: dt.data[0].isSterileStore,
+          storesTariff: dt.data[0].storesTariff,
+          useSellingPriceFromItemBatch: dt.data[0].useSellingPriceFromItemBatch,
+          grnPrintTemplate: dt.data[0].grnPrintTemplate,
+          allowAutoPOGeneration: dt.data[0].allowAutoPOGeneration,
+          pOGenerationFrequency: dt.data[0].pOGenerationFrequency,
+          autoCancelPO: dt.data[0].autoCancelPO,
+          autoCancelPOFreuency: dt.data[0].autoCancelPOFreuency,
+          salesWebTemplate: dt.data[0].salesWebTemplate,
+          salesWebPrinter: dt.data[0].salesWebPrinter,
+          batchExpireThesholdForStockTake: dt.data[0].batchExpireThesholdForStockTake,
+          createdt: null,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        }
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
         console.log('this.isShowEditable', this.isShowEditable);
       });

@@ -13,7 +13,7 @@ export class ManufacturecreationlistComponent {
 
   public mastersGridColumns ="manufactureCretionGridColumns";
   public masterGridData="getManufacureCreation";
-  public paramKey=["_id"];
+  public paramKey=["manufacureId"];
   
   public showEdit =true;
   public showView=true;

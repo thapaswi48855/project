@@ -13,7 +13,7 @@ export class GenericdetailslistComponent {
 
   public mastersGridColumns ="genericDetailsGridColumns";
   public masterGridData="getGenericDetails";
-  public paramKey=["_id"];
+  public paramKey=["generDetId"];
   
   public showEdit =true;
   public showView=true;

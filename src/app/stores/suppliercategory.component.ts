@@ -27,11 +27,12 @@ export class SuppliercategoryComponent {
   public redirectToGrid:boolean =false;
 
   public supplierCategory:any = {
+    supplierCatId:0,
     categoryname: '',
     categorydescription: '',
     status:'ZLS11',
     createdt:null,
-    createby:'',
+    createby:this._service.getUserVal('userid'),
     modifydt:null,
     modifyby:''
   };
@@ -77,8 +78,8 @@ export class SuppliercategoryComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let supplierCatId: number = params['supplierCatId'];
+        this.getMasterData(supplierCatId);
         this.pageMode =params['mode'];
       }else{
         this.isEditable=true;
@@ -90,11 +91,21 @@ export class SuppliercategoryComponent {
 
   getMasterData(supplierCategoryId: any) {
     this._service
-      .serGetDataobject('getSupplierCategory', { _id: supplierCategoryId })
+      .serGetDataobject('getSupplierCategory', { supplierCatId: supplierCategoryId })
       .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.supplierCategory = dt.data[0];
-        this.supplierCategory['_id']=this.supplierCategory._id;
+        // console.log('dt', dt);
+        // this.supplierCategory = dt.data[0];
+        // this.supplierCategory['_id']=this.supplierCategory._id;
+        this.supplierCategory = {
+          supplierCatId:dt.data[0].supplierCatId,
+          categoryname: dt.data[0].categoryname,
+          categorydescription: dt.data[0].categorydescription,
+          status:dt.data[0].status,
+          createdt:dt.data[0].createdt,
+          createby:dt.data[0].createby,
+          modifydt:null,
+          modifyby:this._service.getUserVal('userid')
+        };
         this.isShowEditable= !this.isEditable && this.pageMode !='NEW';
       });
   }

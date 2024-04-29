@@ -23,6 +23,7 @@ export class ModuleComponent {
   public currentRow:any =[];
 
   public module: any = {
+    moduleid:0,
     moduleName: '',
     moduleDescription: '',
     status: true,
@@ -103,6 +104,7 @@ console.log(docPermissions)
           }
           _.forEach(this.currentRow.submodel,(submod,submodInd)=>{
             this.module.submodel.push({
+              submoduleid:submod.submoduleid,
               subModuleName:submod.submodulename,
               subModuleDesc:submod.submoduledesc,
               submodelstatus:submod.submodelstatus
@@ -120,6 +122,7 @@ console.log(docPermissions)
   onGridClick() {}
   addSubModules() {
     this.subModules.push({
+      submoduleid:0,
       subModuleName: '',
       subModuleDesc: '',
       subStatus: '',
@@ -146,6 +149,7 @@ console.log(docPermissions)
     }
 
     let savingJson: any = {
+      moduleid:0,
       modulename: this.module.moduleName,
       moduledesc: this.module.moduleDescription,
       status: this.module.status == true ? 'A' : 'D',
@@ -154,6 +158,7 @@ console.log(docPermissions)
     if (this.subModules.length > 0) {
       _.forEach(this.subModules, (subDoc, subInd) => {
         savingJson['submodel'].push({
+          submoduleid:subInd,
           submodulename: subDoc.subModuleName,
           submoduledesc: subDoc.subModuleDesc,
           submodelstatus: 'A',

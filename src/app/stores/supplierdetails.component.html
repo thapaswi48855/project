@@ -43,7 +43,7 @@
                   [options]="statusList"
                   [(inputModel)]="supplier.status"
                   [optionLabel]="'subMasterName'"
-                  [optionValue]="'subMasterId'"
+                  [optionValue]="'subMasterId'" [disabled]="pageMode !='EDIT'" 
                 ></app-dropdown>
               </div>
               <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
@@ -72,12 +72,8 @@
                 <app-inputtext
                   [labelName]="'GSTIN Number'"
                   [(inputModel)]="supplier.supplierGSTINNumber"
-                  (onBlur)="
-                    _service.onGetErrorMsgs(supplier, 'GSTINNumber', true)
-                  "
-                  errorMessages="{{
-                    this._service.errorMsgs.supplierGSTINNumber
-                  }}"
+                  (onBlur)="onGetErrorMsgs('supplierGSTINNumber', true)"
+                  errorMessages="{{ errorMsgs.supplierGSTINNumberReq }}"
                   [disabled]="!isEditable"
                 ></app-inputtext>
               </div>

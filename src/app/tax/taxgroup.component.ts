@@ -25,16 +25,18 @@ export class TaxgroupComponent {
   public isEditable: any = false;
   public isShowEditable: any = true;
   public redirectToGrid: boolean = false;
-  public serviceGroupList:any =[];
+  public serviceGroupList: any = [];
 
   public taxgroup: any = {
+    taxGrpId: 0,
     taxgrouptype: 'ZLTGT11',
-    taxgroup:'',
+    taxgroup: '',
+    taxgrpcd: '',
     taxgroupcode: '',
-    displayorder:'',
-    status: 'ZLS11',   
+    displayorder: '',
+    status: 'ZLS11',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -48,11 +50,11 @@ export class TaxgroupComponent {
 
   public errorMsgs: any = {
     taxgroupNameReq: '',
-    taxgroupcodeNameReq:''
+    taxgroupcodeNameReq: '',
   };
-  public taxGrpCodeList:any=[];
-  public taxGrpTypeList:any=[];
-  public statusList:any=[];
+  public taxGrpCodeList: any = [];
+  public taxGrpTypeList: any = [];
+  public statusList: any = [];
   public emptyErrorMsgs = JSON.stringify(this.errorMsgs);
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
@@ -64,7 +66,7 @@ export class TaxgroupComponent {
             ? this._service.onGetErrorMsgs(ctrl, true, 'Tax Group Name')
             : '';
         break;
-        case 'taxgroupcode':
+      case 'taxgroupcode':
         this.errorMsgs.taxgroupcodeNameReq =
           this.taxgroup[ctrl] == '' ||
           this.taxgroup[ctrl] == undefined ||
@@ -73,37 +75,35 @@ export class TaxgroupComponent {
             : '';
         break;
     }
-   
   }
 
   async ngOnInit() {
     if (Object.keys(this._service.appConfig).length == 0) {
       await this._service.getConfigData();
     }
-    // 
+    //
     this._service
-    .serGetDataobject('getGeneralMaster', { masterid: 'ZLTGT1' })
-    .subscribe((dt: any) => {
-      this.taxGrpTypeList = dt.data[0].subMasterData;
-    });
+      .serGetDataobject('getGeneralMaster', { masterid: 'ZLTGT1' })
+      .subscribe((dt: any) => {
+        this.taxGrpTypeList = dt.data[0].subMasterData;
+      });
     this._service
-    .serGetDataobject('getGeneralMaster', { masterid: 'ZLTGC1' })
-    .subscribe((dt: any) => {
-      this.taxGrpCodeList = dt.data[0].subMasterData;
-    });
+      .serGetDataobject('getGeneralMaster', { masterid: 'ZLTGC1' })
+      .subscribe((dt: any) => {
+        this.taxGrpCodeList = dt.data[0].subMasterData;
+      });
     this._service
-    .serGetDataobject('getGeneralMaster', { masterid: 'ZLS1' })
-    .subscribe((dt: any) => {
-      this.statusList = dt.data[0].subMasterData;
-    });
-
+      .serGetDataobject('getGeneralMaster', { masterid: 'ZLS1' })
+      .subscribe((dt: any) => {
+        this.statusList = dt.data[0].subMasterData;
+      });
 
     this._activatedRoute.paramMap.subscribe((param: ParamMap) => {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let taxGrpId: number = params['taxGrpId'];
+        this.getMasterData(taxGrpId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -115,17 +115,27 @@ export class TaxgroupComponent {
 
   getMasterData(taxGrpId: any) {
     this._service
-      .serGetDataobject('getTaxGroup', { _id: taxGrpId })
+      .serGetDataobject('getTaxGroup', { taxGrpId: taxGrpId })
       .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.taxgroup = dt.data[0];
-        this.taxgroup['_id'] = this.taxgroup._id;
+        this.taxgroup = {
+          taxGrpId: dt.data[0].taxGrpId,
+          taxgrouptype: dt.data[0].taxgrouptype,
+          taxgroup: dt.data[0].taxgroup,
+          taxgrpcd: dt.data[0].taxgrpcd,
+          taxgroupcode: dt.data[0].taxgroupcode,
+          displayorder: dt.data[0].displayorder,
+          status: dt.data[0].status,
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        };
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
   }
 
   async onSaveClick() {
-    let objectstore = ['taxgroup','taxgroupcode'];
+    let objectstore = ['taxgroup', 'taxgroupcode'];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
@@ -140,7 +150,7 @@ export class TaxgroupComponent {
       });
       return;
     }
-
+    this.taxgroup.taxgrpcd = this.taxgroup.taxgroup.toLowerCase();
     let savingJson = this.taxgroup;
 
     await this.saving.onSaveJson(this.pageTitle, 'insertTaxGroup', [

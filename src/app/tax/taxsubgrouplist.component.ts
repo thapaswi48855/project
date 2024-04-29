@@ -13,7 +13,7 @@ export class TaxsubgrouplistComponent {
 
   public mastersGridColumns ="taxSubGrpGridColumns";
   public masterGridData="getTaxSubGroup";
-  public paramKey=["_id"];
+  public paramKey=["taxSubGrpId"];
   
   public showEdit =true;
   public showView=true;

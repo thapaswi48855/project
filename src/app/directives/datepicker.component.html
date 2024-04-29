@@ -18,6 +18,7 @@
       [minDate]="minDate"
       [maxDate]="maxDate"
       [disabled]="disabled"
+      (onBlur)="onLeaveControl()"
       (ngModelChange)="inputModelChange.emit(inputModel)"
     ></p-calendar>
     <small

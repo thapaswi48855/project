@@ -12,6 +12,8 @@ export class InputtextComponent {
   @Input() public labelName:string='';
   @Input() public disabled:boolean=false;
   @Input() public inputAxis:boolean=false;
+  
+  @Input() labelText :boolean=true;
 
   @Output() public onBlur =new EventEmitter();
   @Output() public onChange =new EventEmitter();

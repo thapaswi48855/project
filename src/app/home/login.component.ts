@@ -27,6 +27,9 @@ export class LoginComponent {
 
     let login= await this._service.login('getNewUsers',loginJson).subscribe((dt: any) => {
       console.log(dt);
+      dt.data.forEach((user:any) => {
+        user.userid = user.userid.toString(); // Convert BigInt to string
+    });
       window.localStorage.setItem("UserInfo",JSON.stringify(dt.data))
       if (dt.status == '200') {
         // this._messageService.add({

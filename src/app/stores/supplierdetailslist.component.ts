@@ -13,7 +13,7 @@ export class SupplierdetailslistComponent {
 
   public mastersGridColumns = 'supplierDetailsGridColumns';
   public masterGridData = 'getSupplierDetails';
-  public paramKey = ['_id'];
+  public paramKey = ['supplierDetId'];
 
   public showEdit = true;
   public showView = true;

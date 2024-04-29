@@ -29,7 +29,9 @@ export class TaxsubgroupComponent {
   public taxGroupList: any = [];
 
   public taxsubgroup: any = {
+    taxSubGrpId: 0,
     taxgroup: '',
+    taxgrpcd: '',
     taxsubgroup: '',
     status: 'ZLS11',
     displayorder: '',
@@ -38,7 +40,7 @@ export class TaxsubgroupComponent {
     validityEndDt: null,
     taxrateexpression: '',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -115,8 +117,8 @@ export class TaxsubgroupComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let taxSubGrpId: number = params['taxSubGrpId'];
+        this.getMasterData(taxSubGrpId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -128,13 +130,33 @@ export class TaxsubgroupComponent {
 
   getMasterData(taxSubGrpId: any) {
     this._service
-      .serGetDataobject('getTaxSubGroup', { _id: taxSubGrpId })
+      .serGetDataobject('getTaxSubGroup', { taxSubGrpId: taxSubGrpId })
       .subscribe((dt: any) => {
-        console.log('dt', dt);
-        this.taxsubgroup = dt.data[0];
-        this.taxsubgroup['_id'] = this.taxsubgroup._id;
+        // console.log('dt', dt);
+        // this.taxsubgroup = dt.data[0];
+        // this.taxsubgroup['_id'] = this.taxsubgroup._id;
+        this.taxsubgroup = {
+          taxSubGrpId: dt.data[0].taxSubGrpId,
+          taxgroup: dt.data[0].taxgroup,
+          taxgrpcd: String,
+          taxsubgroup: dt.data[0].taxsubgroup,
+          status: dt.data[0].status,
+          displayorder: dt.data[0].displayorder,
+          taxrate: dt.data[0].taxrate,
+          validityStartDt: dt.data[0].validityStartDt,
+          validityEndDt: dt.data[0].validityEndDt,
+          taxrateexpression: dt.data[0].taxrateexpression,
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        };
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
+  }
+  onSelectTaxGrp(taxGrpId: any) {
+    let taxgrpcd = _.filter(this.taxGroupList, { taxGrpId: taxGrpId });
+    this.taxsubgroup.taxgrpcd =taxgrpcd[0].taxgroup.toLowerCase();
   }
 
   async onSaveClick() {

@@ -13,7 +13,7 @@ export class NewitemlistComponent {
 
   public mastersGridColumns ="newGridColumns";
   public masterGridData="getNewItem";
-  public paramKey=["_id"];
+  public paramKey=["newItemId"];
   
   public showEdit =true;
   public showView=true;

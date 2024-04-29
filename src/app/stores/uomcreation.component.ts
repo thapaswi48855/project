@@ -28,13 +28,14 @@ export class UomcreationComponent {
   public redirectToGrid:boolean =false;
 
   public uomCreation:any = {
+    uomCreationId:0,
     packageUom: '',
     unitUom: '',
     pkgSize: '',
     integrationId: '',
     status: 'ZLS11',
     createdt: null,
-    createby: '',
+    createby:  this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -108,8 +109,20 @@ export class UomcreationComponent {
       .serGetDataobject('getUomCreation', { _id: uomCreationId })
       .subscribe((dt: any) => {
         console.log('dt', dt);
-        this.uomCreation = dt.data[0];
-        this.uomCreation['_id']=this.uomCreation._id;
+        // this.uomCreation = dt.data[0];
+        // this.uomCreation['_id']=this.uomCreation._id;
+        this.uomCreation = {
+          uomCreationId :dt.data[0].uomCreationId ,
+          packageUom : dt.data[0].packageUom ,
+          unitUom : dt.data[0].unitUom ,
+          pkgSize : dt.data[0].pkgSize ,
+          integrationId : dt.data[0].integrationId ,
+          status : dt.data[0].status ,
+          createdt : dt.data[0].createdt ,
+          createby :  dt.data[0].createby ,
+          modifydt : null,
+          modifyby: this._service.getUserVal('userid'),
+        }
         this.isShowEditable= !this.isEditable && this.pageMode !='NEW';
       });
   }

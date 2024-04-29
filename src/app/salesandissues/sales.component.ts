@@ -26,6 +26,7 @@ export class SalesComponent {
   public isEditable: boolean = true;
 
   public sales: any = {
+    salesId:0,
     patientType: '2',
     date: null,
     store: '',

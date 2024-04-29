@@ -16,13 +16,18 @@ export class MasterserviceService {
   public appConfig: any = {};
   public apiHostUrl = '';
   public summary: any;
-
+  private counters: Map<string, number> = new Map<string, number>();
   constructor(
     private ht: HttpClient,
     private _globalData: GloblData,
     private _messageService: MessageService
   ) {
     this.getConfigData();
+    // Initialize the counter from local storage or default to 0 if not found
+    const savedCounters = localStorage.getItem('sequenceCounters');
+    if (savedCounters) {
+      this.counters = new Map<string, number>(JSON.parse(savedCounters));
+    }
   }
 
   async getConfigData() {
@@ -30,7 +35,7 @@ export class MasterserviceService {
       .getConfig()
       .toPromise()
       .then((re) => (this.appConfig = re));
-      console.log('apiHostUrl',this.appConfig.apiHostUrl)
+    console.log('apiHostUrl', this.appConfig.apiHostUrl);
   }
 
   getDateFromServer() {
@@ -107,14 +112,17 @@ export class MasterserviceService {
   serTokenGetData(methode: any, obj: any) {
     let resultData;
     const queryString = Object.keys(obj)
-      .map((key) => `${key}=${obj[key]}`)
+      .map((key) => `${key}=${obj[key].toString()}`)
       .join('&');
     let header = new HttpHeaders({
       authorization: window.localStorage.getItem('UserInfo') || '',
     });
-    return this.ht.get(`https://node-1-bi29.onrender.com/${methode}?${queryString}`, {
-      headers: header,
-    });
+    return this.ht.get(
+      `https://node-1-bi29.onrender.com/${methode}?${queryString}`,
+      {
+        headers: header,
+      }
+    );
     // .toPromise()
     // .then((res) => {
     //   resultData = res;
@@ -145,13 +153,16 @@ export class MasterserviceService {
       .join('&');
 
     //moduleid
-    return this.ht.get(`https://node-1-bi29.onrender.com/${methode}?${queryString}`, obj);
+    return this.ht.get(
+      `https://node-1-bi29.onrender.com/${methode}?${queryString}`,
+      obj
+    );
   }
 
   serGetSelectedDataobject(methode: any, obj: any) {
     //moduleid
     return this.ht.get(
-      `https://node-1-bi29.onrender.com/${methode}?moduleid=${obj._id}`,
+      `https://node-1-bi29.onrender.com/${methode}?moduleid=${obj.moduleid}`,
       obj
     );
   }
@@ -189,5 +200,38 @@ export class MasterserviceService {
   }
   isMobileDevice() {
     return window.innerWidth <= 768; // Adjust the threshold as needed
-}
+  }
+
+  // Method to get the next sequential number for a specific identifier
+  // getNextSequenceNumber(componentId: string): number {
+  //   let counter = this.counters.get(componentId) || 0;
+  //   counter += 1;
+  //   this.counters.set(componentId, counter);
+  //   // Save the updated counters to local storage
+  //   localStorage.setItem('sequenceCounters', JSON.stringify(Array.from(this.counters.entries())));
+  //   // return 
+  //   // this.ht.get(
+  //   //   `https://node-1-bi29.onrender.com/getSequncy`,
+  //   //   this.counters.entries()
+  //   // );
+  //   return counter;
+  // }
+
+   // Method to get the next sequential number for a given component
+   getNextSequenceNumber(componentId: string): any {
+    // return this.http.post<number>(`${this.baseUrl}/${componentId}/next`, {});
+    return this.ht.post(`https://node-1-bi29.onrender.com/${componentId}/next`, {})
+  }
+  getUserInfo(key:any){
+    let userInfo:any =window.localStorage.getItem('UserInfo');
+    let userDet =JSON.parse(userInfo);
+    return userDet[0][key] ;
+    
+  }
+
+  getUserVal(key:any){
+    let userKeyVal = this.getUserInfo(key);
+    return userKeyVal;
+  }
+
 }

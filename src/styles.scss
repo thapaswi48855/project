@@ -78,3 +78,43 @@ layout-topbar-logo{
 width: 16px;
 height: 16px;
 }
+.btn {
+  border: none;
+  width: 32px; /* Adjust width as needed */
+  height: 32px; /* Adjust height as needed */
+  display: inline-block;
+}
+
+.addtimeIcon {
+  background: #03a203;
+  color: #fff;
+  border-radius: 50%; /* Makes it round */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addtimeIcon i {
+  font-size: 20px; /* Adjust the font size of the icon */
+  color: #fff !important;
+}
+
+.addNewBtn {
+  padding: 4px 8px; /* Adjust padding as needed */
+  font-weight: 600;
+  margin: 0;
+  text-decoration: none;
+  color: #000;
+}
+.remtimeIcon {
+  background: #e73509;
+  color: #fff;
+  border-radius: 50%; /* Makes it round */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.remtimeIcon i {
+  font-size: 20px; /* Adjust the font size of the icon */
+  color: #fff !important;
+}

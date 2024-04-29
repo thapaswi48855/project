@@ -26,6 +26,7 @@ export class StockentryComponent {
   public isShowEditable: any = true;
 
   public stockEntry: any = {
+    stockEntryId: 0,
     store: '',
     ponumber: '',
     quantityUom: '',
@@ -48,7 +49,7 @@ export class StockentryComponent {
     meansTransport: '',
     consignmentNo: '',
     consignmentDate: '',
-    seletedItemList: [],
+    seletedItemLists: [],
     totalItemSchDiscount: '',
     cgst: '',
     sgst: '',
@@ -95,29 +96,39 @@ export class StockentryComponent {
   public purchaseList: any = [];
 
   public errorMsgs: any = {
+    storeReq: '',
     supplierReq: '',
     invoiceNoReq: '',
     invoiceDteReq: '',
-    dueDateReq:'',
+    dueDateReq: '',
     itemNameReq: '',
     mrpReq: '',
     rateReq: '',
     qtyReq: '',
   };
   public mobileState = false;
-  public layoutRes :any ='';
+  public layoutRes: any = '';
+  public supplierList: any = [];
 
   constructor(
     private _service: MasterserviceService,
     private _activatedRoute: ActivatedRoute,
     public _messageService: MessageService
   ) {
-    this.mobileState =this._service.isMobileDevice();
-    this.layoutRes =this.mobileState ?'stack':'scroll'
+    this.mobileState = this._service.isMobileDevice();
+    this.layoutRes = this.mobileState ? 'stack' : 'scroll';
   }
 
   onGetErrorMsgs(ctrl: any, showToast: any) {
     switch (ctrl) {
+      case 'store':
+        this.errorMsgs.storeReq =
+          this.stockEntry[ctrl] == '' ||
+          this.stockEntry[ctrl] == undefined ||
+          this.stockEntry[ctrl] == null
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Store')
+            : '';
+        break;
       case 'supplier':
         this.errorMsgs.supplierReq =
           this.stockEntry[ctrl] == '' ||
@@ -139,15 +150,15 @@ export class StockentryComponent {
           this.stockEntry[ctrl] == '' ||
           this.stockEntry[ctrl] == undefined ||
           this.stockEntry[ctrl] == null
-            ? this._service.onGetErrorMsgs(ctrl, true, 'invoice date')
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Invoice date')
             : '';
         break;
-        case 'dueDate':
+      case 'dueDate':
         this.errorMsgs.dueDateReq =
           this.stockEntry[ctrl] == '' ||
           this.stockEntry[ctrl] == undefined ||
           this.stockEntry[ctrl] == null
-            ? this._service.onGetErrorMsgs(ctrl, true, 'due date')
+            ? this._service.onGetErrorMsgs(ctrl, true, 'Due date')
             : '';
         break;
       case 'itemName':
@@ -190,18 +201,18 @@ export class StockentryComponent {
       await this._service.getConfigData();
     }
 
-    this.mobileState =this._service.isMobileDevice();
-    this.layoutRes =this.mobileState ?'stack':'scroll'
+    this.mobileState = this._service.isMobileDevice();
+    this.layoutRes = this.mobileState ? 'stack' : 'scroll';
 
     this.gridCols = this._service.getGridColumns('purchaseItemListCols');
 
-    this._service.serGetDataobject('getNewItem', {}).subscribe((dt: any) => {
-      console.log(dt);
-      this.newItemList = dt.data;
-      _.forEach(this.newItemList, (item, ind) => {
-        item['selected'] = false;
-      });
-    });
+    // this._service.serGetDataobject('getNewItem', {}).subscribe((dt: any) => {
+    //   console.log(dt);
+    //   this.newItemList = dt.data;
+    //   _.forEach(this.newItemList, (item, ind) => {
+    //     item['selected'] = false;
+    //   });
+    // });
 
     this._service
       .serGetDataobject('getStoreMaster', { status: 'ZLS11' })
@@ -217,7 +228,8 @@ export class StockentryComponent {
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLPoDT' })
       .subscribe((dt: any) => {
-        this.poDiscountTypeList = dt.data[0].subMasterData;
+        this.poDiscountTypeList =
+          dt.data.length > 0 ? dt.data[0].subMasterData : [];
       });
 
     this._service
@@ -259,15 +271,22 @@ export class StockentryComponent {
       .serGetDataobject('getTaxSubGroup', { status: 'ZLS11' })
       .subscribe((dt: any) => {
         this.taxSubGrpList = dt.data;
-        this.cgstList = this.taxSubGrpList; //_.filter(this.taxSubGrpList);
-        this.sgstList = this.taxSubGrpList; //_.filter(this.taxSubGrpList);
-        this.igstList = this.taxSubGrpList; //_.filter(this.taxSubGrpList)
+        this.cgstList = _.filter(this.taxSubGrpList, { taxgrpcd: 'cgst' });
+        this.sgstList = _.filter(this.taxSubGrpList, { taxgrpcd: 'sgst' });
+        this.igstList = _.filter(this.taxSubGrpList, { taxgrpcd: 'igst' });
       });
 
     this._service
       .serGetDataobject('getGeneralMaster', { masterid: 'ZLTGT1' })
       .subscribe((dt: any) => {
         this.taxGrpTypeList = dt.data[0].subMasterData;
+      });
+
+    this._service
+      .serGetDataobject('getSupplierDetails', { status: 'ZLS11' })
+      .subscribe((dt: any) => {
+        this.supplierList = dt.data;
+        console.log('categoryList', this.storeList);
       });
 
     this._activatedRoute.paramMap.subscribe((param: ParamMap) => {
@@ -289,14 +308,58 @@ export class StockentryComponent {
   public sgstList: any = [];
   public igstList: any = [];
   onItemClick() {
+    (this.errorMsgs.itemNameReq = ''),
+      (this.errorMsgs.mrpReq = ''),
+      (this.errorMsgs.qtyReq = ''),
+      (this.errorMsgs.rateReq = '');
+
+    let objectstore = [
+      'store',
+      'supplier',
+      'invoiceNo',
+      'invoiceDte',
+      'dueDate',
+    ];
+    _.forEach(objectstore, (ctrl) => {
+      this.onGetErrorMsgs(ctrl, true);
+    });
+
+    console.log('newItemList', this.newItemList);
+
+    let errorExist = this._service.showErr(this.errorMsgs);
+    if (errorExist) {
+      this._messageService.add({
+        sticky: true,
+        severity: 'warn',
+        summary: 'Warn',
+        detail: 'Please Check the below Errors',
+      });
+      return;
+    }
+
     this.visible = true;
+    this._service
+      .serGetDataobject('getRasiePurchaseOrderMaster', {})
+      .subscribe((dt: any) => {
+        console.log(dt); //approvalStatus
+        let newItemList = _.filter(dt.data, { store: this.stockEntry.store });
+        // let newItemList = _.filter(dt.data, (obj) => {
+        //   obj.store == this.stockEntry.store && obj.approvalStatus == 'ZLARS11';
+        // });
+        _.forEach(newItemList, (item, ind) => {
+          // item['selected'] = false;
+          this.newItemList.push(item.purchuseItems[0]);
+        });
+        console.log('selectItem', this.newItemList);
+      });
+
     this._service
       .serGetDataobject('getTaxSubGroup', { status: 'ZLS11' })
       .subscribe((dt: any) => {
         this.taxSubGrpList = dt.data;
-        this.cgstList = this.taxSubGrpList; //_.filter(this.taxSubGrpList);
-        this.sgstList = this.taxSubGrpList; //_.filter(this.taxSubGrpList);
-        this.igstList = this.taxSubGrpList; //_.filter(this.taxSubGrpList)
+        this.cgstList = _.filter(this.taxSubGrpList, { taxgrpcd: 'cgst' });
+        this.sgstList = _.filter(this.taxSubGrpList, { taxgrpcd: 'sgst' });
+        this.igstList = _.filter(this.taxSubGrpList, { taxgrpcd: 'igst' });
       });
 
     this._service
@@ -313,8 +376,8 @@ export class StockentryComponent {
         console.log('dt', dt);
         this.stockEntry = dt.data[0];
         this.stockEntry['_id'] = this.stockEntry._id;
-        this.newItemsList = this.stockEntry.seletedItemList;
-        // let aaa = this.stockEntry.seletedItemList.split(',');
+        this.newItemsList = this.stockEntry.seletedItemLists;
+        // let aaa = this.stockEntry.seletedItemLists.split(',');
         // console.log('aaa', aaa);
         // _.forEach(aaa, (a) => {
         //   let b = _.filter(this.newItemList, { _id: a });
@@ -345,7 +408,13 @@ export class StockentryComponent {
   }
 
   onSaveClick() {
-    let objectstore = ['supplier','invoiceNo','invoiceDte','dueDate'];
+    let objectstore = [
+      'store',
+      'supplier',
+      'invoiceNo',
+      'invoiceDte',
+      'dueDate',
+    ];
     _.forEach(objectstore, (ctrl) => {
       this.onGetErrorMsgs(ctrl, true);
     });
@@ -362,7 +431,7 @@ export class StockentryComponent {
       });
       return;
     }
-    this.stockEntry.seletedItemList = this.newItemsList;
+    this.stockEntry.seletedItemLists = this.newItemsList;
     let savingJson = this.stockEntry;
     console.log(this.stockEntry);
     this.saving.onSaveJson('Store', 'insertStockEntryMaster', [savingJson]);
@@ -381,49 +450,13 @@ export class StockentryComponent {
   onNewItemSelect(event: any) {
     if (event.selected) {
       let a = event._id;
-      this.stockEntry.seletedItemList =
-        this.stockEntry.seletedItemList == '' ? a : a + ',';
+      this.stockEntry.seletedItemLists =
+        this.stockEntry.seletedItemLists == '' ? a : a + ',';
     }
-    // this.stockEntry.seletedItemList.push(event._id)
+    // this.stockEntry.seletedItemLists.push(event._id)
   }
   public centerTaxRate: any = '0';
-  // public raisePurchaseOrder: any = {
-  //   store: '',
-  //   department: '',
-  //   quantityUom: 'ZLQU11',
-  //   supplier: '',
-  //   supplierAdderss: '',
-  //   poallowedTo: '',
-  //   poDate: '',
-  //   enquiryNo: '',
-  //   enuiryDate: '',
-  //   quotationNo: '',
-  //   quotationDate: '',
-  //   Reference: '',
-  //   creditPeriod: '',
-  //   purposeOfPurchase: '',
-  //   uploadDocumment: '',
-  //   expectedDeliveryDate: '',
-  //   remarks: '',
-  //   seletedItemList: [],
-  //   cgst: 0,
-  //   sgst: 0,
-  //   gst: 0,
-  //   taotaltaxAmt: 0,
-  //   totalItemDiscount: 0,
-  //   totalItemAmount: 0,
-  //   poDiscountType: '',
-  //   poDiscountValue: 0,
-  //   poDiscontAmount: 0,
-  //   roundOff: '',
-  //   transportationCharges: 0,
-  //   InvTotal: 0,
-  //   status: '',
-  //   createdt: null,
-  //   createby: '',
-  //   modifydt: null,
-  //   modifyby: '',
-  // };
+
   public itemDetails: any = {
     itemName: '',
     batch: '',
@@ -478,92 +511,28 @@ export class StockentryComponent {
     this.itemDetails.adjMrp =
       this.itemDetails.mrp - mrp * (this.itemDetails.taxRate / 100);
   }
-  // onDiscountAmt(discount: any) {
-  //   this.itemDetails.taxAmt = discount / 100;
-  //   this.itemDetails.disAmt = -(parseFloat(discount) + discount / 100);
-  // }
-  // onSchDiscountAmt(schDis: any) {
-  //   // this.itemDetails.disAmt
-  //   // this.itemDetails.schDiscount
-  //   let Amt =
-  //     parseFloat(this.itemDetails.rate) -
-  //     (parseFloat(this.itemDetails.disAmt) +
-  //       parseFloat(this.itemDetails.schDiscount));
-  //   // this.itemDetails.taxAmt += schDis / 100;
-  //   // this.itemDetails.disAmt += -(parseFloat(schDis) + schDis / 100);
-  //   this.itemDetails.taxAmt = Amt * (this.itemDetails.taxRate / 100);
-  // }
+
   public newItemsList: any = [];
   onAddItem(item: any) {
-       console.log(item);
+    console.log(item);
     item['totalAmt'] =
       parseFloat(this.itemDetails.qty) * parseFloat(this.itemDetails.rate) -
       this.itemDetails.disAmt +
       item.taxAmt;
     this.newItemsList.push(item);
-    // this.raisePurchaseOrder.cgst = 0;
-    // this.raisePurchaseOrder.sgst = 0;
-    // this.raisePurchaseOrder.taotaltaxAmt = 0;
-    // this.raisePurchaseOrder.totalItemDiscount = 0;
-    // this.raisePurchaseOrder.totalItemAmount = 0;
-    // _.forEach(this.newItemsList, (item, ind) => {
-    //   this.raisePurchaseOrder.cgst += item.cgsttaxAmt;
-    //   this.raisePurchaseOrder.sgst += item.sgsttaxAmt;
-    //   this.raisePurchaseOrder.taotaltaxAmt += item.taxAmt;
-    //   this.raisePurchaseOrder.totalItemDiscount += item.disAmt;
-    //   this.raisePurchaseOrder.totalItemAmount += item.totalAmt;
-    // });
+
     this.itemDetails = JSON.parse(this.emptyItemDetails);
   }
-  // onRateWiseTaxAmt(qty: any) {
-  //   this.itemDetails.taxAmt =
-  //     ((parseFloat(qty) * parseFloat(this.itemDetails.rate) -
-  //       this.itemDetails.disAmt) *
-  //       this.itemDetails.mrp) /
-  //     100;
-  // }
 
-  onPoTotalAmt(poValue: any) {
-    // this.raisePurchaseOrder.poDiscontAmount=0;
-    // console.log('poValue', poValue);
-    // if (poValue == 'ZLPoDT1') {
-    //   this.raisePurchaseOrder.poDiscountValue=parseFloat(this.raisePurchaseOrder.totalItemAmount)*(parseFloat(this.raisePurchaseOrder.poDiscountValue)/100)
-    //   this.raisePurchaseOrder.poDiscontAmount=this.raisePurchaseOrder.poDiscountValue;
-    //   this.raisePurchaseOrder.poTotal=parseFloat(this.raisePurchaseOrder.totalItemAmount)-parseFloat(this.raisePurchaseOrder.poDiscountValue)
-    // }else{
-    //   this.raisePurchaseOrder.poDiscontAmount=this.raisePurchaseOrder.poDiscountValue
-    //   this.raisePurchaseOrder.poTotal=parseFloat(this.raisePurchaseOrder.totalItemAmount)-parseFloat(this.raisePurchaseOrder.poDiscontAmount)
-    // }
-  }
+  onPoTotalAmt(poValue: any) {}
   onSelectPoNum(poNum: any) {
     let stockDet = _.filter(this.purchaseList, { _id: poNum });
     console.log('stockDet', stockDet);
     this.newItemsList = stockDet[0].purchuseItems;
     this.stockEntry.quantityUom = stockDet[0].quantityUom;
     this.stockEntry.supplier = stockDet[0].supplier;
-    this.stockEntry.supplieraddress = stockDet[0].supplierAdderss ;
+    this.stockEntry.supplieraddress = stockDet[0].supplierAdderss;
 
-    //  this.raisePurchaseOrder=stockDet[0];
-    //  this.raisePurchaseOrder.cgst = 0;
-    //   this.raisePurchaseOrder.sgst = 0;
-    //   this.raisePurchaseOrder.taotaltaxAmt = 0;
-    //   this.raisePurchaseOrder.totalItemDiscount = 0;
-    //   this.raisePurchaseOrder.totalItemAmount = 0;
-    //  _.forEach(this.newItemsList, (item, ind) => {
-    //   this.raisePurchaseOrder.cgst += item.cgsttaxAmt;
-    //   this.raisePurchaseOrder.sgst += item.sgsttaxAmt;
-    //   this.raisePurchaseOrder.taotaltaxAmt += item.taxAmt;
-    //   this.raisePurchaseOrder.totalItemDiscount += item.disAmt;
-    //   this.raisePurchaseOrder.totalItemAmount += item.totalAmt;
-    // });
-    // console.log(item);
-    // item['totalAmt'] =
-    //   parseFloat(this.itemDetails.qty) * parseFloat(this.itemDetails.rate) -
-    //   this.itemDetails.disAmt +
-    //   item.taxAmt;
-
-    // item.itemName = this.itemName;
-    // this.newItemsList.push(item);
     this.stockEntry.totalcgst = 0;
     this.stockEntry.totalsgst = 0;
     this.stockEntry.tataltaxAmt = 0;
@@ -612,10 +581,6 @@ export class StockentryComponent {
     this.onSaveClick();
   }
 
-
-  
-
-
   onSavePrintClick() {}
   onAddItemClick(item: any) {
     let objectstore = ['qty', 'rate', 'mrp', 'itemName'];
@@ -635,7 +600,7 @@ export class StockentryComponent {
     }
     // item.itemName = this.itemName;
     item.totalAmt =
-      parseFloat(item.rate) -
+      (parseFloat(item.rate) * parseFloat(item.qty)) -
       (parseFloat(item.schDiscount) + parseFloat(item.disAmt)) +
       parseFloat(item.taxAmt);
     item.itemName = this.itemName;
@@ -644,7 +609,7 @@ export class StockentryComponent {
     } else {
       this.newItemsList['rowInd'] = item;
     }
-
+    
     this.stockEntry.totalcgst = 0;
     this.stockEntry.totalsgst = 0;
     this.stockEntry.tataltaxAmt = 0;
@@ -752,10 +717,23 @@ export class StockentryComponent {
     this.itemDetails.manufacture = event.manufacture;
     this.itemDetails.stock = event.stock;
     this.itemDetails.allStoreStock = event.allStoreStock;
+    this.itemDetails.pckSize =event.pckSize;
+    // let cgst = _.filter(event.taxlist,{taxgrpcd:'cgst'});
+    this.itemDetails.cgst = event.cgst; //cgst[0].taxSubGrp ;
+    console.log(this.itemDetails.cgst);
+    // let sgst = _.filter(event.taxlist,{taxgrpcd:'sgst'});
+    this.itemDetails.sgst = event.sgst;
+    // let igst = _.filter(event.taxlist,{taxgrpcd:'igst'});
+    this.itemDetails.igst = event.igst;
   }
-  onRemoveImg(){}
-  onShowImg(){ this.showImg = true;}
-  onCancelItem(itemDet:any){
-
+  async onLoopUpAdd(event: any) {
+    console.log('event', event);
+    this.stockEntry.supplier = await event.regionstate;
+    this.stockEntry.supplieraddress = event.contactaddress;
   }
+  onRemoveImg() {}
+  onShowImg() {
+    this.showImg = true;
+  }
+  onCancelItem(itemDet: any) {}
 }

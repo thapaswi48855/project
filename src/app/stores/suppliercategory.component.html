@@ -36,7 +36,7 @@
         [options]="statusList"
         [(inputModel)]="supplierCategory.status"
         [optionLabel]="'subMasterName'"
-        [optionValue]="'subMasterId'"
+        [optionValue]="'subMasterId'" [disabled]="pageMode !='EDIT'" 
         ></app-dropdown>
       <!-- </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->

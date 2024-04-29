@@ -18,7 +18,7 @@
     <div class="card">
     <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 120px)' }">
       <div class="grid">
-        <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
+        <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
           <app-inputtext
             [(inputModel)]="servicegroup.servicegroupname"
             [labelName]="'Service Group Name'"
@@ -34,7 +34,7 @@
           <app-dropdown
             [(inputModel)]="servicegroup.status"
             [labelName]="'Status'" [options]="statusList"
-            [disabled]="!isEditable" [optionLabel]="'subMasterName'"
+            [disabled]="pageMode != 'EDIT'" [optionLabel]="'subMasterName'"
             [optionValue]="'subMasterId'"
           ></app-dropdown>
           <app-inputtext

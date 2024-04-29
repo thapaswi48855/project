@@ -27,12 +27,13 @@ export class GenericsubclassificationdetailsComponent {
   public redirectToGrid: boolean = false;
 
   public genericSubClassification: any = {
+    genSubClasiId:0,
     clasificationName: '',
     subClasificationName: '',
     subClasificationDesc: '',
     status: 'ZLS11',
     createdt: null,
-    createby: '',
+    createby: this._service.getUserVal('userid'),
     modifydt: null,
     modifyby: '',
   };
@@ -109,8 +110,8 @@ export class GenericsubclassificationdetailsComponent {
       let params: any = param.get('param');
       if (params != null) {
         params = JSON.parse(atob(params));
-        let _id: number = params['_id'];
-        this.getMasterData(_id);
+        let genSubClasiId: number = params['genSubClasiId'];
+        this.getMasterData(genSubClasiId);
         this.pageMode = params['mode'];
       } else {
         this.isEditable = true;
@@ -123,13 +124,24 @@ export class GenericsubclassificationdetailsComponent {
   getMasterData(genericSubClassificationId: any) {
     this._service
       .serGetDataobject('getGenericSubClassificationDetails', {
-        _id: genericSubClassificationId,
+        genSubClasiId: genericSubClassificationId,
       })
       .subscribe((dt: any) => {
         console.log('dt', dt);
-        this.genericSubClassification = dt.data[0];
-        this.genericSubClassification['_id'] =
-          this.genericSubClassification._id;
+        // this.genericSubClassification = dt.data[0];
+        // this.genericSubClassification['_id'] =
+        //   this.genericSubClassification._id;
+        this.genericSubClassification = {
+          genSubClasiId:dt.data[0].genSubClasiId,
+          clasificationName: dt.data[0].clasificationName,
+          subClasificationName: dt.data[0].subClasificationName,
+          subClasificationDesc: dt.data[0].subClasificationDesc,
+          status: dt.data[0].status,
+          createdt: dt.data[0].createdt,
+          createby: dt.data[0].createby,
+          modifydt: null,
+          modifyby: this._service.getUserVal('userid'),
+        };
         this.isShowEditable = !this.isEditable && this.pageMode != 'NEW';
       });
   }

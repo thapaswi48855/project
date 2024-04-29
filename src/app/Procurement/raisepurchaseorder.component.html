@@ -30,7 +30,7 @@
                 [labelName]="'Store'"
                 [(inputModel)]="raisePurchaseOrder.store"
                 [optionLabel]="'store'"
-                [optionValue]="'_id'"
+                [optionValue]="'storemasterid'"
                 [disabled]="!isEditable"
                 [options]="storeList"
                 (onBlur)="onGetErrorMsgs('store', true)"
@@ -80,8 +80,7 @@
                 [(inputModel)]="raisePurchaseOrder.poallowedTo"
                 [disabled]="!isEditable"
                 [options]="poallowedToList"
-                (onBlur)="onGetErrorMsgs('poallowedTo', true)"
-                errorMessages="{{ errorMsgs.poallowedToReq }}"
+                
               ></app-dropdown>
             </div>
             <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-3">
@@ -89,6 +88,8 @@
                 [labelName]="'PO Date'"
                 [(inputModel)]="raisePurchaseOrder.poDate"
                 [disabled]="!isEditable"
+                (onBlur)="onGetErrorMsgs('poDate', true)"
+                errorMessages="{{ errorMsgs.poDateReq }}"
               ></app-datepicker>
             </div>
             <div class="field col-12 md:col-4 sm:col-4 lg:col-3 xl:col-3">
@@ -541,10 +542,9 @@
             [(inputModel)]="itemDetails.cgst"
             [options]="cgstList"
             [optionLabel]="'taxsubgroup'"
-            [optionValue]="'_id'"
+            [optionValue]="'taxSubGrpId'"
             (onChange)="onCgstTaxAmt(itemDetails.cgst)"
           ></app-dropdown>
-          <!-- {{cgstList |json}} -->
         </div>
         <div class="field col-12 md:col-4 sm:col-6 lg:col-4 xl:col-4">
           <app-dropdown
@@ -552,7 +552,7 @@
             [(inputModel)]="itemDetails.sgst"
             [options]="sgstList"
             [optionLabel]="'taxsubgroup'"
-            [optionValue]="'_id'"
+            [optionValue]="'taxSubGrpId'"
             (onChange)="onSgstTaxAmt(itemDetails.sgst)"
           ></app-dropdown>
         </div>
@@ -562,7 +562,7 @@
             [(inputModel)]="itemDetails.igst"
             [options]="igstList"
             [optionLabel]="'taxsubgroup'"
-            [optionValue]="'_id'"
+            [optionValue]="'taxSubGrpId'"
           ></app-dropdown>
         </div>
       </div>

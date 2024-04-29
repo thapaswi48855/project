@@ -34,7 +34,7 @@
         <app-dropdown
           [labelName]="'Status'"
           [(inputModel)]="genericClassification.status"
-          [disabled]="!isEditable"
+          [disabled]="pageMode !='EDIT'"
           [options]="statusList"
           [optionLabel]="'subMasterName'"
           [optionValue]="'subMasterId'"

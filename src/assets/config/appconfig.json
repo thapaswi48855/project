@@ -2,8 +2,6 @@
     "ErrorMsgs":{
         "erroeReq":"this  is error"
     },
-    
-    
     "drMastersGridColumns":[
         {
             "field":"",
@@ -1764,7 +1762,7 @@
             }
         },
         {
-            "field": "mrp",
+            "field": "pckSize",
             "header": "Package",
             "style": {
                 "width": "100px"

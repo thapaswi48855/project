@@ -20,12 +20,16 @@ export class DocumentComponent {
   public pageMode ='NEW';
 
   public document: any = {
-    _id:'',
+    documentid:0,
     documentName: '',
     documentPageUrl: '',
     documentGridUrl: '',
     documentDescription: '',
     status: true,
+    createdt: null,
+    createby: this._service.getUserVal('userid'),
+    modifydt: null,
+    modifyby: '',
   };
   public emptyDocument = JSON.stringify(this.document);
   public currentRow:any=[];
@@ -67,11 +71,16 @@ console.log(docPermissions)
           console.log(dt);
           this.currentRow =dt.data[0]
           this.document ={
+            documentid:this.currentRow.documentid,
             documentName: this.currentRow.document ,
             documentPageUrl: this.currentRow.documentpageurl,
             documentGridUrl: this.currentRow.documentgridUrl,
             documentDescription: this.currentRow.documentdescription,
-            status: true,
+            status: this.document.status == 'A' ? true : false,
+            createdt: null,
+            createby: this.currentRow.createby,
+            modifydt: null,
+            modifyby: this._service.getUserVal('userid'),
           }
   
         });
@@ -108,16 +117,20 @@ console.log(docPermissions)
     }
 
     let savingJson = {
-      _id: this.pageMode == 'NEW' ?0:this.currentRow._id,
+      documentid: this.pageMode == 'NEW' ?0:this.currentRow.documentid,
       document: this.document.documentName,
       documentpageurl: this.document.documentPageUrl,
       documentgridUrl: this.document.documentGridUrl,
       documentdescription: this.document.documentDescription,
       Status: this.document.status == true ? 'A' : 'D',
+      createdt: null,
+      createby: this._service.getUserVal('userid'),
+      modifydt: null,
+      modifyby: '',
     };
-    if(savingJson._id == 0){
-      delete savingJson._id ;
-    }
+    // if(savingJson._id == 0){
+    //   delete savingJson._id ;
+    // }
     // this.saving.onSaveJson('Store',this.store,this.emptyStore)
     this._service.onSaveJson(this.pageTitle, 'insertDocuments', [savingJson]);
     this.onClearClick();

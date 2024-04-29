@@ -13,7 +13,7 @@ export class GenericclassificationdetailslistComponent {
 
   public mastersGridColumns = 'genericClssificationDetailsGridColumns';
   public masterGridData = 'getGenericClassificationDetails';
-  public paramKey = ['_id'];
+  public paramKey = ['genericClassificationId'];
 
   public showEdit = true;
   public showView = true;
