@@ -1762,7 +1762,7 @@
             }
         },
         {
-            "field": "mrp",
+            "field": "pckSize",
             "header": "Package",
             "style": {
                 "width": "100px"
