@@ -33,7 +33,7 @@
               [(inputModel)]="itemCategory.categoryName"
               (onBlur)="onGetErrorMsgs('categoryName', true)"
               errorMessages="{{ errorMsgs.categoryName }}"
-              [disabled]="!isEditable"
+              [disabled]="!isEditable" pKeyFilter="alpha"
             ></app-inputtext>
           </div>
 
@@ -112,7 +112,7 @@
             <app-inputtext
               [labelName]="'Discount %'"
               [(inputModel)]="itemCategory.discount"
-              [disabled]="!isEditable"
+              [disabled]="!isEditable" pKeyFilter="num"
             ></app-inputtext>
           </div>
           <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">

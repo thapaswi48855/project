@@ -27,14 +27,14 @@
                   [(inputModel)]="supplier.supplierName"
                   (onBlur)="onGetErrorMsgs('supplierName', true)"
                   errorMessages="{{ errorMsgs.supplierNameReq }}"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" pKeyFilter="alpha"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
                 <app-inputtext
                   [labelName]="'Supplier Code'"
                   [(inputModel)]="supplier.suppliercode"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" pKeyFilter="alphanum"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
@@ -74,35 +74,35 @@
                   [(inputModel)]="supplier.supplierGSTINNumber"
                   (onBlur)="onGetErrorMsgs('supplierGSTINNumber', true)"
                   errorMessages="{{ errorMsgs.supplierGSTINNumberReq }}"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" pKeyFilter="alphanum"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
                 <app-inputtext
                   [labelName]="'Credite Periode (Days)'"
                   [(inputModel)]="supplier.suppliercreditPeriod"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" pKeyFilter="int" maxlength="3"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
                 <app-inputtext
                   [labelName]="'Drug License Number'"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" pKeyFilter="alphanum"
                   [(inputModel)]="supplier.supplierdrugLicenseNo"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
                 <app-inputtext
                   [labelName]="'PAN No.'"
-                  [disabled]="!isEditable"
-                  [(inputModel)]="supplier.supplierPANNo"
+                  [disabled]="!isEditable" pKeyFilter="alphanum"
+                  [(inputModel)]="supplier.supplierPANNo" maxlength="12"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
                 <app-inputtext
                   [labelName]="'Corparate Identification Number (CIN)'"
                   [(inputModel)]="supplier.suppliercorporteIdentificationNumber"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" pKeyFilter="alphanum"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
@@ -126,16 +126,16 @@
             <app-inputtext
               [labelName]="'City'"
               [(inputModel)]="supplier.regioncity"
-              [disabled]="!isEditable"
+              [disabled]="!isEditable" pKeyFilter="alpha"
             ></app-inputtext>
             <app-inputtext
               [labelName]="'State'"
-              [disabled]="!isEditable"
+              [disabled]="!isEditable" pKeyFilter="alpha"
               [(inputModel)]="supplier.regionstate"
             ></app-inputtext>
             <app-inputtext
               [labelName]="'Country'"
-              [disabled]="!isEditable"
+              [disabled]="!isEditable" pKeyFilter="alpha"
               [(inputModel)]="supplier.regioncountry"
             ></app-inputtext>
           </p-fieldset>
@@ -152,30 +152,30 @@
               </div>
               <div class="field col">
                 <app-inputtext
-                  [labelName]="'Phone 1'"
+                  [labelName]="'Phone 1'" pKeyFilter="int"
                   [(inputModel)]="supplier.contactphone1"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" maxlength="10"
                 ></app-inputtext>
               </div>
               <div class="field col">
                 <app-inputtext
-                  [labelName]="'Phone 2'"
+                  [labelName]="'Phone 2'" pKeyFilter="int"
                   [(inputModel)]="supplier.contactphone2"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" maxlength="10"
                 ></app-inputtext>
               </div>
               <div class="field col">
                 <app-inputtext
                   [labelName]="'postal Code'"
                   [(inputModel)]="supplier.contactpostalCode"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" pKeyFilter="alphanum" maxlength="10"
                 ></app-inputtext>
               </div>
               <div class="field col">
                 <app-inputtext
                   [labelName]="'Fax'"
                   [(inputModel)]="supplier.contactfax"
-                  [disabled]="!isEditable"
+                  [disabled]="!isEditable" pKeyFilter="alphanum" maxlength="12"
                 ></app-inputtext>
               </div>
               <div class="field col">
@@ -199,12 +199,12 @@
           <p-fieldset legend="Help Desk" [toggleable]="true">
             <app-inputtext
               [labelName]="'Name'"
-              [disabled]="!isEditable"
+              [disabled]="!isEditable" pKeyFilter="alpha"
               [(inputModel)]="supplier.helpdeskname"
             ></app-inputtext>
             <app-inputtext
               [labelName]="'PH No.'"
-              [disabled]="!isEditable"
+              [disabled]="!isEditable" pKeyFilter="int" maxlength="10"
               [(inputModel)]="supplier.helpdeskphno"
             ></app-inputtext>
             <app-inputtext

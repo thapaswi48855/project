@@ -43,11 +43,11 @@
           <app-inputtext
             [(inputModel)]="servicesubgroup.servicesubgroupname"
             [labelName]="'Service Sub Group Name'"
-            [disabled]="!isEditable"
+            [disabled]="!isEditable" pKeyFilter="alpha"
           ></app-inputtext>
           <app-inputtext
             [(inputModel)]="servicesubgroup.code"
-            [labelName]="'Alias/Code'"
+            [labelName]="'Alias/Code'" pKeyFilter="alphanum"
             [disabled]="!isEditable"
           ></app-inputtext>
           <app-inputtext

@@ -24,12 +24,12 @@
             [labelName]="'Service Group Name'"
             (onBlur)="onGetErrorMsgs('servicegroupname', true)"
             errorMessages="{{errorMsgs.servicegroupname}}"
-            [disabled]="!isEditable"
+            [disabled]="!isEditable" pKeyFilter="alpha"
           ></app-inputtext>
           <app-inputtext
             [(inputModel)]="servicegroup.displayorder"
             [labelName]="'Display Order:'"
-            [disabled]="!isEditable"
+            [disabled]="!isEditable" pKeyFilter="alphanum"
           ></app-inputtext>
           <app-dropdown
             [(inputModel)]="servicegroup.status"
@@ -39,7 +39,7 @@
           ></app-dropdown>
           <app-inputtext
             [(inputModel)]="servicegroup.code"
-            [labelName]="'Alias/Code'"
+            [labelName]="'Alias/Code'" pKeyFilter="alphanum"
             [disabled]="!isEditable"
           ></app-inputtext>
         </div>

@@ -36,6 +36,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DialogModule } from 'primeng/dialog';
 import { TreeSelectModule } from 'primeng/treeselect';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 
 
@@ -72,14 +73,14 @@ import { LookupComponent } from '../directives/lookup.component';
     CheckboxModule,HttpClientModule,MenuModule,TabMenuModule,PaginatorModule,ScrollTopModule,TabViewModule,
     ButtonModule,AutoCompleteModule,FieldsetModule,DynamicDialogModule,TreeSelectModule,OverlayPanelModule,MegaMenuModule,PanelMenuModule,
     ToastModule,CheckboxModule,SelectButtonModule,SplitterModule,ScrollPanelModule,PanelModule,FileUploadModule,DialogModule,
-    InputTextareaModule,SidebarModule,ConfirmPopupModule,RadioButtonModule,CalendarModule,MultiSelectModule],
+    InputTextareaModule,SidebarModule,ConfirmPopupModule,RadioButtonModule,CalendarModule,MultiSelectModule,KeyFilterModule],
   exports: [CommonModule, DropdownModule,InputTextModule,FormsModule ,ReactiveFormsModule,TableModule,
     CheckboxModule,HttpClientModule,MenuModule,TabMenuModule,PaginatorModule,ScrollTopModule,TabViewModule,
     ButtonModule,AutoCompleteModule,FieldsetModule,DynamicDialogModule,TreeSelectModule,OverlayPanelModule,ToastModule,CheckboxModule,
     SelectButtonModule,SplitterModule,ScrollPanelModule,PanelModule,MegaMenuModule,PanelMenuModule,InputTextareaModule,SidebarModule,
     InputtextComponent,DropdownComponent,HeaderComponent,CheckboxComponent,HomeComponent,GridviewComponent,
     TextareaComponent,LoginComponent,ConfirmPopupModule,RadioButtonModule,SavingComponent,MultiselectComponent,LabelbindComponent,LookupComponent,
-    DatepickerComponent,CalendarModule,MultiSelectModule,FileUploadModule,DialogModule,TreeSelectModule],
+    DatepickerComponent,CalendarModule,MultiSelectModule,FileUploadModule,DialogModule,TreeSelectModule,KeyFilterModule],
     providers: [DialogService,MessageService,ConfirmationService]
 })
 export class SharedcomponentModule { }

@@ -39,13 +39,13 @@ export class NewUserComponent {
 
     this._service.serGetData('getRoles').subscribe((dt: any) => {
       console.log('a', dt.data);
-      let rolesLists = dt.data;
-      _.forEach(rolesLists, (role, ind) => {
-        this.rolesLists.push({
-          label: role['Role Name'],
-          value: role['_id'],
-        });
-      });
+      this.rolesLists = dt.data;
+      // _.forEach(rolesLists, (role, ind) => {
+      //   this.rolesLists.push({
+      //     label: role['Role Name'],
+      //     value: role['_id'],
+      //   });
+      // });
     });
   }
 

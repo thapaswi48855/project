@@ -27,7 +27,7 @@
             [(inputModel)]="storeMaster.store"
             (onBlur)="onGetErrorMsgs('store', true)"
             errorMessages="{{errorMsgs.store}}"
-            [disabled]="!isEditable"
+            [disabled]="!isEditable" pKeyFilter="alpha"
           ></app-inputtext>
         </div>
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
@@ -49,7 +49,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-inputtext
-            [labelName]="'GSTIN Number'"
+            [labelName]="'GSTIN Number'" pKeyFilter="alphanum"
             [(inputModel)]="storeMaster.gstinno" [disabled]="!isEditable"
           ></app-inputtext>
         </div>
@@ -57,7 +57,7 @@
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-inputtext
             [labelName]="'Drug Licence Number'" [disabled]="!isEditable"
-            [(inputModel)]="storeMaster.drugLicenceNo"
+            [(inputModel)]="storeMaster.drugLicenceNo" pKeyFilter="alphanum"
           ></app-inputtext>
         </div>
 
@@ -82,21 +82,21 @@
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-inputtext
             [labelName]="'Sales Acount Prefix(GST)'" [disabled]="!isEditable"
-            [(inputModel)]="storeMaster.salesAcountPrefix"
+            [(inputModel)]="storeMaster.salesAcountPrefix" pKeyFilter="alphanum"
           ></app-inputtext>
         </div>
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-inputtext
             [labelName]="'Purchese Account prefix(GST)'" [disabled]="!isEditable"
-            [(inputModel)]="storeMaster.purcheseAccountPrefix"
+            [(inputModel)]="storeMaster.purcheseAccountPrefix" pKeyFilter="alphanum"
           ></app-inputtext>
         </div>
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-inputtext
             [labelName]="'Purchese Account prefix(GST)'" [disabled]="!isEditable"
-            [(inputModel)]="storeMaster.purcheseAccountPrefix"
+            [(inputModel)]="storeMaster.purcheseAccountPrefix" pKeyFilter="alphanum"
           ></app-inputtext>
         </div>
 
@@ -231,7 +231,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-inputtext
-            [labelName]="'PO Generation Frequency'"
+            [labelName]="'PO Generation Frequency'" pKeyFilter="alphanum"
             [(inputModel)]="storeMaster.pOGenerationFrequency" [disabled]="!isEditable"
           ></app-inputtext>
         </div>
@@ -247,7 +247,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-inputtext
-            [labelName]="'Auto Cancel PO Freuency'"
+            [labelName]="'Auto Cancel PO Freuency'" pKeyFilter="alphanum"
             [(inputModel)]="storeMaster.autoCancelPOFreuency" [disabled]="!isEditable"
           ></app-inputtext>
         </div>
@@ -272,7 +272,7 @@
 
         <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3">
           <app-inputtext
-            [labelName]="'Batch Expire Theshold for Stock Take(In Months)'"
+            [labelName]="'Batch Expire Theshold for Stock Take(In Months)'" pKeyFilter="int"
             [(inputModel)]="storeMaster.batchExpireThesholdForStockTake" [disabled]="!isEditable" 
           ></app-inputtext>
         </div>

@@ -29,7 +29,7 @@
             <app-inputtext
               [(inputModel)]="taxgroup.taxgroup"
               [labelName]="'Tax Group'"
-              [disabled]="!isEditable"
+              [disabled]="!isEditable" pKeyFilter="alpha"
               (onBlur)="onGetErrorMsgs('taxgroup', true)"
               errorMessages="{{errorMsgs.taxgroupNameReq}}"
             ></app-inputtext>
@@ -46,7 +46,7 @@
             <app-inputtext
               [(inputModel)]="taxgroup.displayorder"
               [labelName]="'Display Order'"
-              [disabled]="!isEditable"
+              [disabled]="!isEditable" pKeyFilter="alphanum"
             ></app-inputtext>
             <app-dropdown
             [(inputModel)]="taxgroup.status"

@@ -27,7 +27,7 @@
           [(inputModel)]="supplierCategory.categoryname"
           (onBlur)="onGetErrorMsgs('categoryname', true)"
           errorMessages="{{errorMsgs.categorynameReq}}"
-          [disabled]="!isEditable"
+          [disabled]="!isEditable"  pKeyFilter="alpha"
         ></app-inputtext>
       <!-- </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
@@ -40,11 +40,11 @@
         ></app-dropdown>
       <!-- </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
-        <app-inputtext
+        <app-textarea
           [labelName]="'Suplier Category Description'"
           [(inputModel)]="supplierCategory.categorydescription"
           [disabled]="!isEditable"
-        ></app-inputtext>
+        ></app-textarea>
       </div>
     </p-scrollPanel>
     </div>

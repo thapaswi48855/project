@@ -33,7 +33,7 @@
             </div>
             <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
               <app-inputtext
-                [labelName]="'Tax Sub Group'"
+                [labelName]="'Tax Sub Group'" pKeyFilter="alpha"
                 [(inputModel)]="taxsubgroup.taxsubgroup"
                 [disabled]="!isEditable"
                 (onBlur)="onGetErrorMsgs('taxsubgroup', true)"
@@ -52,7 +52,7 @@
               <app-inputtext
                 [labelName]="'Display Order'"
                 [(inputModel)]="taxsubgroup.displayorder"
-                [disabled]="!isEditable"
+                [disabled]="!isEditable" pKeyFilter="alphanum"
               ></app-inputtext>
             </div>           
           </div>
@@ -62,7 +62,7 @@
           <div class="formgrid grid">
             <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
               <app-inputtext
-                [labelName]="'Tax Rate'"
+                [labelName]="'Tax Rate'" pKeyFilter="num"
                 [(inputModel)]="taxsubgroup.taxrate"
                 [disabled]="!isEditable"
                 (onBlur)="onGetErrorMsgs('taxrate', true)"

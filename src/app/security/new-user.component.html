@@ -145,7 +145,8 @@ Document Second Path
           [(inputModel)]="user.userRoleid"
           [labelName]="'Role Name'"
           (onBlur)="_service.onGetErrorMsgs(user, 'role', true)"
-          [options]="rolesLists"
+          [options]="rolesLists"  [optionLabel]="'roleName'"
+          [optionValue]="'roleid'"
           errorMessages="{{ this._service.errorMsgs.role }}"
         ></app-dropdown>
       </div>
