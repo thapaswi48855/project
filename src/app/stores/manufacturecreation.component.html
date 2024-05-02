@@ -29,7 +29,7 @@
                   [(inputModel)]="manufacture.manufacturename"
                   (onBlur)="onGetErrorMsgs('manufacturename', true)"
           errorMessages="{{errorMsgs.manufacturenameReq}}"
-                  [disabled]="!isEditable" pKeyFilter="alpha"
+                  [disabled]="!isEditable" [pKeyFilter]="'alpha'"
                 ></app-inputtext>
               </div>
 
@@ -60,21 +60,21 @@
             <p-fieldset legend="Region" [toggleable]="true">
               <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
                 <app-inputtext
-                  [labelName]="'Country'" pKeyFilter="alpha"
+                  [labelName]="'Country'" [pKeyFilter]="'alpha'"
                   [(inputModel)]="manufacture.regioncountry"
                   [disabled]="!isEditable"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
                 <app-inputtext
-                  [labelName]="'State'" pKeyFilter="alpha"
+                  [labelName]="'State'" [pKeyFilter]="'alpha'"
                   [(inputModel)]="manufacture.regionstate"
                   [disabled]="!isEditable"
                 ></app-inputtext>
               </div>
               <div class="field col-12 md:col-12 sm:col-12 lg:col-12 xl:col-12">
                 <app-inputtext
-                  [labelName]="'City'" pKeyFilter="alpha"
+                  [labelName]="'City'" [pKeyFilter]="'alpha'"
                   [(inputModel)]="manufacture.regioncity"
                   [disabled]="!isEditable"
                 ></app-inputtext>
@@ -95,28 +95,28 @@
             </div>
             <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
               <app-inputtext
-                [labelName]="'Phone 1'" pKeyFilter="int"
+                [labelName]="'Phone 1'" [pKeyFilter]="'num'"
                 [(inputModel)]="manufacture.contactphone1"
                 [disabled]="!isEditable" maxlength ="10"
               ></app-inputtext>
             </div>
             <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
               <app-inputtext
-                [labelName]="'Phone 2'" pKeyFilter="int"
+                [labelName]="'Phone 2'" [pKeyFilter]="'num'"
                 [(inputModel)]="manufacture.contactphone2"
                 [disabled]="!isEditable" maxlength ="10"
               ></app-inputtext>
             </div>
             <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
               <app-inputtext
-                [labelName]="'postal Code'" pKeyFilter="int"
+                [labelName]="'postal Code'" [pKeyFilter]="'num'"
                 [(inputModel)]="manufacture.contactpostalCode"
                 [disabled]="!isEditable" maxlength ="6"
               ></app-inputtext>
             </div>
             <div class="field col-12 md:col-8 sm:col-6 lg:col-5 xl:col-5">
               <app-inputtext
-                [labelName]="'Fax'" pKeyFilter="alphanum"
+                [labelName]="'Fax'" [pKeyFilter]="'alphanum'"
                 [(inputModel)]="manufacture.contactfax"
                 [disabled]="!isEditable" maxlength ="12"
               ></app-inputtext>

@@ -35,7 +35,7 @@
           [(inputModel)]="genericSubClassification.subClasificationName"
           (onBlur)="onGetErrorMsgs('subClasificationName', true)"
           errorMessages="{{ errorMsgs.subClasificationNameReq }}"
-          [disabled]="!isEditable" pKeyFilter="alpha"
+          [disabled]="!isEditable" [pKeyFilter]="'alpha'"
         ></app-inputtext>
         <app-dropdown
           [labelName]="'Status'"

@@ -27,7 +27,7 @@
           [(inputModel)]="genericClassification.clasificationName"
           (onBlur)="onGetErrorMsgs('clasificationName', true)"
           errorMessages="{{errorMsgs.clasificationName }}"
-          [disabled]="!isEditable" pKeyFilter="alpha"
+          [disabled]="!isEditable" [pKeyFilter]="'alpha'"
         ></app-inputtext>
       <!-- </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->

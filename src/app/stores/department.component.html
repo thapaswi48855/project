@@ -24,7 +24,7 @@
           <app-inputtext
             [labelName]="'Department'"
             [(inputModel)]="department.department"
-            [disabled]="!isEditable" pKeyFilter="alpha"
+            [disabled]="!isEditable" [pKeyFilter]="'alpha'"
             (onBlur)="onGetErrorMsgs('department', true)"
             errorMessages="{{ errorMsgs.departmentReq }}"
           ></app-inputtext>
@@ -65,7 +65,7 @@
           <app-inputtext
             [labelName]="'Cost Center Code'"
             [(inputModel)]="department.costCenterCode"
-            [disabled]="!isEditable" pKeyFilter="alphanum"
+            [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
           ></app-inputtext>
           <!-- </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->

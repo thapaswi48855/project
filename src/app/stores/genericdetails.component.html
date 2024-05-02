@@ -20,7 +20,7 @@
     <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 120px)' }">
     <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
       <app-inputtext [labelName]="'Generic Name'" [(inputModel)]="genericDetails.genericName" 
-       [disabled]="!isEditable"  pKeyFilter="alpha"
+       [disabled]="!isEditable"  [pKeyFilter]="'alpha'"
           (onBlur)="onGetErrorMsgs('genericName', true)"
           errorMessages="{{errorMsgs.genericNameReq}}"></app-inputtext>
     <!-- </div>
