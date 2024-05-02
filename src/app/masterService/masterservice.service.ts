@@ -236,19 +236,20 @@ export class MasterserviceService {
     return userKeyVal;
   }
 
-  getKeyFilter(key: any) {
-    let keyFilter :any;
-    switch (key) {
-      case 'alpha' :
-       keyFilter = /^[a-zA-Z]+$/;
+  getKeyFilter(ctrl: string, event: any): RegExp | null {
+    let keyFilter: RegExp | null = null;
+    let alpha =/^[a-zA-Z]+$/ ;
+    switch (ctrl) {
+      case 'alpha':
+        keyFilter = alpha.test(event.key) ? event.key : null;
         break;
-      case 'num' :
-       keyFilter = /^[0-9]+$/;
+      case 'num':
+        keyFilter = /^[0-9]+$/;
         break;
-        case 'alphanum' :
-       keyFilter = /^[a-zA-Z0-9]+$/;
+      case 'alphanum':
+        keyFilter = /^[a-zA-Z0-9]+$/;
         break;
     }
-    return keyFilter ;
+    return keyFilter;
   }
 }

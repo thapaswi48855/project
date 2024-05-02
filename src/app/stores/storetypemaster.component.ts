@@ -25,7 +25,7 @@ export class StoretypemasterComponent {
   public isEditable:any=false;
   public isShowEditable:any=true;
   public redirectToGrid:boolean =false;
-
+  
   public store: any = {
     storetypeid:0,
     storetypename: '',
