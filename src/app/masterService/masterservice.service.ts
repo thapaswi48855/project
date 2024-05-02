@@ -209,7 +209,7 @@ export class MasterserviceService {
   //   this.counters.set(componentId, counter);
   //   // Save the updated counters to local storage
   //   localStorage.setItem('sequenceCounters', JSON.stringify(Array.from(this.counters.entries())));
-  //   // return 
+  //   // return
   //   // this.ht.get(
   //   //   `https://node-1-bi29.onrender.com/getSequncy`,
   //   //   this.counters.entries()
@@ -217,21 +217,38 @@ export class MasterserviceService {
   //   return counter;
   // }
 
-   // Method to get the next sequential number for a given component
-   getNextSequenceNumber(componentId: string): any {
+  // Method to get the next sequential number for a given component
+  getNextSequenceNumber(componentId: string): any {
     // return this.http.post<number>(`${this.baseUrl}/${componentId}/next`, {});
-    return this.ht.post(`https://node-1-bi29.onrender.com/${componentId}/next`, {})
+    return this.ht.post(
+      `https://node-1-bi29.onrender.com/${componentId}/next`,
+      {}
+    );
   }
-  getUserInfo(key:any){
-    let userInfo:any =window.localStorage.getItem('UserInfo');
-    let userDet =JSON.parse(userInfo);
-    return userDet[0][key] ;
-    
+  getUserInfo(key: any) {
+    let userInfo: any = window.localStorage.getItem('UserInfo');
+    let userDet = JSON.parse(userInfo);
+    return userDet[0][key];
   }
 
-  getUserVal(key:any){
+  getUserVal(key: any) {
     let userKeyVal = this.getUserInfo(key);
     return userKeyVal;
   }
 
+  getKeyFilter(key: any) {
+    let keyFilter :any;
+    switch (key) {
+      case 'alpha' :
+       keyFilter = /^[a-zA-Z]+$/;
+        break;
+      case 'num' :
+       keyFilter = /^[0-9]+$/;
+        break;
+        case 'alphanum' :
+       keyFilter = /^[a-zA-Z0-9]+$/;
+        break;
+    }
+    return keyFilter ;
+  }
 }

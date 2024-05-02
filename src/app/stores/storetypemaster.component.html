@@ -25,7 +25,7 @@
             [labelName]="'Store Type Name'"
             (onBlur)="onGetErrorMsgs('storetypename', true)"
             errorMessages="{{ errorMsgs.storetypename }}"
-            [disabled]="!isEditable" pKeyFilter="alpha"
+            [disabled]="!isEditable" [pKeyFilter]="this._service.getKeyFilter('alpha')"
           ></app-inputtext>
           <app-dropdown
             [labelName]="'Status'"
