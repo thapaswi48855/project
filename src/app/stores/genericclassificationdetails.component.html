@@ -15,40 +15,46 @@
     ></app-header>
   </div>
 
-  <div class="div-padding">
-    <div class="card">
-    <p-scrollPanel
-      [style]="{ width: '100%', height: ' calc(100vh - 120px)' }"
-      styleClass="custombar1"
-    >
-      <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
-        <app-inputtext
-          [labelName]="'Clasification Name'"
-          [(inputModel)]="genericClassification.clasificationName"
-          (onBlur)="onGetErrorMsgs('clasificationName', true)"
-          errorMessages="{{errorMsgs.clasificationName }}"
-          [disabled]="!isEditable" [pKeyFilter]="'alpha'"
-        ></app-inputtext>
-      <!-- </div>
+  <p-scrollPanel>
+    <div class="div-padding">
+      <div class="grid">
+        <div
+          class="col-12 col-offset-0 md:col-6 md:col-offset-3 lg:col-4 lg:col-offset-4 xl:col-4 xl:col-offset-4"
+        >
+          <div class="card">
+            <div class="grid">
+              <div class="col-12">
+                <app-inputtext
+                  [labelName]="'Clasification Name'"
+                  [(inputModel)]="genericClassification.clasificationName"
+                  (onBlur)="onGetErrorMsgs('clasificationName', true)"
+                  errorMessages="{{ errorMsgs.clasificationName }}"
+                  [disabled]="!isEditable"
+                  [pKeyFilter]="'alpha'"
+                ></app-inputtext>
+                <!-- </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
-        <app-dropdown
-          [labelName]="'Status'"
-          [(inputModel)]="genericClassification.status"
-          [disabled]="pageMode !='EDIT'"
-          [options]="statusList"
-          [optionLabel]="'subMasterName'"
-          [optionValue]="'subMasterId'"
-        ></app-dropdown>
-      <!-- </div>
+                <app-dropdown
+                  [labelName]="'Status'"
+                  [(inputModel)]="genericClassification.status"
+                  [disabled]="pageMode != 'EDIT'"
+                  [options]="statusList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+                <!-- </div>
       <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
-        <app-textarea
-          [labelName]="'Clasification Description'"
-          [(inputModel)]="genericClassification.clasificationDesc"
-          [disabled]="!isEditable"
-        ></app-textarea>
+                <app-textarea
+                  [labelName]="'Clasification Description'"
+                  [(inputModel)]="genericClassification.clasificationDesc"
+                  [disabled]="!isEditable"
+                ></app-textarea>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </p-scrollPanel>
-  </div>
-  </div>
+    </div>
+  </p-scrollPanel>
 </div>
 <app-saving #saving></app-saving>

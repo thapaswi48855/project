@@ -15,46 +15,79 @@
     ></app-header>
   </div>
 
-  <div class="div-padding">
-    <div class="card">
-    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 120px)' }">
-    <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
-      <app-inputtext [labelName]="'Generic Name'" [(inputModel)]="genericDetails.genericName" 
-       [disabled]="!isEditable"  [pKeyFilter]="'alpha'"
-          (onBlur)="onGetErrorMsgs('genericName', true)"
-          errorMessages="{{errorMsgs.genericNameReq}}"></app-inputtext>
-    <!-- </div>
+  <p-scrollPanel>
+    <div class="div-padding">
+      <div class="grid">
+        <div
+          class="col-12 col-offset-0 md:col-6 md:col-offset-3 lg:col-4 lg:col-offset-4 xl:col-4 xl:col-offset-4"
+        >
+          <div class="card">
+            <div class="grid">
+              <div class="col-12">
+                <app-inputtext
+                  [labelName]="'Generic Name'"
+                  [(inputModel)]="genericDetails.genericName"
+                  [disabled]="!isEditable"
+                  [pKeyFilter]="'alpha'"
+                  (onBlur)="onGetErrorMsgs('genericName', true)"
+                  errorMessages="{{ errorMsgs.genericNameReq }}"
+                ></app-inputtext>
+                <!-- </div>
     <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
-      <app-dropdown [labelName]="'Classification Name'" 
-      [(inputModel)]="genericDetails.clasificationName" 
-      [options]="geneticClassificationList" [disabled]="!isEditable"
-          [optionLabel]="'clasificationName'" 
-          [optionValue]="'genericClassificationId'" (onChange)="onSubClasification(genericDetails.clasificationName)"></app-dropdown>
-    <!-- </div>
+                <app-dropdown
+                  [labelName]="'Classification Name'"
+                  [(inputModel)]="genericDetails.clasificationName"
+                  [options]="geneticClassificationList"
+                  [disabled]="!isEditable"
+                  [optionLabel]="'clasificationName'"
+                  [optionValue]="'genericClassificationId'"
+                  (onChange)="
+                    onSubClasification(genericDetails.clasificationName)
+                  "
+                ></app-dropdown>
+                <!-- </div>
     <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
-      <app-dropdown [labelName]="'Sub Classification Name'" 
-      [(inputModel)]="genericDetails.subClassificationName" [options]="geneticSubClassificationList" 
-      [disabled]="!isEditable" [optionLabel]="'subClasificationName'"
-      [optionValue]="'genSubClasiId'"></app-dropdown>
-    <!-- </div>
+                <app-dropdown
+                  [labelName]="'Sub Classification Name'"
+                  [(inputModel)]="genericDetails.subClassificationName"
+                  [options]="geneticSubClassificationList"
+                  [disabled]="!isEditable"
+                  [optionLabel]="'subClasificationName'"
+                  [optionValue]="'genSubClasiId'"
+                ></app-dropdown>
+                <!-- </div>
     <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
-      <app-inputtext [labelName]="'standrd Adult Dose'" [(inputModel)]="genericDetails.standrdAdultDose" [disabled]="!isEditable"></app-inputtext>
-    <!-- </div>
+                <app-inputtext
+                  [labelName]="'standrd Adult Dose'"
+                  [(inputModel)]="genericDetails.standrdAdultDose"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+                <!-- </div>
     <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
-      <app-dropdown [labelName]="'Crability'" [(inputModel)]="genericDetails.crability"
-       [disabled]="!isEditable" [options]="critialityList" 
-       [optionLabel]="'subMasterName'"
-      [optionValue]="'subMasterId'"></app-dropdown>
-    <!-- </div>
+                <app-dropdown
+                  [labelName]="'Crability'"
+                  [(inputModel)]="genericDetails.crability"
+                  [disabled]="!isEditable"
+                  [options]="critialityList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+                <!-- </div>
     <div class="field col-12 md:col-5 sm:col-4 lg:col-3 xl:col-3"> -->
-      <app-dropdown [labelName]="'Status'" [(inputModel)]="genericDetails.status"
-      [disabled]="pageMode !='EDIT'" [options]="statusList" 
-       [optionLabel]="'subMasterName'"
-      [optionValue]="'subMasterId'"></app-dropdown>
+                <app-dropdown
+                  [labelName]="'Status'"
+                  [(inputModel)]="genericDetails.status"
+                  [disabled]="pageMode != 'EDIT'"
+                  [options]="statusList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                ></app-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    </p-scrollPanel>
-  </div>
-  </div>
-
+  </p-scrollPanel>
 </div>
 <app-saving #saving></app-saving>

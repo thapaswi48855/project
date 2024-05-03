@@ -114,7 +114,9 @@ export class HomeComponent {
   }
 
   onSignOut() {
+    // window.localStorage.removeItem('UserInfo');
     this._router.navigateByUrl('/login');
+    window.localStorage.removeItem('UserInfo');
     alert('hi');
   }
 }

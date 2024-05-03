@@ -15,207 +15,276 @@
     ></app-header>
   </div>
 
-  <div class="div-padding">
-    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 164px)' }">
-      <div class="formgroup-inline">
-        <div class="field col-7">
-          <p-fieldset legend="Supplier" [toggleable]="true">
-            <div class="formgrid grid">
-              <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
-                <app-inputtext
-                  [labelName]="'Supplier Name'"
-                  [(inputModel)]="supplier.supplierName"
-                  (onBlur)="onGetErrorMsgs('supplierName', true)"
-                  errorMessages="{{ errorMsgs.supplierNameReq }}"
-                  [disabled]="!isEditable" [pKeyFilter]="'alpha'"
-                ></app-inputtext>
-              </div>
-              <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
-                <app-inputtext
-                  [labelName]="'Supplier Code'"
-                  [(inputModel)]="supplier.suppliercode"
-                  [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
-                ></app-inputtext>
-              </div>
-              <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
-                <app-dropdown
-                  [labelName]="'Status'"
-                  [options]="statusList"
-                  [(inputModel)]="supplier.status"
-                  [optionLabel]="'subMasterName'"
-                  [optionValue]="'subMasterId'" [disabled]="pageMode !='EDIT'" 
-                ></app-dropdown>
-              </div>
-              <div class="field col-12 md:col-6 lg:col-4 xl:col-4">
-                <app-dropdown
-                  [labelName]="'Register Supplier'"
-                  [options]="allowStatusList"
-                  [(inputModel)]="supplier.registeredsupplier"
-                  (onBlur)="onGetErrorMsgs('registeredsupplier', true)"
-                  errorMessages="{{ errorMsgs.registeredsupplierReq }}"
-                  [disabled]="!isEditable"
-                  [optionLabel]="'subMasterName'"
-                  [optionValue]="'subMasterId'"
-                ></app-dropdown>
-              </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
-                <app-dropdown
-                  [labelName]="'Supplier Category'"
-                  [options]="supplierList"
-                  [(inputModel)]="supplier.supplierCategory"
-                  [disabled]="!isEditable"
-                  [optionLabel]="'categoryname'"
-                  [optionValue]="'_id'"
-                ></app-dropdown>
-              </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
-                <app-inputtext
-                  [labelName]="'GSTIN Number'"
-                  [(inputModel)]="supplier.supplierGSTINNumber"
-                  (onBlur)="onGetErrorMsgs('supplierGSTINNumber', true)"
-                  errorMessages="{{ errorMsgs.supplierGSTINNumberReq }}"
-                  [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
-                ></app-inputtext>
-              </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
-                <app-inputtext
-                  [labelName]="'Credite Periode (Days)'"
-                  [(inputModel)]="supplier.suppliercreditPeriod"
-                  [disabled]="!isEditable" [pKeyFilter]="'num'" maxlength="3"
-                ></app-inputtext>
-              </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
-                <app-inputtext
-                  [labelName]="'Drug License Number'"
-                  [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
-                  [(inputModel)]="supplier.supplierdrugLicenseNo"
-                ></app-inputtext>
-              </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
-                <app-inputtext
-                  [labelName]="'PAN No.'"
-                  [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
-                  [(inputModel)]="supplier.supplierPANNo" maxlength="12"
-                ></app-inputtext>
-              </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
-                <app-inputtext
-                  [labelName]="'Corparate Identification Number (CIN)'"
-                  [(inputModel)]="supplier.suppliercorporteIdentificationNumber"
-                  [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
-                ></app-inputtext>
-              </div>
-              <div class="field col-12 md:col-8 sm:col-10 lg:col-4 xl:col-4">
-                <app-dropdown
-                  [labelName]="'Apply TCS PO Stock Entry'"
-                  [options]="allowStatusList"
-                  [(inputModel)]="supplier.supplierapplyTCSforPOStockEntry"
-                  [disabled]="!isEditable"
-                  [optionLabel]="'subMasterName'"
-                  [optionValue]="'subMasterId'"
-                ></app-dropdown>
+  <p-scrollPanel>
+    <div class="div-padding">
+      <div class="grid">
+        <div class="col-12 sm:col-12 md:col-12 lg:col-8 xl:col-8">
+          <div class="card">
+            <div class="grid">
+              <div class="col-12 md:col-12 lg:col-12 xl:col-12">
+                <p-fieldset legend="Supplier" [toggleable]="true">
+                  <div class="formgrid grid">
+                    <!-- <div class="grid"> -->
+                    <div class="col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Supplier Name'"
+                        [(inputModel)]="supplier.supplierName"
+                        (onBlur)="onGetErrorMsgs('supplierName', true)"
+                        errorMessages="{{ errorMsgs.supplierNameReq }}"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alpha'"
+                      ></app-inputtext>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Supplier Code'"
+                        [(inputModel)]="supplier.suppliercode"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alphanum'"
+                      ></app-inputtext>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-dropdown
+                        [labelName]="'Status'"
+                        [options]="statusList"
+                        [(inputModel)]="supplier.status"
+                        [optionLabel]="'subMasterName'"
+                        [optionValue]="'subMasterId'"
+                        [disabled]="pageMode != 'EDIT'"
+                      ></app-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-dropdown
+                        [labelName]="'Register Supplier'"
+                        [options]="allowStatusList"
+                        [(inputModel)]="supplier.registeredsupplier"
+                        (onBlur)="onGetErrorMsgs('registeredsupplier', true)"
+                        errorMessages="{{ errorMsgs.registeredsupplierReq }}"
+                        [disabled]="!isEditable"
+                        [optionLabel]="'subMasterName'"
+                        [optionValue]="'subMasterId'"
+                      ></app-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-dropdown
+                        [labelName]="'Supplier Category'"
+                        [options]="supplierList"
+                        [(inputModel)]="supplier.supplierCategory"
+                        [disabled]="!isEditable"
+                        [optionLabel]="'categoryname'"
+                        [optionValue]="'_id'"
+                      ></app-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'GSTIN Number'"
+                        [(inputModel)]="supplier.supplierGSTINNumber"
+                        (onBlur)="onGetErrorMsgs('supplierGSTINNumber', true)"
+                        errorMessages="{{ errorMsgs.supplierGSTINNumberReq }}"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alphanum'"
+                      ></app-inputtext>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Credite Periode (Days)'"
+                        [(inputModel)]="supplier.suppliercreditPeriod"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'num'"
+                        maxlength="3"
+                      ></app-inputtext>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Drug License Number'"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alphanum'"
+                        [(inputModel)]="supplier.supplierdrugLicenseNo"
+                      ></app-inputtext>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'PAN No.'"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alphanum'"
+                        [(inputModel)]="supplier.supplierPANNo"
+                        maxlength="12"
+                      ></app-inputtext>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Corparate Identification Number (CIN)'"
+                        [(inputModel)]="
+                          supplier.suppliercorporteIdentificationNumber
+                        "
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alphanum'"
+                      ></app-inputtext>
+                    </div>
+                    <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-dropdown
+                        [labelName]="'Apply TCS PO Stock Entry'"
+                        [options]="allowStatusList"
+                        [(inputModel)]="
+                          supplier.supplierapplyTCSforPOStockEntry
+                        "
+                        [disabled]="!isEditable"
+                        [optionLabel]="'subMasterName'"
+                        [optionValue]="'subMasterId'"
+                      ></app-dropdown>
+                    </div>
+                  </div>
+                </p-fieldset>
               </div>
             </div>
-          </p-fieldset>
+          </div>
+        </div>
 
-          <!-- <label for="firstname5" class="p-sr-only">Firstname</label>
-            <input id="firstname5" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary" placeholder="Firstname"> -->
-        </div>
-        <div class="field col-4">
-          <p-fieldset legend="Region" [toggleable]="true">
-            <app-inputtext
-              [labelName]="'City'"
-              [(inputModel)]="supplier.regioncity"
-              [disabled]="!isEditable" [pKeyFilter]="'alpha'"
-            ></app-inputtext>
-            <app-inputtext
-              [labelName]="'State'"
-              [disabled]="!isEditable" [pKeyFilter]="'alpha'"
-              [(inputModel)]="supplier.regionstate"
-            ></app-inputtext>
-            <app-inputtext
-              [labelName]="'Country'"
-              [disabled]="!isEditable" [pKeyFilter]="'alpha'"
-              [(inputModel)]="supplier.regioncountry"
-            ></app-inputtext>
-          </p-fieldset>
-        </div>
-        <div class="field col-7">
-          <p-fieldset legend="Contact" [toggleable]="true">
-            <div class="formgrid grid">
-              <div class="field col-10">
-                <app-textarea
-                  [labelName]="'Address'"
-                  [(inputModel)]="supplier.contactaddress"
-                  [disabled]="!isEditable"
-                ></app-textarea>
-              </div>
-              <div class="field col">
-                <app-inputtext
-                  [labelName]="'Phone 1'" [pKeyFilter]="'num'"
-                  [(inputModel)]="supplier.contactphone1"
-                  [disabled]="!isEditable" maxlength="10"
-                ></app-inputtext>
-              </div>
-              <div class="field col">
-                <app-inputtext
-                  [labelName]="'Phone 2'" [pKeyFilter]="'num'"
-                  [(inputModel)]="supplier.contactphone2"
-                  [disabled]="!isEditable" maxlength="10"
-                ></app-inputtext>
-              </div>
-              <div class="field col">
-                <app-inputtext
-                  [labelName]="'postal Code'"
-                  [(inputModel)]="supplier.contactpostalCode"
-                  [disabled]="!isEditable" [pKeyFilter]="'alphanum'" maxlength="10"
-                ></app-inputtext>
-              </div>
-              <div class="field col">
-                <app-inputtext
-                  [labelName]="'Fax'"
-                  [(inputModel)]="supplier.contactfax"
-                  [disabled]="!isEditable" [pKeyFilter]="'alphanum'" maxlength="12"
-                ></app-inputtext>
-              </div>
-              <div class="field col">
-                <app-inputtext
-                  [labelName]="'Contact Email'"
-                  [(inputModel)]="supplier.contactemail"
-                  [disabled]="!isEditable"
-                ></app-inputtext>
-              </div>
-              <div class="field col">
-                <app-inputtext
-                  [labelName]="'Web Site'"
-                  [(inputModel)]="supplier.contactwebsite"
-                  [disabled]="!isEditable"
-                ></app-inputtext>
+        <div class="col-12 sm:col-12 md:col-12 lg:col-4 xl:col-4">
+          <div class="card">
+            <div class="grid">
+              <div class="col-12 md:col-12 lg:col-12 xl:col-12">
+                <p-fieldset legend="Region" [toggleable]="true">
+                  <div class="formgrid grid">
+                    <div class="col-12 md:col-4 lg:col-12 xl:col-12">
+                      <app-inputtext
+                        [labelName]="'City'"
+                        [(inputModel)]="supplier.regioncity"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alpha'"
+                      ></app-inputtext>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-12 xl:col-12">
+                      <app-inputtext
+                        [labelName]="'State'"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alpha'"
+                        [(inputModel)]="supplier.regionstate"
+                      ></app-inputtext>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-12 xl:col-12">
+                      <app-inputtext
+                        [labelName]="'Country'"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alpha'"
+                        [(inputModel)]="supplier.regioncountry"
+                      ></app-inputtext>
+                    </div>
+                  </div>
+                </p-fieldset>
               </div>
             </div>
-          </p-fieldset>
+          </div>
         </div>
-        <div class="field col-4">
-          <p-fieldset legend="Help Desk" [toggleable]="true">
-            <app-inputtext
-              [labelName]="'Name'"
-              [disabled]="!isEditable" [pKeyFilter]="'alpha'"
-              [(inputModel)]="supplier.helpdeskname"
-            ></app-inputtext>
-            <app-inputtext
-              [labelName]="'PH No.'"
-              [disabled]="!isEditable" [pKeyFilter]="'num'" maxlength="10"
-              [(inputModel)]="supplier.helpdeskphno"
-            ></app-inputtext>
-            <app-inputtext
-              [labelName]="'Email'"
-              [disabled]="!isEditable"
-              [(inputModel)]="supplier.helpdeskemail"
-            ></app-inputtext>
-          </p-fieldset>
+
+        <div class="col-12 sm:col-12 md:col-12 lg:col-8 xl:col-8">
+          <div class="card">
+            <div class="grid">
+              <div class="col-12 md:col-12 lg:col-12 xl:col-12">
+                <p-fieldset legend="Contact" [toggleable]="true">
+                  <div class="formgrid grid">
+                    <div class="col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-textarea
+                        [labelName]="'Address'"
+                        [(inputModel)]="supplier.contactaddress"
+                        [disabled]="!isEditable"
+                      ></app-textarea>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Phone 1'"
+                        [pKeyFilter]="'num'"
+                        [(inputModel)]="supplier.contactphone1"
+                        [disabled]="!isEditable"
+                        maxlength="10"
+                      ></app-inputtext>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Phone 2'"
+                        [pKeyFilter]="'num'"
+                        [(inputModel)]="supplier.contactphone2"
+                        [disabled]="!isEditable"
+                        maxlength="10"
+                      ></app-inputtext>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'postal Code'"
+                        [(inputModel)]="supplier.contactpostalCode"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alphanum'"
+                        maxlength="10"
+                      ></app-inputtext>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Fax'"
+                        [(inputModel)]="supplier.contactfax"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alphanum'"
+                        maxlength="12"
+                      ></app-inputtext>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Contact Email'"
+                        [(inputModel)]="supplier.contactemail"
+                        [disabled]="!isEditable"
+                      ></app-inputtext>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-4 xl:col-4">
+                      <app-inputtext
+                        [labelName]="'Web Site'"
+                        [(inputModel)]="supplier.contactwebsite"
+                        [disabled]="!isEditable"
+                      ></app-inputtext>
+                    </div>
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 sm:col-12 md:col-12 lg:col-4 xl:col-4">
+          <div class="card">
+            <div class="grid">
+              <div class="col-12 md:col-12 lg:col-12 xl:col-12">
+                <p-fieldset legend="Help Desk" [toggleable]="true">
+                  <div class="formgrid grid">
+                    <div class="col-12 md:col-4 lg:col-12 xl:col-12">
+                      <app-inputtext
+                        [labelName]="'Name'"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'alpha'"
+                        [(inputModel)]="supplier.helpdeskname"
+                      ></app-inputtext>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-12 xl:col-12">
+                      <app-inputtext
+                        [labelName]="'PH No.'"
+                        [disabled]="!isEditable"
+                        [pKeyFilter]="'num'"
+                        maxlength="10"
+                        [(inputModel)]="supplier.helpdeskphno"
+                      ></app-inputtext>
+                    </div>
+                    <div class="col-12 md:col-4 lg:col-12 xl:col-12">
+                      <app-inputtext
+                        [labelName]="'Email'"
+                        [disabled]="!isEditable"
+                        [(inputModel)]="supplier.helpdeskemail"
+                      ></app-inputtext>
+                    </div>
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </p-scrollPanel>
-  </div>
+    </div>
+  </p-scrollPanel>
 </div>
 <app-saving #saving></app-saving>

@@ -30,6 +30,7 @@ export class ManufacturecreationComponent {
     manufacturename: '',
     status: 'ZLS11',
     manufacturecode: '',
+    manufacturedesc:'',
     regioncountry: '',
     regionstate: '',
     regioncity: '',

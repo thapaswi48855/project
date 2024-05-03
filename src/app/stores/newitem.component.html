@@ -15,24 +15,24 @@
     ></app-header>
   </div>
 
-  <div class="div-padding">
-    <div class="card">
-      <p-scrollPanel
-        [style]="{ width: '100%', height: ' calc(100vh - 120px)' }"
-      >
+  <p-scrollPanel>
+    <div class="div-padding">
+      <div class="card">
         <div class="formgrid grid">
           <div class="col-12">
             <p-fieldset legend="Item Details" [toggleable]="true">
               <div class="formgrid grid">
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
-                  <app-inputtext [pKeyFilter]="'alpha'"
+                  <app-inputtext
+                    [pKeyFilter]="'alpha'"
                     [labelName]="'Item Name'"
                     [(inputModel)]="newItem.itemName"
                     [disabled]="!isEditable"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
-                  <app-inputtext [pKeyFilter]="'alpha'"
+                  <app-inputtext
+                    [pKeyFilter]="'alpha'"
                     [labelName]="'Short Name'"
                     [(inputModel)]="newItem.shortName"
                     [disabled]="!isEditable"
@@ -66,19 +66,22 @@
                   <app-inputtext
                     [labelName]="'Generate Item Code'"
                     [(inputModel)]="newItem.generateItemCode"
-                    [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
+                    [disabled]="!isEditable"
+                    [pKeyFilter]="'alphanum'"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
                   <app-inputtext
                     [labelName]="'Custom Item Code'"
                     [(inputModel)]="newItem.customItemCode"
-                    [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
+                    [disabled]="!isEditable"
+                    [pKeyFilter]="'alphanum'"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
                   <app-lookup
-                    [labelName]="'Manufacture'" [pKeyFilter]="'alpha'"
+                    [labelName]="'Manufacture'"
+                    [pKeyFilter]="'alpha'"
                     [(inputModel)]="newItem.manufacture"
                     [filteredOptions]="manufactureList"
                     [filterName]="'manufacturename'"
@@ -87,7 +90,8 @@
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
                   <app-inputtext
-                    [labelName]="'Strength'" [pKeyFilter]="'alphanum'"
+                    [labelName]="'Strength'"
+                    [pKeyFilter]="'alphanum'"
                     [(inputModel)]="newItem.strength"
                     [disabled]="!isEditable"
                   ></app-inputtext>
@@ -145,12 +149,13 @@
                   <app-inputtext
                     [labelName]="'Package Size'"
                     [(inputModel)]="newItem.packageSize"
-                    [disabled]="true" 
+                    [disabled]="true"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
                   <app-inputtext
-                    [labelName]="'Package Type'" [pKeyFilter]="'alphanum'"
+                    [labelName]="'Package Type'"
+                    [pKeyFilter]="'alphanum'"
                     [(inputModel)]="newItem.packageType"
                     [disabled]="!isEditable"
                   ></app-inputtext>
@@ -169,12 +174,14 @@
                   <app-inputtext
                     [labelName]="'Consumption Capacity'"
                     [(inputModel)]="newItem.consumptionCapacity"
-                    [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
+                    [disabled]="!isEditable"
+                    [pKeyFilter]="'alphanum'"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
                   <app-inputtext
-                    [labelName]="'Generic Name'" [pKeyFilter]="'alpha'"
+                    [labelName]="'Generic Name'"
+                    [pKeyFilter]="'alpha'"
                     [(inputModel)]="newItem.genericName"
                     [disabled]="!isEditable"
                   ></app-inputtext>
@@ -206,14 +213,16 @@
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
                   <app-inputtext
-                    [labelName]="'Max Cost Price'"[pKeyFilter]="'num'"
+                    [labelName]="'Max Cost Price'"
+                    [pKeyFilter]="'num'"
                     [(inputModel)]="newItem.maxCostPrice"
                     [disabled]="!isEditable"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
                   <app-inputtext
-                    [labelName]="'Supplier Name'" [pKeyFilter]="'alpha'"
+                    [labelName]="'Supplier Name'"
+                    [pKeyFilter]="'alpha'"
                     [(inputModel)]="newItem.supplierName"
                     [disabled]="!isEditable"
                   ></app-inputtext>
@@ -232,7 +241,8 @@
                   <app-inputtext
                     [labelName]="'Invoice Details'"
                     [(inputModel)]="newItem.invoiceDetails"
-                    [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
+                    [disabled]="!isEditable"
+                    [pKeyFilter]="'alphanum'"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
@@ -249,7 +259,7 @@
                   <app-inputtext
                     [labelName]="'Insurence Category'"
                     [(inputModel)]="newItem.insurenceCategory"
-                    [disabled]="!isEditable" 
+                    [disabled]="!isEditable"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
@@ -286,14 +296,16 @@
                   <app-inputtext
                     [labelName]="'Tax (%)'"
                     [(inputModel)]="newItem.tax"
-                    [disabled]="!isEditable" [pKeyFilter]="'num'"
-                  ></app-inputtext> 
+                    [disabled]="!isEditable"
+                    [pKeyFilter]="'num'"
+                  ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
                   <app-inputtext
                     [labelName]="'Bin / Rack'"
                     [(inputModel)]="newItem.binRack"
-                    [disabled]="!isEditable" [pKeyFilter]="'alphanum'"
+                    [disabled]="!isEditable"
+                    [pKeyFilter]="'alphanum'"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
@@ -310,7 +322,8 @@
                   <app-inputtext
                     [labelName]="'Item Selling Price'"
                     [(inputModel)]="newItem.itemSellingPrice"
-                    [disabled]="!isEditable" [pKeyFilter]="'num'"
+                    [disabled]="!isEditable"
+                    [pKeyFilter]="'num'"
                   ></app-inputtext>
                 </div>
                 <div class="field col-12 md:col-4 sm:col-6 lg:col-3 xl:col-3">
@@ -439,8 +452,8 @@
             </div>
           </div>
         </div>
-      </p-scrollPanel>
+      </div>
     </div>
-  </div>
+  </p-scrollPanel>
 </div>
 <app-saving #saving></app-saving>

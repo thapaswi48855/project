@@ -14,44 +14,52 @@
       #headers
     ></app-header>
   </div>
-  <div class="div-padding">
-    <div class="card">
-    <p-scrollPanel
-      [style]="{ width: '100%', height: ' calc(100vh - 120px)' }"
-      styleClass="custombar1"
-    >
-      <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
-        <app-dropdown
-          [labelName]="'Clasification Name'"
-          [options]="geneticClassificationList"
-          [(inputModel)]="genericSubClassification.clasificationName"
-          (onBlur)="onGetErrorMsgs('clasificationName', true)"
-          errorMessages="{{ errorMsgs.clasificationNameReq }}"
-          [optionLabel]="'clasificationName'"
-          [optionValue]="'genericClassificationId'" 
-        ></app-dropdown>
-        <app-inputtext
-          [labelName]="'Sub Clasification Name'"
-          [(inputModel)]="genericSubClassification.subClasificationName"
-          (onBlur)="onGetErrorMsgs('subClasificationName', true)"
-          errorMessages="{{ errorMsgs.subClasificationNameReq }}"
-          [disabled]="!isEditable" [pKeyFilter]="'alpha'"
-        ></app-inputtext>
-        <app-dropdown
-          [labelName]="'Status'"
-          [options]="statusList"
-          [(inputModel)]="genericSubClassification.status"
-          [optionLabel]="'subMasterName'"
-          [optionValue]="'subMasterId'" [disabled]="pageMode !='EDIT'"
-        ></app-dropdown>
-        <app-inputtext
-        [labelName]="'Clasification Description'"
-        [(inputModel)]="genericSubClassification.subClasificationDesc"
-        [disabled]="!isEditable"
-      ></app-inputtext>
+
+  <p-scrollPanel>
+    <div class="div-padding">
+      <div class="grid">
+        <div
+          class="col-12 col-offset-0 md:col-6 md:col-offset-3 lg:col-4 lg:col-offset-4 xl:col-4 xl:col-offset-4"
+        >
+          <div class="card">
+            <div class="grid">
+              <div class="col-12">
+                <app-dropdown
+                  [labelName]="'Clasification Name'"
+                  [options]="geneticClassificationList"
+                  [(inputModel)]="genericSubClassification.clasificationName"
+                  (onBlur)="onGetErrorMsgs('clasificationName', true)"
+                  errorMessages="{{ errorMsgs.clasificationNameReq }}"
+                  [optionLabel]="'clasificationName'"
+                  [optionValue]="'genericClassificationId'"
+                ></app-dropdown>
+                <app-inputtext
+                  [labelName]="'Sub Clasification Name'"
+                  [(inputModel)]="genericSubClassification.subClasificationName"
+                  (onBlur)="onGetErrorMsgs('subClasificationName', true)"
+                  errorMessages="{{ errorMsgs.subClasificationNameReq }}"
+                  [disabled]="!isEditable"
+                  [pKeyFilter]="'alpha'"
+                ></app-inputtext>
+                <app-dropdown
+                  [labelName]="'Status'"
+                  [options]="statusList"
+                  [(inputModel)]="genericSubClassification.status"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                  [disabled]="pageMode != 'EDIT'"
+                ></app-dropdown>
+                <app-inputtext
+                  [labelName]="'Clasification Description'"
+                  [(inputModel)]="genericSubClassification.subClasificationDesc"
+                  [disabled]="!isEditable"
+                ></app-inputtext>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </p-scrollPanel>
-  </div>
-  </div>
+    </div>
+  </p-scrollPanel>
 </div>
 <app-saving #saving></app-saving>

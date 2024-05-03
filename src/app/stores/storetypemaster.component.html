@@ -15,40 +15,45 @@
     ></app-header>
   </div>
   <!-- {{store |json}} -->
-  <div class="div-padding">
-    <div class="card">
-    <p-scrollPanel [style]="{ width: '100%', height: ' calc(100vh - 120px)' }">
+
+  <p-scrollPanel>
+    <div class="div-padding">
       <div class="grid">
-        <div class="field col-12 md:col-6 sm:col-6 lg:col-3 xl:col-3">
-          <app-inputtext
-            [(inputModel)]="store.storetypename"
-            [labelName]="'Store Type Name'"
-            (onBlur)="onGetErrorMsgs('storetypename', true)"
-            errorMessages="{{ errorMsgs.storetypename }}"
-            [disabled]="!isEditable" [pKeyFilter]="'alpha'"
-            
-          ></app-inputtext>
-          <app-dropdown
-            [labelName]="'Status'"
-            [(inputModel)]="store.status"
-            [options]="statusList"
-            [optionLabel]="'subMasterName'"
-            [optionValue]="'subMasterId'"
-            [disabled]="pageMode !='EDIT'"
-          ></app-dropdown>         
-          <app-textarea
-            [labelName]="'Store Type Description'"
-            [rows]="'2'"
-            [cols]="'5'"
-            [disabled]="!isEditable"
-            [(inputModel)]="store.storedescription"
-          ></app-textarea>
+        <div
+          class="col-12 col-offset-0 md:col-6 md:col-offset-3 lg:col-4 lg:col-offset-4 xl:col-4 xl:col-offset-4"
+        >
+          <div class="card">
+            <div class="grid">
+              <div class="col-12 ">
+                <app-inputtext
+                  [(inputModel)]="store.storetypename"
+                  [labelName]="'Store Type Name'"
+                  (onBlur)="onGetErrorMsgs('storetypename', true)"
+                  errorMessages="{{ errorMsgs.storetypename }}"
+                  [disabled]="!isEditable"
+                  [pKeyFilter]="'alpha'"
+                ></app-inputtext>
+                <app-dropdown
+                  [labelName]="'Status'"
+                  [(inputModel)]="store.status"
+                  [options]="statusList"
+                  [optionLabel]="'subMasterName'"
+                  [optionValue]="'subMasterId'"
+                  [disabled]="pageMode != 'EDIT'"
+                ></app-dropdown>
+                <app-textarea
+                  [labelName]="'Store Type Description'"
+                  [rows]="'2'"
+                  [cols]="'5'"
+                  [disabled]="!isEditable"
+                  [(inputModel)]="store.storedescription"
+                ></app-textarea>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </p-scrollPanel>
-  </div>
-  </div>
+    </div>
+  </p-scrollPanel>
 </div>
 <app-saving #saving></app-saving>
-
-
