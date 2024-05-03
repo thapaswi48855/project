@@ -17,6 +17,7 @@ export class InputtextComponent {
   @Input() public labelName: string = '';
   @Input() public disabled: boolean = false;
   @Input() public inputAxis: boolean = false;
+  @Input() maxLength:any ='';
 
   @Input() pKeyFilter: string = 'alpha';
   @Input() labelText: boolean = true;

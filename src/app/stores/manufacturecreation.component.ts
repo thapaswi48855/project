@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { SavingComponent } from '../directives/saving.component';
 import * as _ from 'lodash';
 import { MessageService } from 'primeng/api';
+import validator from 'validator';
 
 @Component({
   selector: 'app-manufacturecreation',
@@ -30,7 +31,7 @@ export class ManufacturecreationComponent {
     manufacturename: '',
     status: 'ZLS11',
     manufacturecode: '',
-    manufacturedesc:'',
+    manufacturedesc: '',
     regioncountry: '',
     regionstate: '',
     regioncity: '',
@@ -39,7 +40,7 @@ export class ManufacturecreationComponent {
     contactphone2: '',
     contactpostalCode: '',
     contactfax: '',
-    contactemail: '',
+    contactemail: null,
     contactwebsite: '',
     createdt: null,
     createby: this._service.getUserVal('userid'),
@@ -72,13 +73,27 @@ export class ManufacturecreationComponent {
             ? this._service.onGetErrorMsgs(ctrl, true, 'Manufacture Name')
             : '';
         break;
-        case 'manufacturecode':
+      case 'manufacturecode':
         this.errorMsgs.manufacturecodeReq =
           this.manufacture[ctrl] == '' ||
           this.manufacture[ctrl] == undefined ||
           this.manufacture[ctrl] == null
             ? this._service.onGetErrorMsgs(ctrl, true, 'Manufacture Code')
             : '';
+        break;
+      case 'contactemail':
+        if (!validator.isEmail(this.manufacture['contactemail'])) {
+          this.errorMsgs.contactemailReq = 'Please enter valid emailid';
+        } else {
+          this.errorMsgs.contactemailReq = '';
+        }
+        break;
+      case 'contactwebsite':
+        if (validator.isURL(this.manufacture['contactwebsite'])) {
+          this.errorMsgs.contactwebsiteReq = 'Please enter valid website';
+        } else {
+          this.errorMsgs.contactemailReq = '';
+        }
         break;
     }
   }

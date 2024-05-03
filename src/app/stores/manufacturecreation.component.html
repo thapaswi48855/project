@@ -125,7 +125,7 @@
                           [pKeyFilter]="'num'"
                           [(inputModel)]="manufacture.contactphone1"
                           [disabled]="!isEditable"
-                          maxlength="10"
+                          [maxLength]="10"
                         ></app-inputtext>
                       </div>
                       <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
@@ -134,7 +134,7 @@
                           [pKeyFilter]="'num'"
                           [(inputModel)]="manufacture.contactphone2"
                           [disabled]="!isEditable"
-                          maxlength="10"
+                          [maxLength]="10"
                         ></app-inputtext>
                       </div>
                       <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
@@ -143,22 +143,24 @@
                           [pKeyFilter]="'num'"
                           [(inputModel)]="manufacture.contactpostalCode"
                           [disabled]="!isEditable"
-                          maxlength="6"
+                          [maxLength]="6"
                         ></app-inputtext>
                       </div>
                       <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
                         <app-inputtext
                           [labelName]="'Fax'"
-                          [pKeyFilter]="'alphanum'"
+                          [pKeyFilter]="'num'"
                           [(inputModel)]="manufacture.contactfax"
                           [disabled]="!isEditable"
-                          maxlength="12"
+                          [maxLength]="10"
                         ></app-inputtext>
                       </div>
                       <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
                         <app-inputtext
                           [labelName]="'Contact Email'"
                           [(inputModel)]="manufacture.contactemail"
+                          (onBlur)="onGetErrorMsgs('contactemail', true)"
+                        errorMessages="{{ errorMsgs.contactemailReq }}"
                           [disabled]="!isEditable"
                         ></app-inputtext>
                       </div>
@@ -166,6 +168,8 @@
                         <app-inputtext
                           [labelName]="'Web Site'"
                           [(inputModel)]="manufacture.contactwebsite"
+                          (onBlur)="onGetErrorMsgs('contactwebsite', true)"
+                        errorMessages="{{ errorMsgs.contactwebsiteReq }}"
                           [disabled]="!isEditable"
                         ></app-inputtext>
                       </div>
