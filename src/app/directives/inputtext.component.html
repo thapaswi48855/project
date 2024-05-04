@@ -4,7 +4,7 @@
         <label *ngIf="labelText" class="border-round white-space-nowrap overflow-hidden text-overflow-ellipsis"
          htmlFor="{{ labelName }}" title="{{labelName}}">{{labelName}} :</label>
         <input pInputText id="username" aria-describedby="username-help"
-        type="text" [maxLength]="maxLength"
+        type="text" 
         [(ngModel)]="inputModel"
         pAutoFocus
         (blur)="onLeaveControl()"

@@ -10,7 +10,7 @@ import { MessageService } from 'primeng/api';
 })
 export class LoginComponent {
   public userLogin = {
-    userName: '',
+    userName: 'a',
     userPwd: '',
   };
 
